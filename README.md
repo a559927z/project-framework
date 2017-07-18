@@ -13,14 +13,14 @@
 2.  hrd-framework
 3.	hrd-util
 
-**hrd-util 依赖： **
+**hrd-util 依赖：**
 1.  jar
 	
-**project-dict 依赖： **
+**project-dict 依赖：**
 1.  hrd-framework
 2.  hrd-util
 
-**project-dict 包含：** 
+**project-dict 包含：**
 1.  dict-base
 2.  dict-run
 
