@@ -127,62 +127,6 @@ public class SysCache {
                 }
             }, customerId);
 
-	/**
-	 * 员工日切片表最小最大日期
-	 */
-	public static CacheBlock<List<KVItemDto>> queryEmpMinMaxDays =
-			new CacheBlockConstructor<List<KVItemDto>> ("queryEmpMinMaxDays").getDefaultBlock(customerId);
-	
-	 /**
-     * 获取管理序列层级
-     */
-    public static CacheBlock<List<KVItemDto>> queryPositionAbility =
-            new CacheBlockConstructor<List<KVItemDto>>("queryPositionAbility").getDefaultBlock(customerId);
-
-    /**
-     * 获取管理序列层级
-     */
-    public static CacheBlock<List<KVItemDto>> queryManageAbility =
-            new CacheBlockConstructor<List<KVItemDto>>("queryManageAbility").getDefaultBlock(customerId);
-
-    /**
-     * 获取大职级（能力层级）
-     */
-    public static CacheBlock<List<KVItemDto>> queryAbility =
-            new CacheBlockConstructor<List<KVItemDto>>("queryAbility").getDefaultBlock(customerId);
-    
-    /**
-     * 获取大职级（能力层级）
-     */
-    public static CacheBlock<List<String>> queryAbilityKey =
-            new CacheBlockConstructor<List<String>>("queryAbilityKey").getDefaultBlock(customerId);
-
-    /**
-     * 性格
-     */
-    public static CacheBlock<List<KVItemDto>> queryPersonality =
-            new CacheBlockConstructor<List<KVItemDto>>("querySoureCodeItem").getDefaultBlock(customerId, TableKeyUtil.CODE_GROUP_PERSONALITY);
-
-    /**
-     * 关键人才类型
-     */
-    public static CacheBlock<Map<String, String>> KeyTalentType =
-            new CacheBlockConstructor<Map<String, String>>("queryKeyTalentType").getCustomBlock(new CustomBlock<Map<String, String>>() {
-                @SuppressWarnings("unchecked")
-                @Override
-                public Map<String, String> formatData(Object obj) {
-                    Map<String, String> resultMap = CollectionKit.newMap();
-                    if (null == obj) {
-                        return null;
-                    }
-                    List<KVItemDto> reList = (List<KVItemDto>) obj;
-                    for (KVItemDto kVItemDto : reList) {
-                        resultMap.put(kVItemDto.getK(), kVItemDto.getV());
-                    }
-                    return resultMap;
-                }
-
-            }, customerId);
 
     /**
      * 功能维
@@ -190,38 +134,6 @@ public class SysCache {
     public static CacheBlock<List<FunctionDto>> queryFunction =
             new CacheBlockConstructor<List<FunctionDto>>("queryFunction").getDefaultBlock(customerId);
 
-    /**
-     * 主序列维
-     */
-    public static CacheBlock<List<SequenceItemsDto>> querySequence =
-            new CacheBlockConstructor<List<SequenceItemsDto>>("querySeq").getDefaultBlock(customerId);
-    /**
-     * 子序列
-     */
-    public static CacheBlock<List<SubSequenceItemsDto>> querySubSequence = 
-    		new CacheBlockConstructor<List<SubSequenceItemsDto>>("querySubSeq").getDefaultBlock(customerId);
-    /**
-     * 学历
-     */
-    public static CacheBlock<List<DegreeDto>> queryDegree =
-            new CacheBlockConstructor<List<DegreeDto>>("queryDegree").getDefaultBlock(customerId, TableKeyUtil.CODE_GROUP_DEGREE);
-
-
-    public static CacheBlock<List<KVItemDto>> queryPosition =
-            new CacheBlockConstructor<List<KVItemDto>>("queryPosition").getDefaultBlock(customerId);
     public static CacheBlock<List<KVItemDto>> queryOrgan =
             new CacheBlockConstructor<List<KVItemDto>>("queryOrgan").getDefaultBlock(customerId);
-    public static CacheBlock<List<KVItemDto>> queryPerformance =
-            new CacheBlockConstructor<List<KVItemDto>>("queryPerformance").getDefaultBlock(customerId);
-    public static CacheBlock<List<KVItemDto>> queryAbilityLv =
-            new CacheBlockConstructor<List<KVItemDto>>("queryAbilityLv").getDefaultBlock(customerId);
-    public static CacheBlock<List<KVItemDto>> queryJobTitle =
-            new CacheBlockConstructor<List<KVItemDto>>("queryJobTitle").getDefaultBlock(customerId);
-    public static CacheBlock<List<KVItemDto>> queryCity =
-            new CacheBlockConstructor<List<KVItemDto>>("queryCity").getDefaultBlock(customerId);
-
-
-    public static CacheBlock<List<KVItemDto>> queryChannel = 
-    		new CacheBlockConstructor<List<KVItemDto>>("queryChannel").getDefaultBlock(customerId);
- 
 }

@@ -120,7 +120,6 @@ net\chinahrd\entity\dto\pc\sequenceCount\SequenceParentItemsDto.class
 net\chinahrd\mvc\pc\dao\admin\FunctionDao.class
 net\chinahrd\entity\dto\pc\laborEfficiency\LaborEfficiencyTypeDto.class
 net\chinahrd\utils\pdf2html\StreamGobbler.class
-net\chinahrd\module\SysCache$4.class
 net\chinahrd\eis\notice\NoticeConfig.class
 net\chinahrd\entity\dto\pc\promotionBoard\PromotionTotalDto.class
 net\chinahrd\eis\search\SearchConsts.class

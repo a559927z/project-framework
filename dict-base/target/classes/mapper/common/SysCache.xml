@@ -46,77 +46,12 @@
     <!-- ########### -->
     <!-- 	维度表	 -->
     <!-- ########### -->
-    <!-- 管理序列 -->
-    <select id="querySeq" resultType="net.chinahrd.entity.dto.pc.SequenceItemsDto">
-		SELECT sequence_id itemId, curt_name prefix, sequence_name itemName 
-		FROM dim_sequence 
-		WHERE customer_id = #{customerId}
-		ORDER BY show_index
-	</select>
-	
-    <!-- 子序列 -->
-    <select id="querySubSeq" resultType="net.chinahrd.entity.dto.pc.SubSequenceItemsDto">
-		SELECT sequence_sub_id subId, curt_name curtName, sequence_sub_name itemName 
-		FROM dim_sequence_sub 
-		WHERE customer_id = #{customerId}
-		ORDER BY show_index
-	</select>
-
-    <!-- 学历维 (默认type为0) -->
-    <select id="queryDegree" resultType="net.chinahrd.entity.dto.pc.DegreeDto">
-		SELECT sys_code_item_id itemId, sys_code_item_name itemName,0 type, show_index showIndex
-		FROM `sys_code_item` where code_group_id = #{groupId} AND customer_id =#{customerId}
-		ORDER BY show_index
-	</select>
-	
-	<!-- 职位层级 -->
-    <select id="queryPositionAbility" resultType="net.chinahrd.entity.dto.KVItemDto">
-	SELECT
-		da.ability_id AS k,
-		da.ability_name AS v
-	FROM dim_ability da
-	WHERE da.customer_id = #{customerId}
-	AND da.type = 0
-	ORDER BY da.show_index
-	</select>
-
-    <!-- 能力层级 -->
-    <select id="queryManageAbility" resultType="net.chinahrd.entity.dto.KVItemDto">
-	SELECT
-		da.ability_id AS k,
-		da.ability_name AS v
-	FROM dim_ability da
-	WHERE da.customer_id = #{customerId}
-	AND da.type = 1
-	ORDER BY da.show_index
-	</select>
-
-    <!-- 大职级（能力层级） -->
-    <select id="queryAbility" resultType="net.chinahrd.entity.dto.KVItemDto">
-		SELECT ability_id k, ability_name v 
-		FROM dim_ability 
-		WHERE customer_id = #{customerId}
-	</select>
-	
-	<!-- 大职级（能力层级） -->
-    <select id="queryAbilityKey" resultType="java.lang.String">
-		SELECT ability_key
-		FROM dim_ability 
-		WHERE customer_id = #{customerId}
-		GROUP BY ability_key
-	</select>
 
 	<!-- 根据不同条件查询字典表 -->
 	<select id="querySoureCodeItem" resultType="net.chinahrd.entity.dto.KVItemDto">
 		SELECT sys_code_item_id k, sys_code_item_name v
 		FROM `sys_code_item` where code_group_id = #{groupId} AND customer_id =#{customerId}
 		ORDER BY show_index 
-	</select>
-
-	<!-- 岗位  -->
-	<select id="queryPosition" resultType="net.chinahrd.entity.dto.KVItemDto">
-		SELECT position_id k, position_name v
-		FROM `dim_position` where customer_id =#{customerId}
 	</select>
 	<!-- 机构  -->
 	<select id="queryOrgan" resultType="net.chinahrd.entity.dto.KVItemDto">
@@ -126,61 +61,11 @@
 		WHERE t.customer_id =#{customerId}
 		ORDER BY t2.organization_type_level
 	</select>
-	<!-- 绩效  -->
-	<select id="queryPerformance" resultType="net.chinahrd.entity.dto.KVItemDto">
-		SELECT performance_id k, performance_name v
-		FROM `dim_performance` t
-		WHERE t.customer_id =#{customerId}
-		ORDER BY t.show_index
-	</select>
-	<!-- 小职级  -->
-	<select id="queryAbilityLv" resultType="net.chinahrd.entity.dto.KVItemDto">
-		SELECT ability_lv_id k, ability_lv_name v
-		FROM `dim_ability_lv` t
-		WHERE t.customer_id =#{customerId}
-		ORDER BY t.show_index
-	</select>
-	<!-- 职衔  -->
-	<select id="queryJobTitle" resultType="net.chinahrd.entity.dto.KVItemDto">
-		SELECT job_title_id k, job_title_name v
-		FROM `dim_job_title` t
-		WHERE t.customer_id =#{customerId}
-		ORDER BY t.show_index
-	</select>
 	<!-- 市  -->
 	<select id="queryCity" resultType="net.chinahrd.entity.dto.KVItemDto">
 		SELECT city_id k, city_name v
 		FROM `dim_city` t
 		WHERE t.customer_id =#{customerId}
 		ORDER BY t.show_index
-	</select>
-	
-	
-	
-	<!-- 查询关键人才类型 -->
-	<select id="queryKeyTalentType" resultType="net.chinahrd.entity.dto.KVItemDto">
-		SELECT key_talent_type_id k,key_talent_type_key v 
-		FROM dim_key_talent_type 
-		WHERE customer_id = #{customerId}
-	</select>
-	
-	 <!-- 数据有效范围  -->
-    <select id="queryEmpMinMaxDays" resultType="net.chinahrd.entity.dto.KVItemDto">
-		SELECT 'k' AS k, min as v FROM `data_range` WHERE customer_id = #{customerId}
-		UNION ALL
-		SELECT 'k' AS k, max as v FROM `data_range` WHERE customer_id = #{customerId}
-	</select>
-	
-	<!-- 招聘渠道 -->
-	<select id="queryChannel" resultType="net.chinahrd.entity.dto.KVItemDto">
-		SELECT
-		  t.`channel_id` AS k,
-		  t.`channel_name` AS v
-		FROM dim_channel t 
-			<where> 1=1
-			<if test="customerId != null and customerId != ''">
-				and t.customer_id = #{customerId}
-			</if>
-			</where>
 	</select>
 </mapper>
