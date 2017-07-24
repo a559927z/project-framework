@@ -21,7 +21,7 @@
 
     <!-- 查出superAdmin的ID -->
     <select id="findSuperAdminIdByUserKey" resultType="java.lang.String">
-        SELECT user_id from dim_user where user_key = #{userKey}
+        SELECT user_id from dict_dim_user where user_key = #{userKey}
     </select>
      
     <!-- 登录人所有数据权限 -->

@@ -3,101 +3,106 @@ package net.chinahrd.entity.dto.pc.admin;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-
-/**
- * Created by wqcai on 15/6/8.
- */
 public class RoleDto implements Serializable {
-    private static final long serialVersionUID = 2653044226874073744L;
+	private static final long serialVersionUID = 2653044226874073744L;
 
-    private String id;
-    private String roleId;
-    private String roleKey;
-    private String roleName;
-    private String customerId;
-    private String note;
-    private String createUserId;
-    private String modifyUserId;
-    private Timestamp createTime;
-    private Timestamp modifyTime;
+	private String id;
+	private String roleId;
+	private String roleKey;
+	private String roleName;
+	private String customerId;
+	private String note;
+	private String createUserId;
+	private String modifyUserId;
+	private Timestamp createTime;
+	private Timestamp modifyTime;
+	private Integer showIndex;
 
-    public String getId() {
-        return id;
-    }
+	public Integer getShowIndex() {
+		return showIndex;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setShowIndex(Integer showIndex) {
+		this.showIndex = showIndex;
+	}
 
-    public String getRoleId() {
-        return roleId;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getRoleKey() {
-        return roleKey;
-    }
+	public String getRoleId() {
+		return roleId;
+	}
 
-    public void setRoleKey(String roleKey) {
-        this.roleKey = roleKey;
-    }
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
+	}
 
-    public String getRoleName() {
-        return roleName;
-    }
+	public String getRoleKey() {
+		return roleKey;
+	}
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
+	public void setRoleKey(String roleKey) {
+		this.roleKey = roleKey;
+	}
 
-    public String getCustomerId() {
-        return customerId;
-    }
+	public String getRoleName() {
+		return roleName;
+	}
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
 
-    public String getNote() {
-        return note;
-    }
+	public String getCustomerId() {
+		return customerId;
+	}
 
-    public void setNote(String note) {
-        this.note = note;
-    }
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
 
-    public String getCreateUserId() {
-        return createUserId;
-    }
+	public String getNote() {
+		return note;
+	}
 
-    public void setCreateUserId(String createUserId) {
-        this.createUserId = createUserId;
-    }
+	public void setNote(String note) {
+		this.note = note;
+	}
 
-    public String getModifyUserId() {
-        return modifyUserId;
-    }
+	public String getCreateUserId() {
+		return createUserId;
+	}
 
-    public void setModifyUserId(String modifyUserId) {
-        this.modifyUserId = modifyUserId;
-    }
+	public void setCreateUserId(String createUserId) {
+		this.createUserId = createUserId;
+	}
 
-    public Timestamp getCreateTime() {
-        return createTime;
-    }
+	public String getModifyUserId() {
+		return modifyUserId;
+	}
 
-    public void setCreateTime(Timestamp createTime) {
-        this.createTime = createTime;
-    }
+	public void setModifyUserId(String modifyUserId) {
+		this.modifyUserId = modifyUserId;
+	}
 
-    public Timestamp getModifyTime() {
-        return modifyTime;
-    }
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
 
-    public void setModifyTime(Timestamp modifyTime) {
-        this.modifyTime = modifyTime;
-    }
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
+
+	public Timestamp getModifyTime() {
+		return modifyTime;
+	}
+
+	public void setModifyTime(Timestamp modifyTime) {
+		this.modifyTime = modifyTime;
+	}
 }

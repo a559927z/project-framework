@@ -20,7 +20,8 @@ import net.chinahrd.utils.holiday.DaysDto;
  */
 @Repository("commonDao")
 public interface CommonDao {
-
+	
+	
 	/**
 	 * 获取人群集合
 	 */

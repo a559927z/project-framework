@@ -14,6 +14,26 @@ public class PojoDto implements Serializable {
 	private String userId;
 	private List<OrganDto> organDto;
 	private List<ProjectRelationDto> projectDto;
+	
+	private RoleDto roleDto;
+	private String oper;
+	
+	public RoleDto getRoleDto() {
+		return roleDto;
+	}
+
+	public void setRoleDto(RoleDto roleDto) {
+		this.roleDto = roleDto;
+	}
+
+	public String getOper() {
+		return oper;
+	}
+
+	public void setOper(String oper) {
+		this.oper = oper;
+	}
+
 	public String getRoleId() {
 		return roleId;
 	}

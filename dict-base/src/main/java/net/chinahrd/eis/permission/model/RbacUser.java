@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.chinahrd.entity.dto.app.OrganTreeDto;
 import net.chinahrd.entity.dto.pc.admin.OrganDto;
+import net.chinahrd.entity.dto.pc.admin.OrganTreeDto;
 import net.chinahrd.entity.dto.pc.admin.ProjectRelationDto;
 import net.chinahrd.utils.CollectionKit;
 

@@ -191,12 +191,6 @@ public interface OrganDao {
 	 */
 	Integer getEmpCountByOrganId(@Param("customerId") String customerId,@Param("organizationId") String organizationId);
 	
-	/***
-	 * 根据条件查询相关机构及机构负责人信息
-	 * @param customerId
-	 * @return
-	 */
-	List<OrganManagerDto> queryOrganManagerLists(@Param("customerId") String customerId);
 	
 	/**
 	 * 根据用户查询用户顶级机构 

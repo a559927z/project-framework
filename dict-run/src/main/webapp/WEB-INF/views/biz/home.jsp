@@ -20,7 +20,7 @@
     <%@include file="/WEB-INF/views/include/top.jsp" %>
     <!-- ace settings handler -->
     <script src="${ctx}/assets/js/lib/base/ace-extra.min.js"></script>
-    <title>中人网才报平台</title>
+    <title>${sysName }</title>
     <style>
         body {
             overflow-y: hidden;
@@ -39,7 +39,7 @@
         }
     </script>
 
-    <div class="skin-1 main-container-inner">
+    <div class="skin-2 main-container-inner">
         <a class="menu-toggler" id="menu-toggler" href="#">
             <span class="menu-text"></span>
         </a>

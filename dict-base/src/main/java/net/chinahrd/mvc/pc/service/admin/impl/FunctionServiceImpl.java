@@ -1,7 +1,6 @@
 package net.chinahrd.mvc.pc.service.admin.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -13,22 +12,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import net.chinahrd.core.web.eis.license.License;
-import net.chinahrd.core.web.eis.license.LicenseConfig;
-import net.chinahrd.core.web.eis.license.LicenseData;
 import net.chinahrd.entity.dto.pc.admin.FunctionDto;
 import net.chinahrd.entity.dto.pc.admin.FunctionItemDto;
 import net.chinahrd.entity.dto.pc.admin.FunctionTreeDto;
 import net.chinahrd.entity.dto.pc.admin.RoleFunctionDto;
-import net.chinahrd.entity.dto.pc.manage.HomeConfigDto;
-import net.chinahrd.entity.enums.HomeConfigEnum;
 import net.chinahrd.mvc.pc.dao.admin.FunctionDao;
 import net.chinahrd.mvc.pc.service.admin.FunctionService;
 import net.chinahrd.utils.CollectionKit;
-import net.chinahrd.utils.CompareUtil;
 import net.chinahrd.utils.DateUtil;
 import net.chinahrd.utils.Identities;
 
@@ -42,7 +32,6 @@ public class FunctionServiceImpl implements FunctionService {
 
 	private static Logger log = LoggerFactory.getLogger(FunctionServiceImpl.class);
 
-	private final String HOME_FUNCTION_CODE = "b5c9410dc7e4422c8e0189c7f8056b5f";
 
     @Autowired
     private FunctionDao functionDao;
@@ -91,7 +80,6 @@ public class FunctionServiceImpl implements FunctionService {
         functionDao.updateFunctionItem(itemDto);
     }
 
-    @SuppressWarnings("unchecked")
 	@Override
     public List<RoleFunctionDto> findFunctionAll(String customerId, List<String> roleIds) {
         List<RoleFunctionDto> list = new ArrayList<>();
@@ -208,84 +196,5 @@ public class FunctionServiceImpl implements FunctionService {
     
     //===========================================================
     
-    @Override
-    public List<HomeConfigDto> queryUserHomeConfig(String empId, String customerId) {
-        List<HomeConfigDto> dtos = queryUserHomeConfig(HOME_FUNCTION_CODE, empId, customerId);
-        if (dtos == null || (dtos != null && dtos.size() == 0)) {
-            dtos = getHomeConfigEnum(empId, customerId);
-        } else {
-            for (HomeConfigDto configDto : dtos) {
-                HomeConfigEnum configEnum = HomeConfigEnum.valueOf(configDto.getCardCode());
-                configDto.setName(configEnum.getTitle());
-                configDto.setModule(configEnum.getModuleId());
-            }
-            Collections.sort(dtos, CompareUtil.createComparator(1, "module", "showIndex"));
-        }
-        return dtos;
-    }
-
-    @Override
-    public List<HomeConfigDto> queryUserHomeConfig(String functionCode, String empId, String customerId) {
-        return functionDao.queryHomeConfig(functionCode, empId, customerId);
-    }
-
-    @Override
-    public void editUserHomeConfig(String homeConfig, String empId, String customerId) {
-        editUserHomeConfig(homeConfig, HOME_FUNCTION_CODE, empId, customerId);
-    }
-
-    @Override
-    public void editUserHomeConfig(String homeConfig, String functionCode, String empId, String customerId) {
-        Gson gson = new Gson();
-        List<HomeConfigDto> list = gson.fromJson(homeConfig, new TypeToken<List<HomeConfigDto>>() {
-        }.getType());
-        List<HomeConfigDto> insertLists = CollectionKit.newList();
-        List<HomeConfigDto> updateLists = CollectionKit.newList();
-        for (HomeConfigDto configDto : list) {
-            if (configDto.getFunctionConfigId() == null) {
-                configDto.setFunctionConfigId(Identities.uuid2());
-                configDto.setEmpId(empId);
-                configDto.setCustomerId(customerId);
-                configDto.setFunctionId(functionCode);
-                insertLists.add(configDto);
-            }else{
-                updateLists.add(configDto);
-            }
-        }
-
-        try {
-            if (insertLists.size() > 0){
-            	functionDao.insertUserHomeConfig(insertLists);
-            }
-            if (updateLists.size() > 0){
-            	functionDao.updateUserHomeConfig(updateLists);
-            }
-        } catch (Exception e) {
-            log.error("没有允许执行多条sql的权限。");
-            log.error(e.getMessage());
-        }
-    }
-
-    private List<HomeConfigDto> getHomeConfigEnum(String empId, String customerId) {
-        List<HomeConfigDto> homeConfigDtos = new ArrayList<HomeConfigDto>();
-        int idx = 1, functionIdx = 1;
-        for (HomeConfigEnum configEnum : HomeConfigEnum.values()) {
-            HomeConfigDto dto = new HomeConfigDto();
-            dto.setEmpId(empId);
-            dto.setCustomerId(empId);
-            dto.setFunctionId(HOME_FUNCTION_CODE);
-            dto.setView(Boolean.TRUE);
-            dto.setCardCode(configEnum.toString());
-            dto.setModule(configEnum.getModuleId());
-            dto.setName(configEnum.getTitle());
-            if (configEnum.getModuleId() == 1) {     //不同的模块不同的索引
-                dto.setShowIndex(idx++);
-            } else {
-                dto.setShowIndex(functionIdx++);
-            }
-            homeConfigDtos.add(dto);
-        }
-        return homeConfigDtos;
-    }
 
 }

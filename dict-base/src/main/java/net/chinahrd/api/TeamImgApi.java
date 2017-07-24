@@ -7,7 +7,6 @@ package net.chinahrd.api;
 import java.util.List;
 
 import net.chinahrd.entity.dto.KVItemDto;
-import net.chinahrd.entity.dto.pc.teamImg.TeamImgEmpDto;
 
 /**团队画像API文档
  * @author htpeng
@@ -15,12 +14,6 @@ import net.chinahrd.entity.dto.pc.teamImg.TeamImgEmpDto;
  */
 public interface TeamImgApi {
 	
-	/**
-	 * 查询团队画像
-	 * @param String organId
-     * @param String customerId
-	 */
-	List<TeamImgEmpDto> queryTeamImgAb ( String  organId,String customerId);
 
 	/**
 	 * 分组统计能力层级人数

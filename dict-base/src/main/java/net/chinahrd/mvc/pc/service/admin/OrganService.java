@@ -104,12 +104,6 @@ public interface OrganService {
 	 */
 	Integer getEmpCountByOrganId(String customerId,String organizationId);
 	
-	/**
-	 * 根据条件查询相关机构及机构负责人信息
-	 * @param customerId
-	 * @return
-	 */
-	List<OrganManagerDto> queryOrganManagerLists(String customerId);
 
 	List<OrganDto> queryOrganPermit2(String userId);
 

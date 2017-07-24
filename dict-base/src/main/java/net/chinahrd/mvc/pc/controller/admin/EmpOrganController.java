@@ -7,6 +7,19 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.alibaba.fastjson.JSON;
+
 import net.chinahrd.entity.dto.PaginationDto;
 import net.chinahrd.entity.dto.pc.admin.EmpDto;
 import net.chinahrd.entity.dto.pc.admin.OrganDto;
@@ -20,22 +33,9 @@ import net.chinahrd.mvc.pc.service.admin.EmpOrganService;
 import net.chinahrd.mvc.pc.service.admin.OrganService;
 import net.chinahrd.mvc.pc.service.admin.UserService;
 import net.chinahrd.mvc.pc.service.common.CommonService;
-import net.chinahrd.utils.CacheHelper;
 import net.chinahrd.utils.CollectionKit;
 import net.chinahrd.utils.ExcelUtil;
 import net.chinahrd.utils.Str;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.alibaba.fastjson.JSON;
 
 /**
  * Created by jxzhang on 15/6/23.

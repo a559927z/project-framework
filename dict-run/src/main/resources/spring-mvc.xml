@@ -24,12 +24,6 @@
 
 
 	<mvc:interceptors>
-	    <mvc:interceptor>  <!-- app请求拦截器 -->
-	        <mvc:mapping path="/mobile/**"/>
-	        <mvc:exclude-mapping path="/mobile/login/**"/>
-	        <mvc:exclude-mapping path="/mobile/logout/**"/>
-	        <bean class="net.chinahrd.mvc.app.AppHandlerInterceptor"/>
-	    </mvc:interceptor>
 		<mvc:interceptor>	<!-- pc请求拦截器 -->
 			<mvc:mapping path="/*"/>
 			<mvc:exclude-mapping path="/login"/>
@@ -63,6 +57,9 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
+	
+	<!-- 自定义异常处理-->
+	<bean id="exceptionResolver" class="net.chinahrd.eis.permission.exception.MyExceptionResolver"></bean>
 
 	<!-- REST中根据URL后缀自动判定Content-Type及相应的View -->
 	<bean id="contentNegotiationManager"

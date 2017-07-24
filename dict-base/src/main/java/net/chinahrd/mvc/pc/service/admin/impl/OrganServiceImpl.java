@@ -3,6 +3,13 @@ package net.chinahrd.mvc.pc.service.admin.impl;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+
 import net.chinahrd.eis.permission.EisWebContext;
 import net.chinahrd.eis.permission.enums.PermissionCode;
 import net.chinahrd.eis.permission.model.RbacUser;
@@ -12,7 +19,6 @@ import net.chinahrd.entity.dto.pc.admin.RoleOrganizationDto;
 import net.chinahrd.entity.dto.pc.admin.TreeDto;
 import net.chinahrd.entity.dto.pc.admin.UserDto;
 import net.chinahrd.entity.dto.pc.admin.UserOrganizationDto;
-import net.chinahrd.entity.dto.pc.common.OrganManagerDto;
 import net.chinahrd.mvc.pc.dao.admin.OrganDao;
 import net.chinahrd.mvc.pc.dao.admin.OrganTypeDao;
 import net.chinahrd.mvc.pc.service.admin.OrganService;
@@ -20,13 +26,6 @@ import net.chinahrd.utils.CollectionKit;
 import net.chinahrd.utils.DateUtil;
 import net.chinahrd.utils.Identities;
 import net.chinahrd.utils.PropertiesUtil;
-
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
 /**
  * Created by jxzhang on 15/6/23.
@@ -325,10 +324,6 @@ public class OrganServiceImpl implements OrganService {
         return organDao.getEmpCountByOrganId(customerId, organizationId);
     }
 
-    @Override
-    public List<OrganManagerDto> queryOrganManagerLists(String customerId) {
-        return organDao.queryOrganManagerLists(customerId);
-    }
 
 //	@Override
 //	public List<OrganDto> queryOrganPermitTop(String userId, String customerId) {

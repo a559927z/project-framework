@@ -28,7 +28,7 @@
           df.show_index,
           df.full_path,
           df.note
-        FROM dim_function df
+        FROM dict_dim_function df
         <where>
           <if test="customerIds != null and customerIds.size != 0">
             AND df.customer_id IN
@@ -52,7 +52,7 @@
         NULL AS note,
         1 AS type,
         'false' AS open
-      FROM dim_function_item dfi
+      FROM dict_dim_function_item dfi
       <where>
         <if test="customerIds != null and customerIds.size != 0">
         AND dfi.customer_id IN
@@ -75,7 +75,7 @@
       df.full_path AS fullPath,
       df.note AS note,
       0 AS type
-      FROM dim_function df
+      FROM dict_dim_function df
       <where>
         <if test="customerId != null">
         df.customer_id = #{customerId}
@@ -92,11 +92,11 @@
     </select>
 
     <delete id="deleteFunction" >
-    DELETE FROM dim_function WHERE (function_id = #{id} OR function_parent_id = #{id})  AND customer_id = #{customerId}
+    DELETE FROM dict_dim_function WHERE (function_id = #{id} OR function_parent_id = #{id})  AND customer_id = #{customerId}
     </delete>
   
     <delete id="deleteFunctionItem">
-    DELETE FROM dim_function_item
+    DELETE FROM dict_dim_function_item
     <where>
       <if test="customerId != null">
         customer_id = #{customerId}
@@ -111,7 +111,7 @@
     </delete>
   
     <insert id="addFunction" parameterType="net.chinahrd.entity.dto.pc.admin.FunctionDto" >
-      INSERT INTO dim_function (
+      INSERT INTO dict_dim_function (
         function_id,
         function_key,
         function_name,
@@ -143,7 +143,7 @@
 
 
     <insert id="addFunctionItem" parameterType="net.chinahrd.entity.dto.pc.admin.FunctionItemDto" >
-      INSERT INTO dim_function_item (
+      INSERT INTO dict_dim_function_item (
         function_item_id,
         customer_id,
         function_id,
@@ -164,7 +164,7 @@
     </insert>
   
     <update id="updateFunction" parameterType="net.chinahrd.entity.dto.pc.admin.FunctionDto">
-      UPDATE dim_function df
+      UPDATE dict_dim_function df
       <set>
         <if test="functionDto.functionKey != null and functionDto.functionKey != ''" >
           df.function_key = #{functionDto.functionKey},
@@ -199,7 +199,7 @@
     </update>
 
     <update id="updateFunctionItem" parameterType="net.chinahrd.entity.dto.pc.admin.FunctionItemDto">
-      UPDATE dim_function_item dfi
+      UPDATE dict_dim_function_item dfi
       <set>
         <if test="itemDto.functionId != null and itemDto.functionId != ''" >
           dfi.function_id = #{itemDto.functionId},
@@ -231,10 +231,10 @@
       dff.show_index,
       NULL AS functionItem,
       NULL AS itemName
-    FROM dim_function dff
-    LEFT JOIN dim_function dff2 ON dff2.function_parent_id = dff.function_id AND dff.customer_id = dff2.customer_id 
+    FROM dict_dim_function dff
+    LEFT JOIN dict_dim_function dff2 ON dff2.function_parent_id = dff.function_id AND dff.customer_id = dff2.customer_id 
       <if test="roleIds != null and roleIds.size() > 0">
-      RIGHT JOIN function_role_relation frrf ON  dff2.function_id = frrf.function_id AND frrf.customer_id = dff2.customer_id 
+      RIGHT JOIN dict_relation_role_function frrf ON  dff2.function_id = frrf.function_id AND frrf.customer_id = dff2.customer_id 
       </if>
       <where>
         <if test="customerId != null">
@@ -258,20 +258,20 @@
       (
         SELECT
         GROUP_CONCAT(dfi.item_code)
-        FROM dim_function_item dfi
+        FROM dict_dim_function_item dfi
         WHERE dfi.function_id = df.function_id   AND dfi.customer_id = #{customerId}
         ORDER BY dfi.modify_time
       ) AS functionItem,
       (
         SELECT
         GROUP_CONCAT(dfi.note)
-        FROM dim_function_item dfi
+        FROM dict_dim_function_item dfi
         WHERE dfi.function_id = df.function_id   AND dfi.customer_id = #{customerId}
         ORDER BY dfi.modify_time
       ) AS itemName
-      FROM dim_function df
+      FROM dict_dim_function df
       <if test="roleIds != null and roleIds.size() > 0">
-        RIGHT JOIN function_role_relation frr ON df.function_id = frr.function_id AND df.customer_id = frr.customer_id 
+        RIGHT JOIN dict_relation_role_function frr ON df.function_id = frr.function_id AND df.customer_id = frr.customer_id 
       </if>
       <where>
         <if test="customerId != null">
@@ -293,7 +293,7 @@
         frr.function_id AS functionId,
         frr.role_id AS roleId,
         frr.item_codes AS functionItem
-      FROM function_role_relation frr
+      FROM dict_relation_role_function frr
       <where>
         <if test="roleId != null">
         frr.role_id = #{roleId}
@@ -305,7 +305,7 @@
     </select>
 
     <insert id="addRoleFunction" parameterType="net.chinahrd.entity.dto.pc.admin.RoleFunctionDto">
-      INSERT INTO function_role_relation
+      INSERT INTO dict_relation_role_function
       (
         function_role_id,
         customer_id,
@@ -330,11 +330,11 @@
     </insert>
 
     <delete id="deleteRoleFunction" parameterType="string">
-    DELETE FROM function_role_relation WHERE role_id = #{roleId} AND customer_id = #{customerId}
+    DELETE FROM dict_relation_role_function WHERE role_id = #{roleId} AND customer_id = #{customerId}
     </delete>
 
     <update id="updateFullPathByParent">
-      UPDATE dim_function df
+      UPDATE dict_dim_function df
       SET df.full_path = CONCAT(#{pKey},'_',df.function_key)
       WHERE df.function_parent_id = #{pid} AND df.customer_id = #{customerId}
     </update>
@@ -343,21 +343,6 @@
 
 	<!-- ==================================================================== -->
 	
-	  <select id="queryHomeConfig" resultType="net.chinahrd.entity.dto.pc.manage.HomeConfigDto">
-    SELECT
-        fc.function_config_id,
-        fc.customer_id,
-        fc.emp_id,
-        fc.function_id,
-        fc.card_code,
-        fc.is_view,
-        fc.show_index
-    FROM function_config fc
-    WHERE fc.function_id = #{functionId}
-    AND fc.emp_id = #{empId}
-    AND fc.customer_id = #{customerId}
-    ORDER BY fc.is_view DESC,fc.show_index
-    </select>
 
     <insert id="insertUserHomeConfig">
     INSERT INTO function_config (

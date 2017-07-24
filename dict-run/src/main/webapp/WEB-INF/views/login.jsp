@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="description" content="overview & stats"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-    <title>才报平台</title>
+    <title>${sysName }</title>
     <link rel="icon" href="${ctx}/favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="${ctx}/favicon.ico" type="image/x-icon"/>
     <link href="${ctx}/assets/css/bootstrap.min.css" rel="stylesheet">

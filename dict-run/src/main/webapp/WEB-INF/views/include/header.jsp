@@ -59,7 +59,7 @@
 				<!--</small>-->
 			<!--</a>-->
             <img class="ct-logo" width="28" height="28" src="${ctx}/assets/img/base/logo.png">
-            <span class="ct-logo-text">才报平台演示版</span>
+            <span class="ct-logo-text">${sysName }</span>
             <!-- /.brand -->
 		</div><!-- /.navbar-header -->
 

@@ -3,11 +3,6 @@
 */
 package net.chinahrd.module;
 
-
-
-
-
-
 import net.chinahrd.core.api.ApiRegister;
 import net.chinahrd.core.cache.CacheBlock;
 import net.chinahrd.core.cache.CacheRegister;
@@ -21,16 +16,19 @@ import org.springframework.stereotype.Component;
 
 /**
  * 模块注册中心
- * @author htpeng
- *2016年10月8日下午1:42:50
+ * 
+ * @author htpeng 2016年10月8日下午1:42:50
  */
 @Lazy(false)
 @Component("hrd-base-module")
-public  class SysModule extends ModuleRegister  {
-	public static void main(String[] df){
+public class SysModule extends ModuleRegister {
+	public static void main(String[] df) {
 		System.out.println(CacheBlock.class.getInterfaces()[0]);
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see net.chinahrd.core.module.ModuleRegisterAbstract#registerCache()
 	 */
 	@Override
@@ -38,7 +36,9 @@ public  class SysModule extends ModuleRegister  {
 		return new SysCacheDefine();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see net.chinahrd.core.module.ModuleRegisterAbstract#registerMenu()
 	 */
 	@Override
@@ -46,8 +46,9 @@ public  class SysModule extends ModuleRegister  {
 		return new SysMenuDefine();
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see net.chinahrd.core.RegisterAbstract#getXmlPath()
 	 */
 	@Override
@@ -55,7 +56,9 @@ public  class SysModule extends ModuleRegister  {
 		return "module.properties";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see net.chinahrd.core.module.ModuleRegisterAbstract#registerApi()
 	 */
 	@Override
@@ -63,7 +66,9 @@ public  class SysModule extends ModuleRegister  {
 		return new SysApiDefine();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see net.chinahrd.core.module.ModuleRegister#install()
 	 */
 	@Override
@@ -71,19 +76,25 @@ public  class SysModule extends ModuleRegister  {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see net.chinahrd.core.module.ModuleRegister#uninstall()
 	 */
 	@Override
 	protected ModuleService uninstall() {
 		return null;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see net.chinahrd.core.module.ModuleRegister#registerJob()
 	 */
 	@Override
 	protected JobRegister registerJob() {
-		return new SysJob().associate(new SysProcessJob());
+		// return new SysJob().associate(new SysProcessJob());
+		return null;
 	}
 
 }

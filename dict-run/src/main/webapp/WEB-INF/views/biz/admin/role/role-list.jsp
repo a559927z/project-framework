@@ -1,146 +1,111 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<%@include file="/WEB-INF/views/include/taglibs.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
+<%@include file="/WEB-INF/views/include/taglibs.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%@include file="/WEB-INF/views/include/top.jsp" %>
-    <title>角色管理</title>
+<%@include file="/WEB-INF/views/include/top.jsp"%>
+<title>角色管理</title>
+<link rel="stylesheet" type="text/css" href="${ctxAssets}plugin/datatables/css/jquery.dataTables.css">
 </head>
 <body>
-<div class="rightBody">
-    <div class="SetUpBody">
-        <div class="index-common-title bottom-title">
-            <div class="index-common-title-left bottom-left"></div>
-            <div class="index-common-title-text bottom-text">角色管理</div>
-        </div>
-        <div class="bottom-div bottom-div2 clearfix">
-            <div class="col-sm-12 ct-col1">
-                <table id="grid-table"></table>
-                <div id="grid-pager"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    require(['jgGrid', 'messenger'], function () {
-        var webRoot = G_WEB_ROOT;
-        var urls = {
-            findRoleAll: webRoot + '/role/findRoleAll.do',
-            operateRole: webRoot + '/role/operateRole.do',
-            delRole: webRoot + '/role/delRole.do'
-        }
-        var grid_selector = "#grid-table";
-        var pager_selector = "#grid-pager";
-        var template = 
-        	"<form class='container' style='width : 300px'> " +
-                "<div class='row form-group'> " +
-                "<label class='col-xs-4 text-right'>角色编号：</label> " +
-                "<span class='col-xs-8'>{roleKey}</span> " +
-                "</div> " +
-                "<div class='row form-group'> " +
-                "<label class='col-xs-4 text-right'>角色名称：</label> " +
-                "<span class='col-xs-8'>{roleName}</span> " +
-                "</div> " +
-                "<div class='row form-group'> " +
-                "<label class='col-xs-4 text-right'>描述：</label> " +
-                "<span class='col-xs-8'>{note}</span> " +
-                "</div> " +
-                "<div class='row form-group' align='center'> {sData} {cData}</div>" +
-                "</form>";
-        jQuery(grid_selector).jqGrid({
-            url: urls.findRoleAll,
-            datatype: 'json',
-            mtype: 'POST',
-            autowidth: true,
-            height: 800,
-            colNames: ['id', '角色编码', '角色名称', '角色描述', '创建时间', '操作'],
-            colModel: [
-                {name: 'id', index: 'id', hidedlg: true, hidden: true, width: 60},
-                {name:'roleKey',width:60,editable:true,editoptions:{maxlength:"20"},editrules:{required:true}},
-                {name:'roleName',width:100,editable:true,editoptions:{size:"20",maxlength:"20"},editrules:{required:true}},
-                {name:'note',width:150,editable:true,editoptions:{size:"20",maxlength:"32"},editrules:{required:true}},
-                {name:'createTime',width:100,editable:true,align:'center',sorttype:"date"},
-                {
-                    name: 'myac', width: 200, fixed: true, sortable: false, resize: false, title: false
-                    //				formatter:'actions',
-                    //				formatoptions:{
-                    //					keys:true,
-                    //					delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback}
-                    //				}
-                }
-            ],
-            viewrecords: true,
-            rowNum: 20,
-            rowList: [10, 20, 30],
-            pager: pager_selector,
-            altRows: true,
-            multiselect: true,
-            multiboxonly: true,
-            rowHeight: 36,
-            styleUI: 'Bootstrap',
-            loadComplete: function (xhr) {
-                var rows = xhr.rows;
-                var ids = $(grid_selector).jqGrid('getDataIDs');
-                for (var i = 0; i < ids.length; i++) {
-                    var col = ids[i];
-                    var html = '<shiro:hasPermission name="XiTongGuanLi_JueSeGuanLi:configFunction"><a href="javascript:void(0)" data-index="' + i + '" class="role_col1" style="margin:0 10px;">配置功能</a></shiro:hasPermission>'
-                            + '<shiro:hasPermission name="XiTongGuanLi_JueSeGuanLi:configData"><a href="javascript:void(0)" data-index="' + i + '" class="role_col2" >配置数据</a></shiro:hasPermission>';
-                    $(grid_selector).jqGrid('setRowData', col, {myac: html});
-                }
-                $('.role_col1').unbind().bind('click', function () {
-                    var _this = $(this);
-                    var idx = _this.attr('data-index');
-                    var roleObj = rows[idx];
-                    window.location.href = webRoot + '/role/roleFunction?roleId=' + roleObj.roleId;
-                });
-                $('.role_col2').unbind().bind('click', function () {
-                    var _this = $(this);
-                    var idx = _this.attr('data-index');
-                    var roleObj = rows[idx];
-                    //异步
-                    // 				window.location.href = webRoot + '/role/roleOrganAsync?roleId='+roleObj.roleId;
-                    //同步
-                    window.location.href = webRoot + '/role/roleOrgan?roleId=' + roleObj.roleId;
-                });
-                var table = this;
-            },
-            editurl: urls.operateRole
-        });
-        //navButtons
-        jQuery(grid_selector).jqGrid('navGrid', pager_selector,
-                {
-                    editCaption: "修改",
-                    width: 350,
-                    left: 450,
-                    top: 20,
-                    template: template,
-                    errorTextFormat: function (data) {
-                        return 'Error: ' + data.responseText
-                    }
-                },
-                {
-                    editCaption: "新增",
-                    template: template,
-                    width: 350,
-                    left: 450,
-                    top: 20,
-                    errorTextFormat: function (data) {
-                        return 'Error: ' + data.responseText
-                    }
-                },
-                {recreateForm:true,beforeShowForm:function(e){varform=$(e[0]);}},
-                {closeAfterAdd:true,recreateForm:true,viewPagerButtons:false,beforeShowForm:function(e){varform=$(e[0]);}},
-                {recreateForm:true,beforeShowForm:function(e){varform=$(e[0]);},onClick:function(e){alert(1);}},
-                {recreateForm:true,afterShowSearch:function(e){varform=$(e[0]);},afterRedraw:function(){},multipleSearch:true},
-                {recreateForm:true,beforeShowForm:function(e){varform=$(e[0]);}}
-        )
-        function notifyInfo(msg, type) {
-            Messenger().post({
-                type: type,
-                message: msg
-            });
-        }
-    });
-</script>
+	<input type="hidden" id="roleId" /><!-- 更新用 -->
+	<input type="hidden" name="checkIds" /><!-- 	批量删除  -->
+	<div class="rightBody">
+		<div class="SetUpBody">
+			<div class="index-common-title bottom-title">
+				<div class="index-common-title-left bottom-left"></div>
+				<div class="index-common-title-text bottom-text">角色管理</div>
+			</div>
+
+			<div class="bottom-div bottom-div2 clearfix">
+				<div class="col-sm-12 ct-col1">
+					<table id="example" class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th><input type="checkbox" name="allChecked" /></th>
+								<th>序号</th>
+								<th>角色编码</th>
+								<th>角色名称</th>
+								<th>角色描述</th>
+								<th>创建时间</th>
+								<th>修改时间</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+
+<!-- 			<div class="bottom-div bottom-div2 clearfix"> -->
+<!-- 				<div class="col-sm-12 ct-col1"> -->
+<!-- 					<table id="grid-table"></table> -->
+<!-- 					<div id="grid-pager"></div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+		</div>
+	</div>
+	
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">新增</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<input type="text" class="form-control" id="roleKey"
+							placeholder="角色编码">
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="roleName"
+							placeholder="角色名称">
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="note"
+							placeholder="角色描述">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" id="save">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="delModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" >删除角色</h4>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-warning">
+						<strong>确认删除角色！</strong>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-danger" id="del">确认</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<%-- 	<script src="${ctx}/assets/js/biz/admin/roleListJQ.js"></script> --%>
+	<script src="${ctx}/assets/js/biz/admin/roleListDT.js"></script>
 </body>
 </html>

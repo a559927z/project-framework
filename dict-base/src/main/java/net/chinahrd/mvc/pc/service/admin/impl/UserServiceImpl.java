@@ -3,10 +3,16 @@ package net.chinahrd.mvc.pc.service.admin.impl;
 import java.util.List;
 import java.util.Map;
 
-import net.chinahrd.core.web.eis.license.License;
-import net.chinahrd.core.web.eis.license.LicenseConfig;
-import net.chinahrd.core.web.eis.license.LicenseData;
+import org.apache.ibatis.session.RowBounds;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
 import net.chinahrd.eis.permission.EisWebContext;
+import net.chinahrd.eis.permission.dao.RbacAuthorizerDao;
+import net.chinahrd.eis.permission.model.RbacPermission;
 import net.chinahrd.eis.permission.model.RbacRole;
 import net.chinahrd.eis.permission.model.RbacUser;
 import net.chinahrd.entity.dto.PaginationDto;
@@ -18,13 +24,6 @@ import net.chinahrd.mvc.pc.service.admin.UserService;
 import net.chinahrd.utils.CollectionKit;
 import net.chinahrd.utils.Str;
 
-import org.apache.ibatis.session.RowBounds;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-
 /**
  * 用户Service实现类
  * Created by wqcai on 15/6/8.
@@ -34,10 +33,12 @@ import org.springframework.util.StringUtils;
  * @author 家安
  */
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends BaseServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private RbacAuthorizerDao rbacAuthorizerDao;
     
 	/**
 	 * 带入角色过滤
@@ -61,13 +62,11 @@ public class UserServiceImpl implements UserService {
         int count = userDao.findAllCount(customerId, userName, getRoleIds());
         pageDto.setRecords(count);
         
-        Map<String,Object> mapParam=CollectionKit.newMap();
-		mapParam.put("customerId", customerId);
-		mapParam.put("userName", userName);
-		mapParam.put("rbacRoles",  getRoleIds());
-		mapParam.put("rowBounds", rowBounds);
-        
-        List<UserDto> dtos = userDao.findAll(mapParam);
+		Map<String, Object> paramsMap = this.paramsMap();
+		paramsMap.put("userName", userName);
+		paramsMap.put("rowBounds", rowBounds);
+		
+        List<UserDto> dtos = userDao.findAll(paramsMap);
         pageDto.setRows(dtos);
         return pageDto;
     }
@@ -134,6 +133,7 @@ public class UserServiceImpl implements UserService {
     public boolean deleteUser(String customerId, List<String> userId) {
         try {
             userDao.deleteUser(customerId, userId);
+            userDao.deleteUserRole(customerId, userId);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -245,6 +245,35 @@ public class UserServiceImpl implements UserService {
         }
         return rs;
     }
+
+	@Override
+	public Map<String, Object> findAll2(String customerId, String search, int start, int length) {
+		int count = userDao.findAllCount(customerId, null, null);
+		if (count == 0) {
+			return null;
+		}
+		Map<String, Object> rs = this.paramsMap();
+		rs.put("recordsTotal", count);
+		rs.put("recordsFiltered", count);
+		List<UserDto> roleList = userDao.findAll(rs);
+		rs.put("data", roleList);
+		return rs;
+	}
+
+	@Override
+	public Map<String, Object> queryPerms(String customerId, String search, int start, int length) {
+		int count = rbacAuthorizerDao.queryPermsCount(this.paramsMap());
+		if (count == 0) {
+			return null;
+		}
+		List<RbacPermission> roleList = rbacAuthorizerDao.queryPerms(this.paramsMap());
+		Map<String, Object> rs = CollectionKit.newMap();
+		rs.put("recordsTotal", count);
+		rs.put("recordsFiltered", count);
+		rs.put("data", roleList);
+		return rs;
+		
+	}
 
 
 }

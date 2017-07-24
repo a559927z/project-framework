@@ -26,8 +26,17 @@ import net.chinahrd.utils.export.PhantomJSUtil;
 public class DemoController {
 	@RequestMapping(value = "/toPerBenefitView")
 	public ModelAndView toPerBenefitView() throws Exception {
-
 		return new ModelAndView("biz/productivity/perBenefitTrend");
+	}
+
+	/**
+	 * 数据表Demo
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/dataTableDemo")
+	public String dataTableDemo() {
+		return "demo/dataTableDemo";
 	}
 
 	/**

@@ -20,6 +20,7 @@ public class PaginationDto<E> implements Serializable {
     private int records;    //总条数
     private List<E> rows;
     private E userdata;
+    
 
     /**
      * sql用

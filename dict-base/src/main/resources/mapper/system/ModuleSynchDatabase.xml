@@ -45,11 +45,11 @@
 			name,
 			version,
 			staus
-	FROM sys_module
+	FROM dict_sys_module
     </select>
 
 <insert id="insertModule" parameterType="net.chinahrd.core.module.model.ModuleModel" >
-      INSERT INTO sys_module (
+      INSERT INTO dict_sys_module (
         module_id,
         code,
         name,

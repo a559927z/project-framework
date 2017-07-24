@@ -4,7 +4,7 @@
 <mapper namespace="net.chinahrd.eis.aop.LogDao">
 
 	<insert id="insertLoginLog" parameterType="net.chinahrd.eis.aop.AopInformation">
-		INSERT INTO login_log (
+		INSERT INTO dict_log_login (
 			login_log_id,
 			user_id,
 			user_key,
@@ -24,7 +24,7 @@
 	</insert>
 
 	<insert id="insertOperateLog" parameterType="net.chinahrd.eis.aop.AopInformation">
-		INSERT INTO operate_log (
+		INSERT INTO dict_log_operate (
 			user_id,
 			user_key,
 			user_name,

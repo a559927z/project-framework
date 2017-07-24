@@ -8,35 +8,6 @@
 	<script>
 		try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
 	</script>
-	<%--<div class="sidebar-shortcuts" id="sidebar-shortcuts">--%>
- 		<%--<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">--%>
- 			<%--<button class="btn btn-success" title="数据字典">--%>
- 				<%--<i class="icon-signal"></i>--%>
- 			<%--</button>--%>
-
- 			<%--<button class="btn btn-info" title="组件demo">--%>
- 				<%--<i class="icon-pencil"></i>--%>
- 			<%--</button>--%>
-
- 			<%--<button class="btn btn-warning" title="人员交际" >--%>
- 				<%--<i class="icon-group"></i>--%>
- 			<%--</button>--%>
-
- 			<%--<button class="btn btn-danger" title="菜单管理" >--%>
- 				<%--<i class="icon-cogs"></i>--%>
- 			<%--</button>--%>
-		<%--</div>--%>
-
-		<%--<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">--%>
-			<%--<span class="btn btn-success"></span>--%>
-
-			<%--<span class="btn btn-info"></span>--%>
-
-			<%--<span class="btn btn-warning"></span>--%>
-
-			<%--<span class="btn btn-danger"></span>--%>
-		<%--</div>--%>
-	<%--</div>--%>
 	<div class="sidebar-collapse" id="sidebar-collapse">
 		<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
 	</div>
@@ -50,9 +21,6 @@
 			</a>
 			<ul class="submenu" style="display: none;">
 				<li class="active"><a href="manageHome/index" target="mainFrame"><i class="icon-double-angle-right"></i>首页</a></li></li>
-				<li><a href="manageHome/bossIndex" target="mainFrame"><i class="icon-double-angle-right"></i>首页(老板)</a></li>
-				<li><a href="manageHome/lineIndex" target="mainFrame"><i class="icon-double-angle-right"></i>首页(直线)</a></li>
-				<li><a href="manageHome/hrIndex" target="mainFrame"><i class="icon-double-angle-right"></i>首页(HR)</a></li>
 			</ul>
 		</li>
 
@@ -103,9 +71,6 @@
 					<ul class="submenu">
 						<c:forEach items="${parentDto.childs}" var="childDto">
 							<c:choose>
-								<%-- <c:when test="${childDto.pathUrl == 'emp/list'}">
-
-								</c:when> --%>
 								<c:when test="${childDto.pathUrl == 'talentContrast/toTalentContrastView'||childDto.pathUrl == 'talentProfile/toTalentProfileView'}">
 									<li><a href="${childDto.pathUrl}" target="mainFrame"><i class="icon-double-angle-right"></i>${childDto.functionName}</a></li>
 								</c:when>
@@ -142,6 +107,7 @@
 					<b class="arrow icon-angle-down"></b>
 				</a>
 				<ul class="submenu">
+					<li><a href="demo/dataTableDemo" target="mainFrame"><i class="icon-double-angle-right"></i>数据表Demo</a></li></li>
 					<li><a href="demo/compDemo" target="mainFrame"><i class="icon-double-angle-right"></i>vue组件Demo</a></li></li>
 					<li><a href="demo/pieTableDemo" target="mainFrame"><i class="icon-double-angle-right"></i>饼图、表格互动Demo</a></li></li>
 					<li><a href="demo/riskTreeDemo2" target="mainFrame"><i class="icon-double-angle-right"></i>离职风险树组件2</a></li></li>

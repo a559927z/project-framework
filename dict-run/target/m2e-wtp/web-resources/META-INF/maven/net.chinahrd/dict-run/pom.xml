@@ -10,7 +10,6 @@
 	<artifactId>dict-run</artifactId>
 	<version>20170718</version>
 	<packaging>war</packaging>
-
 	<!-- 依赖项定义 -->
 	<dependencies>
 		<dependency>

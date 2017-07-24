@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 
 import net.chinahrd.eis.permission.EisWebContext;
 import net.chinahrd.entity.dto.PaginationDto;
+import net.chinahrd.entity.dto.pc.RequestParamsDto;
 import net.chinahrd.entity.dto.pc.admin.UserDto;
 import net.chinahrd.entity.dto.pc.admin.UserRoleDto;
 import net.chinahrd.entity.dto.pc.common.FormOperType;
@@ -47,6 +48,34 @@ public class UserController extends BaseController {
     private RoleService roleService;
 
     /**
+     * 跳转用户管理页面
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String list(Model model) {
+        return "biz/admin/user/user-list";
+    }
+    
+
+    /**
+     * 对用户进行新增、修改、删除的操作
+     *
+     * @param userDto 用户的信息
+     * @param oper    操作类型（新增、修改、删除）
+     * @return 操作是否成功
+     */
+    @ResponseBody
+    @RequestMapping(value = "/queryPerms", method = RequestMethod.POST)
+    public Map<String, Object> queryPerms(RequestParamsDto paramsDto, HttpServletRequest reqs) {
+
+		String search = reqs.getParameter("search[value]");
+    	return userService.queryPerms(getCustomerId(), search, paramsDto.getStart(),
+				paramsDto.getLength());
+    }
+    
+    /**
      * 对用户进行新增、修改、删除的操作
      *
      * @param userDto 用户的信息
@@ -58,6 +87,7 @@ public class UserController extends BaseController {
     public boolean operateUser(UserDto userDto, String oper) {
         String customerId = getCustomerId();
         String userId = getUserId();
+        
         if (FormOperType.ADD.getOper().equals(oper)) {
             userDto.setUserId(Identities.uuid2());
             userDto.setCustomerId(customerId);
@@ -83,17 +113,6 @@ public class UserController extends BaseController {
     }
 
     /**
-     * 跳转用户管理页面
-     *
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Model model) {
-        return "biz/admin/user/user-list";
-    }
-
-    /**
      * 查询用户信息
      *
      * @param userName
@@ -110,6 +129,16 @@ public class UserController extends BaseController {
         dto = userService.findAll(getCustomerId(), userName, dto);
         return dto;
     }
+    
+	@ResponseBody
+	@RequestMapping(value = "/findAll", method = RequestMethod.POST)
+	public Map<String, Object> findAll(RequestParamsDto paramsDto, HttpServletRequest reqs) {
+
+		String search = reqs.getParameter("search[value]");
+		Map<String, Object> findAll2 = userService.findAll2(getCustomerId(), search, paramsDto.getStart(),
+				paramsDto.getLength());
+		return findAll2;
+	}
 
     /**
      * 修改用户密码信息
