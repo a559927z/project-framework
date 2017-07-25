@@ -70,7 +70,7 @@ public interface RoleService {
 	 * @param roleIds
 	 * @param createUserId
 	 */
-	void addUserRole(String customerId, String userId, String[] roleIds, String createUserId);
+	boolean addUserRole(String customerId, String userId, String[] roleIds, String createUserId);
 
 	/**
 	 * 查询当前登录人的所有角色ID

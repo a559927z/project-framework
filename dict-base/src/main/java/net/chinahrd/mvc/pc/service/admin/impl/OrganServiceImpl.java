@@ -18,7 +18,6 @@ import net.chinahrd.entity.dto.pc.admin.OrganTypeDto;
 import net.chinahrd.entity.dto.pc.admin.RoleOrganizationDto;
 import net.chinahrd.entity.dto.pc.admin.TreeDto;
 import net.chinahrd.entity.dto.pc.admin.UserDto;
-import net.chinahrd.entity.dto.pc.admin.UserOrganizationDto;
 import net.chinahrd.mvc.pc.dao.admin.OrganDao;
 import net.chinahrd.mvc.pc.dao.admin.OrganTypeDao;
 import net.chinahrd.mvc.pc.service.admin.OrganService;
@@ -152,51 +151,6 @@ public class OrganServiceImpl implements OrganService {
         return true;
     }
 
-
-    /*==============================================================*/
-	/*  配置页面使用-配置数据权限-user2organ				            */
-	/*==============================================================*/
-    @Override
-    public List<OrganDto> queryUserOrgans(String userId, String customerId,
-                                          boolean isOrganPermit) {
-        return organDao.queryUserOrgans(userId, customerId, isOrganPermit);
-    }
-
-    @Override
-    public boolean deleteUserOrganization(String userId, String customerId) {
-        try {
-            organDao.deleteUserOrganization(userId, customerId);
-        } catch (Exception e1) {
-            e1.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean addUserOrganization(String userId, String createUserId,
-                                       String customerId, List<OrganDto> organDtos) {
-        if (CollectionKit.isEmpty(organDtos)) {
-            return false;
-        }
-        organDao.deleteUserOrganization(userId, customerId);
-        List<UserOrganizationDto> dtos = CollectionKit.newList();
-
-        for (OrganDto organDto : organDtos) {
-            UserOrganizationDto dto = new UserOrganizationDto();
-            dto.setUserOrganizationId(Identities.uuid2());
-            dto.setCustomerId(customerId);
-//	            dto.setEmpId(empId);
-            dto.setUserId(userId);
-            dto.setHalfCheck(organDto.getHalfCheck());
-            dto.setOrganizationId(organDto.getOrganizationId());
-            dto.setCreateUserId(createUserId);
-            dto.setCreateTime(DateUtil.getTimestamp());
-            dtos.add(dto);
-        }
-        organDao.addUserOrganization(dtos);
-        return true;
-    }
 
 
     /*==============================================================*/
@@ -362,5 +316,6 @@ public class OrganServiceImpl implements OrganService {
     	org.setOrganizationTypeId(orgTypelist.get(0).getOrganizationTypeId());
 		return organDao.findList(org);
 	}
+
 
 }

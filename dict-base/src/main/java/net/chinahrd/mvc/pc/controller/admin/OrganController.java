@@ -42,61 +42,6 @@ public class OrganController extends BaseController {
 	/*==============================================================*/
     /*  配置页面使用-配置数据权限							            */
     /*==============================================================*/
-
-    /**
-     * 根据用户ID查询用户组织架构权限-user2organ
-     *
-     * @param model
-     * @param userId
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "/getTreeDataJson", method = RequestMethod.POST)
-    public Object getTreeDataJson(Model model, @RequestParam(value = "userId") String userId) {
-
-        // 被操作角色对象已存的所有数据（包括：全勾、半勾）
-        List<OrganDto> existOrgans = organService.queryUserOrgans(userId,
-                getCustomerId(), false);
-
-        List<TreeDto> treeDtos = organService.dbToZtree(existOrgans);
-        Object json = JSON.toJSON(treeDtos);
-        return json;
-    }
-
-    /**
-     * 添加角色数据权限-user2organ
-     *
-     * @param pojoDto
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "/addEmpOrganiation", method = RequestMethod.POST)
-    public ResultDto<String> addEmpOrganiation(
-            @RequestBody(required = false) PojoDto pojoDto) {
-
-        ResultDto<String> result = new ResultDto<>();
-        boolean rs = false;
-        result.setMsg("机构已存操作失败");
-
-        if (null == pojoDto) {
-            result.setMsg("对当前员工操作有误，请重新选择员工进行操作");
-        }
-
-        String userId = pojoDto.getUserId();
-        List<OrganDto> organDtos = pojoDto.getOrganDto();
-
-        if (organDtos.size() == 0) {
-            rs = organService.deleteUserOrganization(userId, getCustomerId());
-            result.setMsg("删除成功");
-        } else {
-
-            rs = organService.addUserOrganization(userId, getUserId(), getCustomerId(), organDtos);
-            result.setMsg("添加成功");
-        }
-        result.setType(rs);
-        return result;
-    }
-	
 	
 	
 	/*==============================================================*/

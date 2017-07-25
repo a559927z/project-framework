@@ -7,6 +7,15 @@
 <title>角色管理</title>
 <link rel="stylesheet" type="text/css" href="${ctxAssets}plugin/datatables/css/jquery.dataTables.css">
 </head>
+<style>
+.glyphiconColor {
+	color: #0099cc
+}
+
+.dataTables_wrapper .row:first-child {
+	background-color: #fff;
+}
+</style>
 <body>
 	<input type="hidden" id="roleId" /><!-- 更新用 -->
 	<input type="hidden" name="checkIds" /><!-- 	批量删除  -->

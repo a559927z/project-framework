@@ -4,6 +4,44 @@
         window.Tc = {};
     }
     var Tc = window.Tc;
+
+ /**
+	 * ajax异步请求
+	 */
+    Tc.ajax = function (settings) {
+        var defaultSetting = {
+            type: "POST",
+            url: '',
+            async: true,
+            data: {},
+            dataType: "json",
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            shade: {
+                show: false,    //是否显示；默认不显示
+                region: 'body'  //遮罩区域，默认body
+            }
+        }
+        $.extend(defaultSetting, settings);
+        // var _shade = defaultSetting.shade;
+        // if (_shade.show) { Tc.loading.showLoading({ region: _shade.region }); }
+        $.ajax({
+            url: defaultSetting.url,
+            type: defaultSetting.type,
+            dataType: defaultSetting.dataType,
+            data: defaultSetting.data,
+            contentType: defaultSetting.contentType,
+            success: function (data, status) {
+                settings.success(data);
+            },
+            error: function (data, status, e) {
+                // if (_shade.show) {
+                    // Tc.loading.nothingData({ region: _shade.region });
+                // }
+            }
+        })
+    };
+
+
     //饼图默认样式
 //    Tc.defaultPieColor = ['#7996d2', '#a491d1', '#c797e1', '#c7c0e1', '#60bbb6', '#6fcdb2', '#90d4e7', '#8fe7bf', '#8eb3e8', '#6386ce'];
     Tc.defaultPieColor = ['#5cb7f1', '#01d286', '#e5689b', '#b285c3', '#4682bc', '#8f684b', '#f28e7f', '#fbc370', '#8eb3e8', '#6386ce'];

@@ -25,7 +25,7 @@
 		<result property="empName" column="user_name_ch" />
 	</resultMap>
 
-	<select id="findAll" resultMap="UserMap"  useCache="true">
+	<select id="findAll" resultMap="UserMap" useCache="true">
 		SELECT
 		du.user_id,
 		du.customer_id,
@@ -41,9 +41,9 @@
 		du.modify_time
 		FROM dict_dim_user du
 		<where>
-<!-- 			AND t2.organization_id in ( -->
-<!-- 				<include refid="net.chinahrd.mvc.pc.dao.common.CommonDao.orgPermitSql"></include>					 -->
-<!-- 				) -->
+			<!-- AND t2.organization_id in ( -->
+			<!-- <include refid="net.chinahrd.mvc.pc.dao.common.CommonDao.orgPermitSql"></include> -->
+			<!-- ) -->
 			<if test="customerId != null">
 				AND du.customer_id = #{customerId}
 			</if>
@@ -53,7 +53,7 @@
 				LIKE concat('%',#{userName},'%'))
 			</if>
 		</where>
-		ORDER BY du.user_key
+		ORDER BY du.create_time desc, du.modify_time
 	</select>
 	<select id="findAllCount" resultType="int">
 		SELECT count(du.user_id) FROM dict_dim_user du

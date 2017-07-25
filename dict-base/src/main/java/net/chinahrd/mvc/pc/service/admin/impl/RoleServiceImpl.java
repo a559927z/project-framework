@@ -106,11 +106,11 @@ public class RoleServiceImpl extends BaseServiceImpl implements RoleService {
 		return roleDao.findRoleById(customerId, roleId);
 	}
 
+	@Transactional
 	@Override
-	public void addUserRole(String customerId, String userId, String[] roleIds, String createUserId) {
-		roleDao.deleteUserRole(customerId, userId);
+	public boolean addUserRole(String customerId, String userId, String[] roleIds, String createUserId) {
 		if (null == roleIds || roleIds.length <= 0) {
-			return;
+			return false;
 		}
 		List<UserRoleDto> dtos = new ArrayList<>();
 		for (String roleId : roleIds) {
@@ -121,10 +121,11 @@ public class RoleServiceImpl extends BaseServiceImpl implements RoleService {
 			dto.setRoleId(roleId);
 			dto.setCreateUserId(createUserId);
 			dto.setCreateTime(DateUtil.getTimestamp());
-
 			dtos.add(dto);
 		}
+		roleDao.deleteUserRole(customerId, userId);
 		roleDao.addUserRole(dtos);
+		return true;
 	}
 
 	@Override

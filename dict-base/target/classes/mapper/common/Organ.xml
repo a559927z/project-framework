@@ -173,58 +173,6 @@
     </insert>
 
 
-    <!-- user2organ -->
-    <!-- isOrganPermit==true 用户下所有数据权限 -->
-    <!-- isOrganPermit==false 用户下所有带状态数据,用作机构树配置半勾情况 -->
-    <select id="queryUserOrgans" resultMap="organMap">
-        SELECT DISTINCT
-        vo.organization_id,
-        vo.organization_name,
-        vo.organization_parent_id,
-        vo.full_path as fullPath,
-        uor.half_check as halfCheck
-        FROM
-        user_organization_relation uor
-        INNER JOIN dict_dim_organization vo ON vo.organization_id = uor.organization_id AND vo.customer_id=uor.customer_id
-        WHERE
-        uor.user_id =#{userId} and uor.customer_id = #{customerId}
-        <if test="isOrganPermit == true">
-            and ro.half_check = 0
-        </if>
-    </select>
-    <!-- user2organ -->
-    <!-- 删除用户下所有数据权限 -->
-    <delete id="deleteUserOrganization" parameterType="string">
-		DELETE FROM user_organization_relation WHERE user_id = #{userId} and customer_id = #{customerId}
-    </delete>
-    <!-- user2organ -->
-    <!-- 用户配置数据 -->
-    <insert id="addUserOrganization" parameterType="net.chinahrd.entity.dto.pc.admin.EmpOrganizationDto">
-        INSERT INTO user_organization_relation
-        (
-        user_organization_id,
-        customer_id,
-        user_id,
-        organization_id,
-        half_check,
-        create_user_id,
-        create_time
-        )
-        VALUES
-        <foreach collection="dtos" item="dto" separator=",">
-            (
-            #{dto.userOrganizationId},
-            #{dto.customerId},
-            #{dto.userId},
-            #{dto.organizationId},
-            #{dto.halfCheck},
-            #{dto.createUserId},
-            #{dto.createTime}
-            )
-        </foreach>
-        <!--  CALL pro_fetch_emp_organization( #{dto.customerId},'3cfd3db15ffc4c119e344e82eb8cbb19'); -->
-    </insert>
-
 
     <!--
     /*==============================================================*/
@@ -292,11 +240,9 @@
         emp.user_name_ch AS userNameCh
         FROM
         dict_dim_organization vo
-        <!-- 		INNER JOIN dict_relation_role_organization ro on vo.organization_id = ro.organization_id AND vo.customer_id=ro.customer_id  -->
-        <!-- 		INNER JOIN dict_dim_role dr on dr.role_id = ro.role_id AND vo.customer_id=dr.customer_id  -->
-        <!-- 		INNER JOIN dict_relation_role_user ur on ur.role_id = ro.role_id AND vo.customer_id=ur.customer_id  -->
-        INNER JOIN user_organization_relation ur on ur.organization_id = vo.organization_id AND
-        vo.customer_id=ur.customer_id
+   		INNER JOIN dict_relation_role_organization ro on vo.organization_id = ro.organization_id AND vo.customer_id=ro.customer_id 
+   		INNER JOIN dict_dim_role dr on dr.role_id = ro.role_id AND vo.customer_id=dr.customer_id 
+   		INNER JOIN dict_relation_role_user ur on ur.role_id = ro.role_id AND vo.customer_id=ur.customer_id 
         INNER JOIN dict_dim_user du on ur.user_id = du.user_id and du.sys_deploy = 0 AND vo.customer_id=du.customer_id
         and du.is_lock = 0
         inner JOIN v_dim_emp emp on emp.emp_id = du.emp_id AND vo.customer_id=emp.customer_id
@@ -334,25 +280,25 @@
 
 
     <!-- 根据用户查询用户顶级机构 -->
-    <!-- 	<select id="queryOrganPermitTop" resultMap="organMap"> -->
-    <!-- 		SELECT  -->
-    <!-- 			dor.organization_id,  -->
-    <!-- 			dor.organization_name, -->
-    <!-- 			dor.organization_parent_id, -->
-    <!-- 			dor.has_children, -->
-    <!-- 			dor.full_path, -->
-    <!-- 			dor.depth -->
-    <!-- 		FROM user_organization_relation urr  -->
-    <!-- 		INNER JOIN dict_dim_organization dor ON urr.organization_id=dor.organization_id AND urr.customer_id = dor.customer_id -->
-    <!-- 		LEFT JOIN ( -->
-    <!-- 			SELECT organization_id, customer_id FROM user_organization_relation   -->
-    <!-- 			WHERE user_id = #{userId} AND  half_check=0 AND customer_id = #{customerId} -->
-    <!-- 		) p ON  dor.organization_parent_id = p.organization_id AND p.customer_id = dor.customer_id -->
-    <!-- 		WHERE p.organization_id is null -->
-    <!-- 			AND urr.user_id = #{userId}  -->
-    <!-- 			AND urr.customer_id = #{customerId} -->
-    <!-- 			AND urr.half_check=0 -->
-    <!-- 	</select> -->
+<!--     	<select id="queryOrganPermitTop" resultMap="organMap"> -->
+<!--     		SELECT  -->
+<!--     			dor.organization_id,  -->
+<!--     			dor.organization_name, -->
+<!--     			dor.organization_parent_id, -->
+<!--     			dor.has_children, -->
+<!--     			dor.full_path, -->
+<!--     			dor.depth -->
+<!--     		FROM user_organization_relation urr  -->
+<!--     		INNER JOIN dict_dim_organization dor ON urr.organization_id=dor.organization_id AND urr.customer_id = dor.customer_id -->
+<!--     		LEFT JOIN ( -->
+<!--     			SELECT organization_id, customer_id FROM user_organization_relation   -->
+<!--     			WHERE user_id = #{userId} AND  half_check=0 AND customer_id = #{customerId} -->
+<!--     		) p ON  dor.organization_parent_id = p.organization_id AND p.customer_id = dor.customer_id -->
+<!--     		WHERE p.organization_id is null -->
+<!--     			AND urr.user_id = #{userId}  -->
+<!--     			AND urr.customer_id = #{customerId} -->
+<!--     			AND urr.half_check=0 -->
+<!--     	</select> -->
 
 
     <!--

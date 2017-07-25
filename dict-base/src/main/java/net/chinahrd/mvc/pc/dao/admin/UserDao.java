@@ -35,7 +35,7 @@ public interface UserDao extends CommonDao {
 	 * @param customerId
 	 * @param userId
 	 */
-	void deleteUserRole(String customerId, List<String> userId);
+	void deleteUserRole(@Param("customerId") String customerId, @Param("userId") List<String> userId);
 
 	void updateUserEmp(@Param("customerId") String customerId, @Param("userId") String userId,
 			@Param("empId") String empId);

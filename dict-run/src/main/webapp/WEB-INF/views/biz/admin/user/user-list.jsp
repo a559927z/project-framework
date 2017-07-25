@@ -5,12 +5,14 @@
 <head>
 <%@include file="/WEB-INF/views/include/top.jsp"%>
 <title>用户管理</title>
-<link rel="stylesheet" type="text/css" href="${ctxAssets}plugin/datatables/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css"
+	href="${ctxAssets}plugin/datatables/css/jquery.dataTables.css">
 </head>
 <style>
 .glyphiconColor {
 	color: #0099cc
 }
+
 .dataTables_wrapper .row:first-child {
 	background-color: #fff;
 }
@@ -31,7 +33,7 @@
 								<th>序号</th>
 								<th>用户编码</th>
 								<th>用户名称</th>
-								<th>角色描述</th>
+								<th>用户描述</th>
 								<th>创建时间</th>
 								<th>修改时间</th>
 								<th>操作</th>
@@ -40,6 +42,8 @@
 					</table>
 				</div>
 			</div>
+			<br/>
+			<br/>
 			<div class="index-common-title bottom-title">
 				<div class="index-common-title-left bottom-left"></div>
 				<div class="index-common-title-text bottom-text">用户信息</div>
@@ -111,47 +115,7 @@
 	</div>
 	<!-- /.modal -->
 
-	<!-- 搜索弹出框 -->
-	<div id="searchModal" class="modal fade" data-backdrop="static"
-		tabindex="-1" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<input type="hidden" id="searchUserId">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h3 class="modal-title">绑定员工</h3>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-xs-7">
-							<div class="input-group">
-								<input type="text" class="form-control search-query"
-									id="searchTxt" placeholder="请输入员工ID/姓名" /> <span
-									class="input-group-btn">
-									<button type="button" class="btn btn-white" id="searchBtn">
-										查询 <i class="icon-search icon-on-right bigger-110"></i>
-									</button>
-								</span>
-							</div>
-						</div>
-						<div class="col-xs-5">
-							<label>* 姓名支持模糊查询</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-12 column" id="searchEmpTable">
-							<table id="searchEmpGrid"></table>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
+	<!-- 模板1结束 -->
 	<script src="${ctx}/assets/js/biz/admin/userListDT.js"></script>
 </body>
 </html>
