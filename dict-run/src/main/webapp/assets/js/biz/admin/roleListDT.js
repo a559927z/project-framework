@@ -1,9 +1,7 @@
 require(['jquery', 'bootstrap', 'dataTable', 'underscore', 'layer'], function () {
 	var webRoot = G_WEB_ROOT;
 	var urls = {
-		findRoleAll: webRoot + '/role/findRoleAll.do',
 		operateRole: webRoot + '/role/operateRole.do',
-		delRole: webRoot + '/role/delRole.do',
 		findAll: webRoot + '/role/findAll.do',
 	}
 	layer.config({
@@ -220,11 +218,15 @@ require(['jquery', 'bootstrap', 'dataTable', 'underscore', 'layer'], function ()
 			dataType: 'json',
 			contentType: 'application/json;charset=utf-8',
 			success: function (data) {
-				table.ajax.reload();
+				if(data){
+					table.ajax.reload();
+					layer.msg('亲，操作已完成...', { icon: 6 });
+				}else{
+					layer.msg('亲，操作失败（角色有用户在使用）...', { icon: 5 });
+				}
 				$(".modal").modal("hide");
 				$("#myModalLabel").text("新增");
 				clear();
-				layer.msg('亲，操作已完成...', { icon: 6 });
 			}
 		});
 	}

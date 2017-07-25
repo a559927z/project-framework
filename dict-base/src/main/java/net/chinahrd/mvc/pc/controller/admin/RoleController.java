@@ -100,19 +100,6 @@ public class RoleController extends BaseController {
 		return isSuccess;
 	}
 
-	/**
-	 * 加载所有角色信息
-	 *
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/findRoleAll", method = RequestMethod.POST)
-	public PaginationDto<RoleDto> findRoleAll(String userName, Integer page, Integer rows, String sidx, String sord) {
-		PaginationDto<RoleDto> dto = new PaginationDto<RoleDto>(page, rows);
-		dto = roleService.findAll(getCustomerId(), dto);
-		return dto;
-	}
-
 	@ResponseBody
 	@RequestMapping(value = "/findAll", method = RequestMethod.POST)
 	public Map<String, Object> findAll(RequestParamsDto paramsDto, HttpServletRequest reqs) {
@@ -129,6 +116,8 @@ public class RoleController extends BaseController {
 				paramsDto.getLength());
 		return findAll2;
 	}
+
+	/////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * 跳转角色功能配置页面
@@ -251,6 +240,19 @@ public class RoleController extends BaseController {
 		}
 		result.setType(rs);
 		return result;
+	}
+
+	/**
+	 * 加载所有角色信息
+	 *
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/findRoleAll", method = RequestMethod.POST)
+	public PaginationDto<RoleDto> findRoleAll(String userName, Integer page, Integer rows, String sidx, String sord) {
+		PaginationDto<RoleDto> dto = new PaginationDto<RoleDto>(page, rows);
+		dto = roleService.findAll(getCustomerId(), dto);
+		return dto;
 	}
 
 }

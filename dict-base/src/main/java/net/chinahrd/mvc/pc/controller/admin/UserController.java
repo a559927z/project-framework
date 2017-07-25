@@ -139,6 +139,23 @@ public class UserController extends BaseController {
 	}
 
 	/**
+	 * 添加用户角色关联
+	 *
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/addUserRoles", method = RequestMethod.POST)
+	public ResultDto<String> addUserRoles(@RequestParam(value = "userId") String userId,
+			@RequestParam(value = "roleIds[]", required = false) String[] roleIds) {
+		ResultDto<String> result = new ResultDto<String>();
+		boolean isSuccess = roleService.addUserRole(getCustomerId(), userId, roleIds, getUserId());
+		result.setType(isSuccess);
+		return result;
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+
+	/**
 	 * 查询用户信息
 	 *
 	 * @param userName
@@ -192,21 +209,6 @@ public class UserController extends BaseController {
 			enPwd = Base64.encodeToString(keyPwd.getBytes());
 		}
 		boolean result = userService.updateUserPWDbyUserName(enPwd, userName, getCustomerId());
-		return result;
-	}
-
-	/**
-	 * 添加用户角色关联
-	 *
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/addUserRoles", method = RequestMethod.POST)
-	public ResultDto<String> addUserRoles(@RequestParam(value = "userId") String userId,
-			@RequestParam(value = "roleIds[]", required = false) String[] roleIds) {
-		ResultDto<String> result = new ResultDto<String>();
-		boolean isSuccess = roleService.addUserRole(getCustomerId(), userId, roleIds, getUserId());
-		result.setType(isSuccess);
 		return result;
 	}
 

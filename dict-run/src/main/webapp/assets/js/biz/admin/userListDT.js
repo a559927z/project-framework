@@ -137,7 +137,6 @@ require(['jquery', 'bootstrap', 'dataTable', 'underscore', 'layer', 'dataTablePu
 	}
 
 
-
 	function configRoleEvent(obj, e) {
 		var userId = obj.userId;
 		var label = '(' + obj.userNameCh + ')';
@@ -193,6 +192,7 @@ require(['jquery', 'bootstrap', 'dataTable', 'underscore', 'layer', 'dataTablePu
 			contentType: _contentType,
 			success: function (rs) {
 				table.ajax.reload();
+				infoTable.ajax.reload();
 				$(".modal").modal("hide");
 				if (rs) {
 					layer.msg('亲，操作已完成...', { icon: 6 });
@@ -227,5 +227,5 @@ require(['jquery', 'bootstrap', 'dataTable', 'underscore', 'layer', 'dataTablePu
 					"width" : "100px",
 				}*/ ]
 	}
-	$("#infoTable").dataTablePush(infoTable);
+	var infoTable = $("#infoTable").dataTablePush(infoTable);
 });
