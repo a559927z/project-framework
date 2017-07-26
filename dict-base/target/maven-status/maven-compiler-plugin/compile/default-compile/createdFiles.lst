@@ -57,10 +57,8 @@ net\chinahrd\entity\dto\pc\admin\PojoDto.class
 net\chinahrd\entity\dto\pc\common\MessageResultDto.class
 net\chinahrd\module\SysApiDefine.class
 net\chinahrd\eis\aop\LogService.class
-net\chinahrd\mvc\pc\controller\admin\EmpProjectRelationController.class
 net\chinahrd\eis\permission\service\RbacAuthorizerService.class
 net\chinahrd\entity\dto\KVItemDto.class
-net\chinahrd\mvc\pc\service\admin\impl\EmpProjectRelationServiceImpl.class
 net\chinahrd\eis\aop\LogAnnotationAspect.class
 net\chinahrd\entity\dto\pc\admin\FunctionTreeDto.class
 net\chinahrd\mvc\pc\service\admin\impl\BaseServiceImpl.class
@@ -148,14 +146,12 @@ net\chinahrd\entity\dto\pc\admin\UserDto.class
 net\chinahrd\entity\dto\pc\RequestParamsDto.class
 net\chinahrd\eis\mail\MailProperty.class
 net\chinahrd\mvc\pc\controller\admin\ImportDataController.class
-net\chinahrd\entity\dto\pc\admin\ProjectRelationDto.class
 net\chinahrd\mvc\pc\controller\admin\UserController.class
 net\chinahrd\entity\dto\pc\admin\UserRoleDto.class
 net\chinahrd\eis\pagination\PaginationPlugin$BoundSqlSqlSource.class
 net\chinahrd\module\SysCacheDefine.class
 net\chinahrd\eis\search\service\impl\EsQueryServiceImpl$1.class
 net\chinahrd\eis\pagination\OracleDialect.class
-net\chinahrd\mvc\pc\service\admin\EmpProjectRelationService.class
 net\chinahrd\eis\permission\dao\ModuleSynchDatabase.class
 net\chinahrd\eis\sms\c123\HttpUtils.class
 net\chinahrd\eis\sms\AbstractSMSSendProvider$1.class
@@ -175,7 +171,6 @@ net\chinahrd\eis\pagination\Dialect.class
 net\chinahrd\utils\phantomjs\PhantomJSReference2.class
 net\chinahrd\eis\sms\AbstractSMSSendProvider$MonitorNotifier.class
 net\chinahrd\eis\search\aggs\AggsType.class
-net\chinahrd\mvc\pc\dao\admin\EmpProjectRelationDao.class
 net\chinahrd\mvc\pc\controller\LoginController.class
 net\chinahrd\eis\sms\c123\BalanceResultBean.class
 net\chinahrd\module\SysProcessJob.class

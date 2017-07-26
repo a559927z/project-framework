@@ -7,13 +7,11 @@ D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\entity\
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\entity\enums\QuarterRangeEnum.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\eis\aop\LogExecutionAspect.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\eis\search\aggs\DateHistogramPack.java
-D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\mvc\pc\controller\admin\EmpProjectRelationController.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\eis\notice\service\NoticeService.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\eis\permission\model\RbacUser.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\entity\dto\pc\admin\RoleFunctionDto.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\entity\dto\pc\common\MemoStatusDto.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\mvc\pc\controller\HomeController.java
-D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\entity\dto\pc\admin\ProjectRelationDto.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\eis\permission\model\RbacPermission.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\eis\search\dao\EmployeeDao.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\entity\dto\pc\common\MemoCreateDto.java
@@ -73,7 +71,6 @@ D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\entity\
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\mvc\pc\service\admin\impl\BaseServiceImpl.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\mvc\pc\controller\admin\UserController.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\mvc\pc\controller\common\CommonController.java
-D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\mvc\pc\service\admin\EmpProjectRelationService.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\mvc\pc\service\common\ConfigService.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\mvc\pc\dao\admin\RoleDao.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\utils\phantomjs\PhantomJSExecutor2.java
@@ -179,7 +176,6 @@ D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\eis\sms
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\eis\sms\c123\SendStateBean.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\eis\permission\dao\RbacAuthorizerDao.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\entity\dto\pc\admin\EmpOrganizationDto.java
-D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\mvc\pc\dao\admin\EmpProjectRelationDao.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\eis\sms\c123\UpdateResultBean.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\eis\sms\c123\BalanceResultBean.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\mvc\pc\dao\common\CommonDao.java
@@ -208,6 +204,5 @@ D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\entity\
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\entity\dto\pc\common\MemoResultDto.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\entity\dto\pc\admin\FunctionItemDto.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\api\module\Modules.java
-D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\mvc\pc\service\admin\impl\EmpProjectRelationServiceImpl.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\eis\aop\LogAnnotationAspect.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\eis\sms\AbstractSMSSendProvider.java

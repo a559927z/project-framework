@@ -3,8 +3,6 @@ package net.chinahrd.entity.dto.pc.admin;
 import java.io.Serializable;
 import java.util.List;
 
-import net.chinahrd.entity.dto.pc.admin.OrganDto;
-
 public class PojoDto implements Serializable {
 
 	private static final long serialVersionUID = -1263390655478896349L;
@@ -13,11 +11,10 @@ public class PojoDto implements Serializable {
 	private String empId;
 	private String userId;
 	private List<OrganDto> organDto;
-	private List<ProjectRelationDto> projectDto;
-	
+
 	private RoleDto roleDto;
 	private String oper;
-	
+
 	public RoleDto getRoleDto() {
 		return roleDto;
 	}
@@ -64,18 +61,6 @@ public class PojoDto implements Serializable {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public List<ProjectRelationDto> getProjectDto() {
-		return projectDto;
-	}
-
-	public void setProjectDto(List<ProjectRelationDto> projectDto) {
-		this.projectDto = projectDto;
 	}
 
 }

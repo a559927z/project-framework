@@ -12,7 +12,6 @@ public enum PermissionCode {
 	 * 角色
 	 */
 	SUPER_ADMIN("superAdmin"), // "超级管理员Key"
-	
 	ADMIN("admin"), // "管理员"
 	USER("user"), // "用户"
 	GUEST("guest"), // "来宾"

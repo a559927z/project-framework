@@ -3,6 +3,8 @@ require(['jquery', 'bootstrap', 'dataTable', 'underscore', 'layer'], function ()
 	var urls = {
 		operateRole: webRoot + '/role/operateRole.do',
 		findAll: webRoot + '/role/findAll.do',
+		roleFunction : webRoot + '/role/roleFunction?roleId=', //跳转角色功能配置页面
+		roleOrgan : webRoot + '/role/roleOrgan?roleId=', //跳转角色功能配置页面
 	}
 	layer.config({
 		path: webRoot + '/assets/plugin/layer-v3.0.3/layer/' //layer.js所在的目录，可以是绝对目录，也可以是相对目录
@@ -105,7 +107,7 @@ require(['jquery', 'bootstrap', 'dataTable', 'underscore', 'layer'], function ()
 		$("._fun").unbind().bind('click', function () {
 			var _this = $(this);
 			var id = _this.attr('data-index');
-			window.location.href = webRoot + '/role/roleFunction?roleId=' + id;
+			window.location.href =	urls.roleFunction + id;
 		});
 		$("._org").unbind().bind('click', function () {
 			var _this = $(this);

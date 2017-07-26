@@ -1,18 +1,12 @@
 package net.chinahrd.eis.permission.service;
 
-import net.chinahrd.eis.permission.dao.RbacAuthorizerDao;
-import net.chinahrd.eis.permission.enums.AuthenticationCode;
-import net.chinahrd.eis.permission.enums.PermissionCode;
-import net.chinahrd.eis.permission.model.AuthenticationResult;
-import net.chinahrd.eis.permission.model.RbacFunction;
-import net.chinahrd.eis.permission.model.RbacRole;
-import net.chinahrd.eis.permission.model.RbacUser;
-import net.chinahrd.entity.dto.pc.admin.OrganDto;
-import net.chinahrd.entity.dto.pc.admin.ProjectRelationDto;
-import net.chinahrd.mvc.pc.service.admin.EmpProjectRelationService;
-import net.chinahrd.mvc.pc.service.admin.OrganService;
-import net.chinahrd.utils.CollectionKit;
-import net.chinahrd.utils.PropertiesUtil;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.codec.Base64;
 import org.slf4j.Logger;
@@ -22,8 +16,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import java.util.*;
-import java.util.Map.Entry;
+import net.chinahrd.eis.permission.dao.RbacAuthorizerDao;
+import net.chinahrd.eis.permission.enums.AuthenticationCode;
+import net.chinahrd.eis.permission.enums.PermissionCode;
+import net.chinahrd.eis.permission.model.AuthenticationResult;
+import net.chinahrd.eis.permission.model.RbacFunction;
+import net.chinahrd.eis.permission.model.RbacRole;
+import net.chinahrd.eis.permission.model.RbacUser;
+import net.chinahrd.entity.dto.pc.admin.OrganDto;
+import net.chinahrd.mvc.pc.service.admin.OrganService;
+import net.chinahrd.utils.CollectionKit;
+import net.chinahrd.utils.PropertiesUtil;
 
 /**
  * Shiro提供自定服务
@@ -42,9 +45,6 @@ public class RbacAuthorizerServiceImpl implements RbacAuthorizerService {
     @Autowired
     private OrganService organService;
 
-    @Autowired
-    private EmpProjectRelationService empProjectRelationService;
-    
     @Override
     public AuthenticationResult authenticate(final String customerId, final String username, final String inputPwd) {
 
@@ -106,15 +106,11 @@ public class RbacAuthorizerServiceImpl implements RbacAuthorizerService {
 			List<RbacRole> rbacRoles = (List<RbacRole>) rsMap.get("rbacRoles");
 			List<RbacFunction> rbacFunctions = (List<RbacFunction>) rsMap.get("rbacFunctions");
 			List<OrganDto> organAllStatus = (List<OrganDto>) rsMap.get("organAllStatus");
-			List<ProjectRelationDto> projectAllStatus = (List<ProjectRelationDto>) rsMap.get("projectAllStatus");
-			List<String> empInfoList = (List<String>) rsMap.get("empInfoList");
 			if(null != roleSet){rbacUser.setShiroRolesKey(roleSet); }
 			if(null != funSet){rbacUser.setShiroPermissions(funSet); }
 			if(null != rbacRoles){rbacUser.setRbacRoles(rbacRoles); }
 			if(null != rbacFunctions){rbacUser.setRbacFunctions(rbacFunctions); }
 			if(null != organAllStatus){ packOrgans(rbacUser, organAllStatus); }
-			if(null != projectAllStatus){rbacUser.setProjectAllStatus(projectAllStatus); }
-			if(null != empInfoList){rbacUser.setEmpInfoList(empInfoList); }
 		}
         return new AuthenticationResult(rbacUser);
     }
@@ -129,11 +125,6 @@ public class RbacAuthorizerServiceImpl implements RbacAuthorizerService {
         List<OrganDto> organAllStatus = organService.queryOrganPermit2(userId);
         rsMap.put("organAllStatus", organAllStatus);
 		        
-//        List<ProjectRelationDto> projectAllStatus = empProjectRelationService.queryProjectPermit(userId);
-//        rsMap.put("projectAllStatus", projectAllStatus);
-//
-//		List<String> empInfoList = empProjectRelationService.queryEmpInfosByEmpid(empId);
-//		rsMap.put("empInfoList", empInfoList);
         // superAdmin
 		if (isSysDeploy) {
 			rsMap.put("funSet", new HashSet<String>(Arrays.asList(PermissionCode.ALL_FUNCTION.getValue())));

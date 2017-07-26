@@ -42,6 +42,7 @@
 			<value>
 				<!-- anon表示此地址不需要任何权限即可访问 -->
 			    /login = authc
+<!-- 			    /login = anon -->
 			    /logout = logout
 				/assets/** = anon
 				/mobile/** = anon

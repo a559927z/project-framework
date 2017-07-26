@@ -117,8 +117,6 @@ public class RoleController extends BaseController {
 		return findAll2;
 	}
 
-	/////////////////////////////////////////////////////////////////////////////
-
 	/**
 	 * 跳转角色功能配置页面
 	 *
@@ -127,13 +125,14 @@ public class RoleController extends BaseController {
 	 */
 	@RequestMapping(value = "/roleFunction", method = RequestMethod.GET)
 	public String roleFunction(Model model, @RequestParam(value = "roleId") String roleId) {
-		String customerId = getCustomerId();
-		RoleDto dto = roleService.findRoleById(customerId, roleId);
-		List<RoleFunctionDto> list = functionService.findFunctionAll(customerId, null);
+		RoleDto dto = roleService.findRoleById(getCustomerId(), roleId);
+		List<RoleFunctionDto> list = functionService.findFunctionAll(getCustomerId(), null);
 		model.addAttribute("roleDto", dto);
 		model.addAttribute("list", list);
 		return "biz/admin/role/role-function";
 	}
+
+	/////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * 添加角色功能权限

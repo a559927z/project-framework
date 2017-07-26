@@ -14,41 +14,42 @@
 	default-lazy-init="true">
 
 	<context:component-scan base-package="net.chinahrd">
-<!-- 		<context:exclude-filter type="annotation"  -->
-<!-- 			expression="org.springframework.stereotype.Controller" /> -->
+		<!-- <context:exclude-filter type="annotation" -->
+		<!-- expression="org.springframework.stereotype.Controller" /> -->
 	</context:component-scan>
-	
 
-	<context:component-scan base-package="net.chinahrd.eis.aop"/>
+
+	<context:component-scan base-package="net.chinahrd.eis.aop" />
 	<!-- 定义aspectj -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
 
 	<!-- 支持上传文件 -->
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
-	
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 		<qualifier value="main" />
 	</bean>
 
+	<!-- DAO接口所在包 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="net.chinahrd" />
 		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>  
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
 
 	<!-- 使用annotation定义事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager"
-		proxy-target-class="true" />
-		
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 
-<!-- 	<import resource="mail/spring-mail.xml" /> -->
+
+	<!-- <import resource="mail/spring-mail.xml" /> -->
 	<import resource="security/spring-shiro.xml" />
-<!-- 	<import resource="spring-quartzJob.xml" /> -->
-<!-- 	<import resource="sms/spring-sms.xml" /> -->
+	<!-- <import resource="spring-quartzJob.xml" /> -->
+	<!-- <import resource="sms/spring-sms.xml" /> -->
 	<import resource="spring-elsearch.xml" />
 
 	<!-- 生产环境 -->
@@ -87,10 +88,11 @@
 					</bean>
 				</array>
 			</property>
+			<!-- mybatis配置文件位置 -->
 			<property name="configLocation" value="classpath:/mybatis-config.xml" />
 			<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
 			<property name="typeAliasesPackage" value="net.chinahrd.mvc.pc.model" />
-			<!-- 显式指定Mapper文件位置 -->
+			<!-- 自动扫描Mapper文件位置 -->
 			<property name="mapperLocations" value="classpath*:mapper/**/*.xml" />
 		</bean>
 	</beans>
@@ -115,16 +117,24 @@
 			<!-- 连接Idle10分钟后超时，每1分钟检查一次 -->
 			<property name="timeBetweenEvictionRunsMillis" value="60000" />
 			<property name="minEvictableIdleTimeMillis" value="1800000" />
-			
+
 			<!-- SQL查询，将用于验证连接从这个池前返回给调用者。如果指定，此查询没有返回任何数据，它只是不能抛出SQLException。默认值为空。 -->
 			<!-- Oracle写法 <property name="validationQuery"><value>select 1 from dual</value></property> -->
-			<property name="validationQuery"><value>SELECT 1</value></property>
+			<property name="validationQuery">
+				<value>SELECT 1</value>
+			</property>
 			<!-- 在从池中借用之前是否对对象进行验证的指示。如果对象无法验证，它将从池中删除，我们将尝试借用另一个。 -->
-		    <property name="testOnBorrow"><value>true</value></property>  
+			<property name="testOnBorrow">
+				<value>true</value>
+			</property>
 			<!-- 在返回到池之前是否要验证对象的指示。 -->
-		    <property name="testOnReturn"><value>true</value></property>  
+			<property name="testOnReturn">
+				<value>true</value>
+			</property>
 			<!-- 如果一个对象无法验证，它将从池中删除。 -->
-		    <property name="testWhileIdle"><value>true</value></property>  
+			<property name="testWhileIdle">
+				<value>true</value>
+			</property>
 		</bean>
 
 		<!-- mybatis -->
@@ -148,9 +158,10 @@
 			<!-- 显式指定Mapper文件位置 -->
 			<property name="mapperLocations" value="classpath*:mapper/**/*.xml" />
 		</bean>
-		    
+
 		<!-- 定义默认的缓存机制 -->
-		<bean  id="cacheBlock" scope="prototype"  class="net.chinahrd.core.cache.storage.SimpleCacheStorage"/>
-	
+		<bean id="cacheBlock" scope="prototype"
+			class="net.chinahrd.core.cache.storage.SimpleCacheStorage" />
+
 	</beans>
 </beans>

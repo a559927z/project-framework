@@ -108,7 +108,7 @@ public class FunctionServiceImpl implements FunctionService {
 		//List<String> lice=(List<String>)licenseData.get(LicenseConfig.LicenseParm.SV);
 		//if(null==lice){
 		//	lice=CollectionKit.newList();
-		//}ssss
+		//}
 		//handFunction(list,lice);
         return list;
     }

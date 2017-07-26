@@ -8,7 +8,6 @@ import java.util.Set;
 
 import net.chinahrd.entity.dto.pc.admin.OrganDto;
 import net.chinahrd.entity.dto.pc.admin.OrganTreeDto;
-import net.chinahrd.entity.dto.pc.admin.ProjectRelationDto;
 import net.chinahrd.utils.CollectionKit;
 
 /**
@@ -99,7 +98,6 @@ public class RbacUser implements Serializable {
 
 	private List<OrganTreeDto> mobileTree; // 用于移动端 机构树结构
 	
-	private List<ProjectRelationDto> projectAllStatus; // 所有机构包括全勾和半勾（注：不能当角色拥有数据权限使用）
 	
 	private List<String> empInfoList; // 获取登录用户的项目下的所有员工
 	public List<RbacRole> getRbacRoles() {
@@ -278,13 +276,6 @@ public class RbacUser implements Serializable {
 		this.mobileTree = mobileTree;
 	}
 
-	public List<ProjectRelationDto> getProjectAllStatus() {
-		return projectAllStatus;
-	}
-
-	public void setProjectAllStatus(List<ProjectRelationDto> projectAllStatus) {
-		this.projectAllStatus = projectAllStatus;
-	}
 
 	public List<String> getEmpInfoList() {
 		return empInfoList;

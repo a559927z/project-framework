@@ -83,7 +83,8 @@
 		</if>
 		ORDER BY du.modify_time,du.create_time
 	</select>
-
+	
+	<!-- 根据条件查询用户角色信息 -->
 	<select id="findRoleList" resultMap="RbacRoleMap">
 		SELECT
 		dr.role_id,
@@ -104,11 +105,14 @@
 		</if>
 		ORDER BY dr.modify_time,dr.create_time
 	</select>
-
+	
+	<!-- shiro权限：根据角色查询功能和操作信息 -->
 	<select id="findRbacPermissionByRole" resultMap="RbacFunctionMap">
 		SELECT
 		frr.item_codes,
-		df.function_id, df.function_name, df.function_key,
+		df.function_id, 
+		df.function_name, 
+		df.function_key,
 		df.full_path
 		FROM dict_relation_role_function frr
 		LEFT JOIN dict_dim_function df ON df.function_id = frr.function_id AND

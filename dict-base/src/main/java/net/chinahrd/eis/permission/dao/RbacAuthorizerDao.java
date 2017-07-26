@@ -22,6 +22,7 @@ public interface RbacAuthorizerDao {
 	 * @return
 	 */
 	List<RbacPermission> queryPerms(Map<String, Object> params);
+
 	Integer queryPermsCount(Map<String, Object> params);
 
 	/**
@@ -44,7 +45,7 @@ public interface RbacAuthorizerDao {
 	List<RbacRole> findRoleList(@Param("customerId") String customerId, @Param("userId") String userId);
 
 	/**
-	 * 根据权限查询功能和操作信息
+	 * 根据角色查询功能和操作信息
 	 * 
 	 * @param roleIds
 	 * @return
