@@ -1,8 +1,9 @@
 package net.chinahrd.mvc.pc.controller;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +20,29 @@ public class LoginController extends BaseController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/loginView", method = RequestMethod.GET)
 	public String login() {
 		return "login";
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(@RequestParam("u") String userName, @RequestParam("p") String password, Model model) {
+		Subject subject = SecurityUtils.getSubject();
+		UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
+		try {
+			subject.login(token);
+			Session session = subject.getSession();
+			System.out.println("sessionId:" + session.getId());
+			System.out.println("sessionHost:" + session.getHost());
+			System.out.println("sessionTimeout:" + session.getTimeout());
+			session.setAttribute("info", "session的数据");
+			return "redirect:/";
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("user", userName);
+			request.setAttribute("errorMsg", "用户名或密码错误！");
+			return "loginView";
+		}
 	}
 
 	/**
@@ -31,11 +52,14 @@ public class LoginController extends BaseController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String fail(@RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String userName, Model model) {
-		model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, userName);
-		return "login";
-	}
+	// @RequestMapping(value = "/login", method = RequestMethod.POST)
+	// public String
+	// fail(@RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM)
+	// String userName, Model model) {
+	// model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM,
+	// userName);
+	// return "login";
+	// }
 
 	@ControllerAop(description = "退出登录", writeDb = true, type = 2)
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

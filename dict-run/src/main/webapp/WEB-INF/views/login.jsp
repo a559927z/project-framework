@@ -24,10 +24,10 @@
 			<div class="container">
 				<h1>字典后台</h1>
 
-				<form class="form">
+				<form action="${ctx }/login" method="post" class="form">
 					<input type="text" id="u" name="u" value="${username}" placeholder="请输入用户名" tabindex="1" autocomplete="off"/>
 					<input type="password" id="p" name="p" value="" placeholder="请输入密码" tabindex="2" autocomplete="off"/>
-					<button type="submit" id="loginBtn">登录</button>
+					<button type="submit" >登录</button>
 				</form>
 			</div>
 
