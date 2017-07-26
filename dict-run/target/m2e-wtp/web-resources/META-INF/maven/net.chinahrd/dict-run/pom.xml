@@ -119,7 +119,7 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<configuration>
 					<systemProperties>
-						<spring.profiles.active>test</spring.profiles.active>
+						<spring.profiles.active>dev</spring.profiles.active>
 					</systemProperties>
 					<!-- <port>8080</port> -->
 					<!-- Goals里可以在parent项目指定运行 特定war项目及特定端口 -->

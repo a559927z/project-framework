@@ -43,66 +43,21 @@
 
 
 	<!-- 使用annotation定义事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
 
 
 	<!-- <import resource="mail/spring-mail.xml" /> -->
 	<import resource="security/spring-shiro.xml" />
 	<!-- <import resource="spring-quartzJob.xml" /> -->
 	<!-- <import resource="sms/spring-sms.xml" /> -->
-	<import resource="spring-elsearch.xml" />
-
-	<!-- 生产环境 -->
-	<beans profile="production">
-		<context:property-placeholder
-			ignore-resource-not-found="true" ignore-unresolvable="true"
-			location="classpath:conf/*.properties" />
-		<!-- datasource -->
-		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
-			destroy-method="close">
-			<!-- Connection Info -->
-			<property name="driverClassName" value="${jdbc.driver}" />
-			<property name="url" value="${jdbc.url}" />
-			<property name="username" value="${jdbc.username}" />
-			<property name="password" value="${jdbc.password}" />
-			<property name="maxActive" value="${jdbc.pool.maxActive}" />
-			<property name="maxIdle" value="${jdbc.pool.maxIdle}" />
-			<property name="minIdle" value="0" />
-			<property name="defaultAutoCommit" value="false" />
-			<!-- 连接Idle10分钟后超时，每1分钟检查一次 -->
-			<property name="timeBetweenEvictionRunsMillis" value="60000" />
-			<property name="minEvictableIdleTimeMillis" value="1800000" />
-		</bean>
-
-		<!-- mybatis -->
-		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-			<property name="dataSource" ref="dataSource" />
-			<property name="plugins">
-				<array>
-					<bean class="net.chinahrd.eis.pagination.PaginationPlugin">
-						<property name="properties">
-							<value>
-								dialectClass=net.chinahrd.eis.pagination.MySQLDialect
-							</value>
-						</property>
-					</bean>
-				</array>
-			</property>
-			<!-- mybatis配置文件位置 -->
-			<property name="configLocation" value="classpath:/mybatis-config.xml" />
-			<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-			<property name="typeAliasesPackage" value="net.chinahrd.mvc.pc.model" />
-			<!-- 自动扫描Mapper文件位置 -->
-			<property name="mapperLocations" value="classpath*:mapper/**/*.xml" />
-		</bean>
-	</beans>
+	<!-- <import resource="spring-elsearch.xml" /> -->
 
 	<!-- 开发/测试环境 -->
 	<beans profile="dev,test">
 		<context:property-placeholder
 			ignore-resource-not-found="true" ignore-unresolvable="true"
-			location="classpath:conf/*.properties,
-			          classpath:dev-conf/*.properties" />
+			location="classpath:conf/*.properties" />
 		<!-- datasource -->
 		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
 			destroy-method="close">
@@ -151,11 +106,12 @@
 					</bean>
 				</array>
 			</property>
+			<!-- mybatis配置文件位置 -->
 			<property name="configLocation" value="classpath:/mybatis-config.xml" />
 			<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
 			<property name="typeAliasesPackage"
 				value="net.chinahrd.mvc.pc.model,net.chinahrd.biz.test.model" />
-			<!-- 显式指定Mapper文件位置 -->
+			<!-- 自动扫描Mapper文件位置 -->
 			<property name="mapperLocations" value="classpath*:mapper/**/*.xml" />
 		</bean>
 
