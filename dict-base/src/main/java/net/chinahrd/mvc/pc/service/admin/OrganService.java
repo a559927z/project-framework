@@ -3,7 +3,6 @@ package net.chinahrd.mvc.pc.service.admin;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.util.MultiValueMap;
 
 import net.chinahrd.entity.dto.pc.admin.OrganDto;
 import net.chinahrd.entity.dto.pc.admin.TreeDto;
@@ -20,7 +19,7 @@ public interface OrganService {
 	 * @param userId
 	 * @return
 	 */
-	MultiValueMap<Integer, OrganDto> queryOrganPermit(String userId);
+	List<OrganDto> queryOrganPermit2(String userId, boolean isOrganPermit);
 
 	/**
 	 * 每个指标里的机构树
@@ -94,8 +93,6 @@ public interface OrganService {
 	 * @return
 	 */
 	Integer getEmpCountByOrganId(String customerId, String organizationId);
-
-	List<OrganDto> queryOrganPermit2(String userId);
 
 	/**
 	 * 根据用户查询用户顶级机构

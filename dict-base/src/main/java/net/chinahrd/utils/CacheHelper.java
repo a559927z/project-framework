@@ -16,6 +16,16 @@ public class CacheHelper {
 	}
 
 	/**
+	 * 获得superAdminId
+	 *
+	 * @param organId
+	 * @return
+	 */
+	public static String getSuperAdminId() {
+		return SysCache.findSuperAdminId.get();
+	}
+
+	/**
 	 * 获得所有子孙机构ID by 父机构ID
 	 *
 	 * @param organId

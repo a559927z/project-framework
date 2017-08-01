@@ -68,6 +68,7 @@ O),s=s.replace(Q,""),g.jsExtRegExp.test(s)&&(s=I),q.deps=q.deps?q.deps.concat(s)
             "jquery-drag": "lib/jquery-drag/jquery.drag",//jqueryDrag
             "jquery-mCustomScrollBar": "lib/jquery-mCustomScrollbar/jquery.mCustomScrollbar.concat.min",//jqueryMCustomScrollbar
             "layer" : "../plugin/layer-v3.0.3/layer/layer", //弹出层
+            'ajaxUpload': 'lib/ajaxfileupload',
             
             // 自定义插件
     		//=========================================
@@ -159,9 +160,12 @@ O),s=s.replace(Q,""),g.jsExtRegExp.test(s)&&(s=I),q.deps=q.deps?q.deps.concat(s)
             'cardTabel': 'lib/widgets/cardTabel',
             'salesGrid': "lib/widgets/salesGrid", //销售看板列表
             'gridly': "lib/jquery-gridly/jquery.gridly", //gridly
+            'editable':'../plugin/xEditable/bootstrap-editable.min'	//用于创建可编辑弹出框的插件
         },
 
         shim = {
+    		"ajaxUpload" : {deps:["jquery"]},
+    		"editable" : {deps:["jquery"]},
     		"layer" : {deps:["jquery"]},
     		"dataTable": {deps: ["jquery"]},
     		"pieComp": {deps: ["vue2x"]},

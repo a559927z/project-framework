@@ -201,7 +201,7 @@ public class RoleController extends BaseController {
 	@RequestMapping(value = "/getTreeDataJson", method = RequestMethod.POST)
 	public Object getTreeDataJson(Model model, @RequestParam(value = "roleId") String roleId) {
 
-		// 被操作角色对象已存的所有数据（包括：全勾、半勾）
+		// 被操作角色, 目前已存的所有数据（包括：全勾、半勾）
 		List<OrganDto> existOrgans = organService.queryRoleOrgans(roleId, getCustomerId(), false);
 
 		List<TreeDto> treeDtos = organService.dbToZtree(existOrgans);
@@ -231,11 +231,17 @@ public class RoleController extends BaseController {
 
 		if (organDtos.size() == 0) {
 			rs = organService.deleteRoleOrganization(roleId, getCustomerId());
-			result.setMsg("删除成功");
+			if (rs) {
+				result.setMsg("删除成功");
+			}
 		} else {
-
-			rs = organService.addRoleOrganization(roleId, getUserId(), getCustomerId(), organDtos);
-			result.setMsg("添加成功");
+			try {
+				rs = organService.addRoleOrganization(roleId, getUserId(), getCustomerId(), organDtos);
+				rs = true;
+				result.setMsg("添加成功");
+			} catch (Exception e) {
+				rs = false;
+			}
 		}
 		result.setType(rs);
 		return result;

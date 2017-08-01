@@ -35,11 +35,11 @@
 			<version>${base.version}</version>
 		</dependency>
 
-		<!-- <dependency> -->
-		<!-- <groupId>net.chinahrd</groupId> -->
-		<!-- <artifactId>tr-homePage</artifactId> -->
-		<!-- <version>${tr.1.0.version}</version> -->
-		<!-- </dependency> -->
+		<dependency>
+			<groupId>net.chinahrd</groupId>
+			<artifactId>dict-home</artifactId>
+			<version>20170728</version>
+		</dependency>
 
 
 	</dependencies>

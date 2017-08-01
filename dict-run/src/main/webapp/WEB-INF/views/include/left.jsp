@@ -20,7 +20,7 @@
 				<b class="arrow icon-angle-down"></b>
 			</a>
 			<ul class="submenu" style="display: none;">
-				<li class="active"><a href="manageHome/index" target="mainFrame"><i class="icon-double-angle-right"></i>首页</a></li></li>
+				<li class="active"><a href="home/profile" target="mainFrame"><i class="icon-double-angle-right"></i>用户信息</a></li></li>
 			</ul>
 		</li>
 

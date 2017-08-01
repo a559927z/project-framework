@@ -221,12 +221,15 @@
       </where>
     </update>
     
+    <!-- 配置权限：根据角色查询功能和操作信息 -->
+    <!-- rbacAuthorizer.xml.findRbacPermissionByRole-->
     <select id="findFunctionAll" resultType="net.chinahrd.entity.dto.pc.admin.RoleFunctionDto">
     SELECT
       dff.function_id AS functionId,
       dff.function_name AS functionName,
       dff.function_parent_id AS pid,
       dff.url AS pathUrl,
+      dff.full_path AS fullPath,
       dff.is_menu AS isMenu,
       dff.show_index,
       NULL AS functionItem,
@@ -253,6 +256,7 @@
       df.function_name AS functionName,
       df.function_parent_id AS pid,
       df.url AS pathUrl,
+      df.full_path AS fullPath,
       df.is_menu AS isMenu,
       df.show_index,
       (

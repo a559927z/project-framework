@@ -1,13 +1,13 @@
-;(function ($) {
+; (function ($) {
 
     if (window.Tc == undefined) {
         window.Tc = {};
     }
     var Tc = window.Tc;
 
- /**
-	 * ajax异步请求
-	 */
+    /**
+        * ajax异步请求
+        */
     Tc.ajax = function (settings) {
         var defaultSetting = {
             type: "POST",
@@ -35,7 +35,7 @@
             },
             error: function (data, status, e) {
                 // if (_shade.show) {
-                    // Tc.loading.nothingData({ region: _shade.region });
+                // Tc.loading.nothingData({ region: _shade.region });
                 // }
             }
         })
@@ -43,7 +43,7 @@
 
 
     //饼图默认样式
-//    Tc.defaultPieColor = ['#7996d2', '#a491d1', '#c797e1', '#c7c0e1', '#60bbb6', '#6fcdb2', '#90d4e7', '#8fe7bf', '#8eb3e8', '#6386ce'];
+    //    Tc.defaultPieColor = ['#7996d2', '#a491d1', '#c797e1', '#c7c0e1', '#60bbb6', '#6fcdb2', '#90d4e7', '#8fe7bf', '#8eb3e8', '#6386ce'];
     Tc.defaultPieColor = ['#5cb7f1', '#01d286', '#e5689b', '#b285c3', '#4682bc', '#8f684b', '#f28e7f', '#fbc370', '#8eb3e8', '#6386ce'];
 
     //折线图默认样式
@@ -86,19 +86,19 @@
     Tc.markChange = function (val) {
         return val.replace(/[;,\s\n；，]/g, function (match, pos, originalText) {
             switch (match) {
-                case ";" :
+                case ";":
                     return ",";
-                case "^\s*$" :
+                case "^\s*$":
                     return ",";
-                case "," :
+                case ",":
                     return ",";
-                case " " :
+                case " ":
                     return ",";
-                case "\n" :
+                case "\n":
                     return ",";
-                case "，" :
+                case "，":
                     return ",";
-                case "；" :
+                case "；":
                     return ",";
             }
         });
@@ -173,7 +173,7 @@
                 if (prevData < 0) prevData = -(prevData);
             }
         }
-        
+
         if (undefined === currVal || currVal == "") {
             obj.find(".data").addClass("hide").eq(0).removeClass("hide");
         } else {
@@ -184,11 +184,39 @@
         }
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    // 时间操作
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Tc.dateTimeDiff = function dateTimeDiff(_data1, _data2) {
+        var date1 = _data1;  //开始时间  
+        var date2 = _data2;    //结束时间  
+        var date3 = date2.getTime() - new Date(date1).getTime();   //时间差的毫秒数        
+
+        //计算出相差天数  
+        var days = Math.floor(date3 / (24 * 3600 * 1000))
+
+        //计算出小时数  
+
+        var leave1 = date3 % (24 * 3600 * 1000)    //计算天数后剩余的毫秒数  
+        var hours = Math.floor(leave1 / (3600 * 1000))
+        //计算相差分钟数  
+        var leave2 = leave1 % (3600 * 1000)        //计算小时数后剩余的毫秒数  
+        var minutes = Math.floor(leave2 / (60 * 1000))
+        //计算相差秒数  
+        var leave3 = leave2 % (60 * 1000)      //计算分钟数后剩余的毫秒数  
+        var seconds = Math.round(leave3 / 1000)
+        // alert(" 相差 " + days + "天 " + hours + "小时 " + minutes + " 分钟" + seconds + " 秒")
+        return days + "天 " + hours + "小时 " + minutes + " 分钟" + seconds + " 秒"
+    }
+
+
+
     /**
      * 格式化浮点数字,并去除多余空格(默认保留2位)
      */
     Tc.formatFloat = function (val, num) {
-        if (val && typeof(val) == 'number') {
+        if (val && typeof (val) == 'number') {
             num = undefined === num ? 2 : num;
             return parseFloat((val).toFixed(num));
         } else {
@@ -213,7 +241,7 @@
      */
     Tc.parseToDate = function (str) {
         var arr;
-        if (!str || !$.trim(str) || !( arr = str.match(/\d+/g)).length) {
+        if (!str || !$.trim(str) || !(arr = str.match(/\d+/g)).length) {
             return new Date();
         }
 

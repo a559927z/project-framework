@@ -36,7 +36,6 @@ net\chinahrd\mvc\pc\controller\common\ConfigController.class
 net\chinahrd\mvc\pc\service\common\ConfigService.class
 net\chinahrd\eis\sms\C123SMSSendProvider.class
 net\chinahrd\eis\permission\enums\PermissionCode.class
-net\chinahrd\eis\permission\exception\MyExceptionResolver.class
 net\chinahrd\eis\notice\service\NoticeServiceImpl.class
 net\chinahrd\entity\dto\pc\admin\OrganTypeDto.class
 net\chinahrd\mvc\pc\dao\admin\ImportDataDao.class
@@ -144,6 +143,7 @@ net\chinahrd\eis\annotation\log\ControllerAop.class
 net\chinahrd\eis\search\aggs\AggsItem.class
 net\chinahrd\entity\dto\pc\admin\UserDto.class
 net\chinahrd\entity\dto\pc\RequestParamsDto.class
+net\chinahrd\entity\dto\pc\common\UserExpDto.class
 net\chinahrd\eis\mail\MailProperty.class
 net\chinahrd\mvc\pc\controller\admin\ImportDataController.class
 net\chinahrd\mvc\pc\controller\admin\UserController.class
@@ -193,6 +193,7 @@ net\chinahrd\eis\search\aggs\AggsOption.class
 net\chinahrd\eis\aop\LogExecutionAspect.class
 net\chinahrd\entity\enums\CompanyAgeEnum.class
 net\chinahrd\eis\sms\c123\SendStateBean.class
+net\chinahrd\entity\dto\pc\home\PhotoDto.class
 net\chinahrd\entity\dto\pc\common\RiskItemDto.class
 net\chinahrd\entity\enums\HomeConfigEnum.class
 net\chinahrd\api\TeamImgApi.class

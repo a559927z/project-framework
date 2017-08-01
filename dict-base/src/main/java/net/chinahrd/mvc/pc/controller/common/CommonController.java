@@ -2,23 +2,19 @@ package net.chinahrd.mvc.pc.controller.common;
 
 import java.util.List;
 
-import net.chinahrd.entity.dto.KVItemDto;
-import net.chinahrd.entity.dto.pc.common.EmpDto;
-import net.chinahrd.entity.dto.pc.common.ItemDto;
-import net.chinahrd.entity.dto.pc.common.OpearRiskDto;
-import net.chinahrd.entity.dto.pc.common.ResultDto;
-import net.chinahrd.entity.dto.pc.common.RiskDto;
-import net.chinahrd.entity.dto.pc.common.RiskItemDto;
-import net.chinahrd.mvc.pc.controller.BaseController;
-import net.chinahrd.mvc.pc.service.common.CommonService;
-import net.chinahrd.utils.CollectionKit;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import net.chinahrd.entity.dto.pc.admin.OrganDto;
+import net.chinahrd.entity.dto.pc.admin.TreeDto;
+import net.chinahrd.entity.dto.pc.common.ResultDto;
+import net.chinahrd.mvc.pc.controller.BaseController;
+import net.chinahrd.mvc.pc.service.admin.OrganService;
+import net.chinahrd.mvc.pc.service.common.CommonService;
 
 /**
  * 通用Controller
@@ -29,167 +25,62 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/common")
 public class CommonController extends BaseController {
 
-    @Autowired
-    private CommonService commonService;
+	@Autowired
+	private CommonService commonService;
+	@Autowired
+	private OrganService organService;
 
-    /***
-     * 跳转到临时页面
-     *
-     * @return
-     */
-    @RequestMapping(value = "/noAuthor")
-    public String getNoAuthor() {
-        return "biz/noAuthor";
-    }
+	/***
+	 * 跳转到临时页面
+	 *
+	 * @return
+	 */
+	@RequestMapping(value = "/noAuthor")
+	public String getNoAuthor() {
+		return "biz/noAuthor";
+	}
 
-    /**
-     * 获取人群集合
-     *
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "/getPopulations")
-    public List<KVItemDto> getPopulations() {
-        return commonService.queryPopulations(getCustomerId());
-    }
 
-    /**
-     * 获取岗位信息
-     *
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "/getPosition")
-    public List<KVItemDto> getPosition(String positionName) {
-        return commonService.queryPositions(positionName, getCustomerId());
-    }
 
-    /**
-     * 获取职级
-     *
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "/getAbility")
-    public List<ItemDto> getAbility() {
-        return commonService.queryAbilityType(getCustomerId());
-    }
+	/* ============================================================== */
+	/* 配置页面使用-配置数据权限 */
+	/* ============================================================== */
+	/**
+	 * 使用时机构树，提供给 @see organTreeSeletor
+	 *
+	 * @param id
+	 * @return name
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getOrganNameById", method = RequestMethod.POST)
+	public ResultDto<String> getOrganNameById(@RequestParam(value = "id", required = false) String id) {
+		ResultDto<String> rs = new ResultDto<String>();
+		OrganDto dto = organService.findOrganById(id, getCustomerId());
+		String organName = dto == null ? null : dto.getOrganizationName();
+		rs.setType(true);
+		rs.setT(organName);
+		return rs;
+	}
+	/* ============================================================== */
+	/* 指标页面使用-查出机构树 */
+	/* ============================================================== */
 
-    /**
-     * 获取人才类型
-     *
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "/getTalentType")
-    public List<ItemDto> getTalentType() {
-        return commonService.getTalentType(getCustomerId());
-    }
+	/**
+	 * 使用时机构树，提供给 @see organTreeSeletor
+	 *
+	 * @param id
+	 * @param isSingleOrgan
+	 *            是否独立核算
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/queryOrganTree", method = RequestMethod.POST)
+	public List<TreeDto> queryOrganTree(@RequestParam(value = "id", required = false) String id,
+			@RequestParam(value = "isSingleOrgan", required = false) Boolean isSingleOrgan) {
 
-    /**
-     * 筛选条件
-     *
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "/getSearchBox")
-    public List<ItemDto> getSearchBox() {
-        return commonService.getSearchBox(getCustomerId());
-    }
-    
-    /**
-     * 筛选条件
-     *
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "/getTalentMapsSearchBox")
-    public List<ItemDto> getTalentMapsSearchBox() {
-    	return commonService.getTalentMapsSearchBox(getCustomerId());
-    }
+		List<TreeDto> list = organService.queryOrganTree(getUserId(), getCustomerId(), isSingleOrgan);
 
-    /**
-     * 筛选条件
-     *
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "/getTalentSearchBox")
-    public List<ItemDto> getTalentSearchBox() {
-        return commonService.getTalentSearchBox(getCustomerId());
-    }
+		return list;
+	}
 
-    /**
-     * 绩效变化页面 筛选条件
-     *
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "/getPerChangeSearchBox")
-    public List<ItemDto> getSearchBoxPerChange() {
-        return commonService.getSearchBoxPerChange(getCustomerId());
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/getTimeScope")
-    public List<String> getTimeScope() {
-        return commonService.getTimeScope(getCustomerId());
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/getEmpBaseInfo")
-    public EmpDto getEmpBaseInfo(String empId) {
-
-        return commonService.getEmpBaseInfo(getCustomerId(), empId);
-    }
-
-    /**
-     * 对应 riskTree2 控件
-     *
-     * @param empId
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "/getEmpBaseInfo2")
-    public EmpDto getEmpBaseInfo2(String empId) {
-
-        return commonService.getEmpBaseInfo(getCustomerId(), empId);
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/addRisk", method = RequestMethod.POST)
-    public ResultDto<String> addRisk(
-            @RequestBody(required = false) OpearRiskDto opearRiskDto) {
-        ResultDto<String> result = new ResultDto<>();
-        boolean rs = false;
-        if (null == opearRiskDto) {
-            result.setMsg("对当前员工操作有误，请重新选择员工进行操作");
-        }
-        List<RiskDto> list = opearRiskDto.getRisks();
-        RiskDto riskDto = null;
-        List<RiskItemDto> itemList = CollectionKit.newList();
-        for (RiskDto r : list) {
-            if (r.getRiskId().equals("-1")) {
-                riskDto = r;
-                r.setEmpId(opearRiskDto.getEmpId());
-                r.setNote(opearRiskDto.getNote());
-                list.remove(r);
-                break;
-            }
-        }
-        for (RiskDto r : list) {
-            RiskItemDto rid = new RiskItemDto();
-            rid.setRiskFlag(r.getRiskFlag());
-            rid.setRiskId(r.getRiskId());
-            itemList.add(rid);
-        }
-        rs = commonService.addRisk(getCustomerId(), riskDto, itemList);
-        result.setType(rs);
-        if (rs) {
-            result.setMsg("评估成功");
-        } else {
-            result.setMsg("评估失败");
-        }
-        return result;
-    }
 };

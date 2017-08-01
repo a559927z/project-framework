@@ -10,12 +10,16 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-	<!-- 自动注册@Controller -->
-	<context:component-scan base-package="net.chinahrd.**.controller"
-		use-default-filters="false">
-		<context:include-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
+<!-- 子容器 -->
+
+	<!-- 子容器只扫描@Controller层就可以了，因为没有事务 -->
+	<context:component-scan base-package="net.chinahrd.**.controller" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
+<!-- 	<context:component-scan base-package="net.chinahrd" use-default-filters="false"> -->
+<!-- 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" /> -->
+<!-- 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" /> -->
+<!-- 	</context:component-scan> -->
 	
 	
 	<context:component-scan base-package="net.chinahrd.eis.aop"/>
@@ -32,6 +36,7 @@
 			<bean class="net.chinahrd.mvc.pc.WebHandlerInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
+	
 	
 	<!-- support JSR303 annotation if JSR 303 validation present on classpath -->
 	<mvc:annotation-driven
@@ -59,7 +64,7 @@
 	</mvc:annotation-driven>
 	
 	<!-- 自定义异常处理-->
-	<bean id="exceptionResolver" class="net.chinahrd.eis.permission.exception.MyExceptionResolver"></bean>
+<!-- 	<bean id="exceptionResolver" class="net.chinahrd.eis.permission.exception.MyExceptionResolver"></bean> -->
 
 	<!-- REST中根据URL后缀自动判定Content-Type及相应的View -->
 	<bean id="contentNegotiationManager"
@@ -97,7 +102,8 @@
 
 	<!-- 静态资源 -->
 	<mvc:resources mapping="/assets/**" location="/assets/" />
-
+<!--  	<mvc:resources mapping="/upload/**" location="/upload/"/> -->
+ 
 	<!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 -->
 	<mvc:default-servlet-handler />
 

@@ -41,6 +41,13 @@
     <select id="queryFunction" resultType="net.chinahrd.entity.dto.pc.admin.FunctionDto">
 		SELECT function_id functionId, function_name functionName, url FROM `dict_dim_function` WHERE is_menu = 0 and customer_id =#{customerId}
 	</select>
+	
+    <!-- 查出superAdmin的ID -->
+    <select id="findSuperAdminId" resultType="java.lang.String">
+        SELECT user_id from `dict_dim_user` where sys_deploy = 1 and customer_id=#{customerId}
+    </select>
+	
+	
 
 
     <!-- ########### -->

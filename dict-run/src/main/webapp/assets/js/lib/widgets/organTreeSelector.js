@@ -54,7 +54,7 @@
                     vname = self._getNameById(vid);
                     if (undefined == vname || vname == '') {
                         $.ajax({
-                            url: contextPath + "/organ/getOrganNameById.do",
+                            url: contextPath + "/common/getOrganNameById.do",
                             async: false,
                             type: 'POST',
                             data: {'id': vid},
@@ -83,7 +83,7 @@
                 if (value) {
                     urlParams += "&" + opt.params.name + "=" + opt.params.value;
                 }
-                opt.async.url = Tc.timestamp(contextPath + "/organ/queryOrganTree.do") + urlParams;
+                opt.async.url = Tc.timestamp(contextPath + "/common/queryOrganTree.do") + urlParams;
             }
             if (opt.multiple) {
                 opt.check = {

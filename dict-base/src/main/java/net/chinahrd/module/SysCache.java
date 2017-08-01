@@ -132,4 +132,7 @@ public class SysCache {
 
     public static CacheBlock<List<KVItemDto>> queryOrgan =
             new CacheBlockConstructor<List<KVItemDto>>("queryOrgan").getDefaultBlock(customerId);
+    
+    public static CacheBlock<String> findSuperAdminId =
+            new CacheBlockConstructor<String>("findSuperAdminId").getDefaultBlock(customerId);
 }

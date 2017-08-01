@@ -17,12 +17,6 @@ public enum PermissionCode {
 	GUEST("guest"), // "来宾"
 	
 	/**
-	 * 超级管理员UUID
-	 */
-	SUPER_ADMIN_ID(""),// "超级管理员id" bc10d0cf3b1c11e5b2cb08606e0aa89a
-	SUPER_ADMIN_KEY("superAdmin"),
-	
-	/**
 	 *  功能模块
 	 */
 	YUAN_DONG_LI("yuan_dong_li"), //元动力

@@ -56,7 +56,7 @@ public class SysJob extends JobRegisterAbstract {
 			boolean insertDays = commonService.insertDays(endDay, startDay);
 			log.info(insertDays == true ? TipsEnum.DATA_SUCCESS.getDesc() : TipsEnum.DATA_FAIL.getDesc());
 			
-			commonService.insertTheoryAttendance(year.toString("yyyy"), 8.0);
+//			commonService.insertTheoryAttendance(year.toString("yyyy"), 8.0);
 		}
 		log.info(TipsEnum.JOB_END.getDesc());
 	}

@@ -64,10 +64,12 @@ D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\entity\
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\entity\enums\HumanInventoryEnum.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\mvc\pc\service\admin\impl\RoleServiceImpl.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\entity\dto\pc\common\ResultDto.java
+D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\entity\dto\pc\common\UserExpDto.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\eis\sms\SMSService.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\utils\ReflexUtil.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\utils\jqgrid\TreeGridData.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\entity\dto\pc\common\GraphChartDto.java
+D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\entity\dto\pc\home\PhotoDto.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\mvc\pc\service\admin\impl\BaseServiceImpl.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\mvc\pc\controller\admin\UserController.java
 D:\MyXFiles\EclipseWeb\project-dict\dict-base\src\main\java\net\chinahrd\mvc\pc\controller\common\CommonController.java

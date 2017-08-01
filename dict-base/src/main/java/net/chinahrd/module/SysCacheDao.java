@@ -41,6 +41,14 @@ public interface SysCacheDao {
 	 */
 	List<KVItemDto> queryUnderAllOrganRelation(@Param("customerId") String customerId);
 
+	/**
+	 * 查出superAdminId
+	 * 
+	 * @param customerId
+	 * @return
+	 */
+	String findSuperAdminId(@Param("customerId") String customerId);
+
 	// =================================
 	// 维度表
 	// =================================

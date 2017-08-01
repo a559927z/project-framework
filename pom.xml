@@ -51,6 +51,7 @@
 		<!-- <module>hrd-util</module> -->
 		<!-- <module>hrd-framework</module> -->
 		<module>dict-base</module>
+		<module>dict-home</module>
 	</modules>
 
 	<!-- 插件配置 -->

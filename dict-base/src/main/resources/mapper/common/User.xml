@@ -41,9 +41,6 @@
 		du.modify_time
 		FROM dict_dim_user du
 		<where>
-			<!-- AND t2.organization_id in ( -->
-			<!-- <include refid="net.chinahrd.mvc.pc.dao.common.CommonDao.orgPermitSql"></include> -->
-			<!-- ) -->
 			<if test="customerId != null">
 				AND du.customer_id = #{customerId}
 			</if>

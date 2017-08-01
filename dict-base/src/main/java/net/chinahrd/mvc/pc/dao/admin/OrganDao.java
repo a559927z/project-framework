@@ -19,23 +19,18 @@ public interface OrganDao {
 	/* ============================================================== */
 	/* 配置页面使用-配置数据权限 */
 	/* ============================================================== */
-	/**
-	 * 查出superAdmin的ID
-	 * 
-	 * @param userKey
-	 * @return
-	 */
-	String findSuperAdminIdByUserKey(String userKey);
 
 	/**
 	 * 查询当前登录人所有数据权限
 	 * 
 	 * @param userId
 	 * @param customerId
-	 *            TODO
-	 * @return （带出全勾和半勾选的机构）
+	 * @param isOrganPermit
+	 *            true只有有效的数据机构， false当前登录人所有数据机（包括半勾机构）
+	 * @return
 	 */
-	List<OrganDto> queryOrganPermit(@Param("userId") String userId, @Param("customerId") String customerId);
+	List<OrganDto> queryOrganPermit(@Param("userId") String userId, @Param("customerId") String customerId,
+			@Param("isOrganPermit") boolean isOrganPermit);
 
 	/**
 	 * 根据机构ID查询相关机构信息

@@ -47,9 +47,8 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken)
 			throws AuthenticationException {
-		// check invalid input
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-
+		log.debug("输入框封装入authcToken信息: userName: {}, password: {}", token.getUsername(), token.getPassword());
 		if (StringUtils.isBlank(token.getUsername())) {
 			throw new ShiroAuthenticationException(AuthenticationCode.USER_NOT_FOUND);
 		}

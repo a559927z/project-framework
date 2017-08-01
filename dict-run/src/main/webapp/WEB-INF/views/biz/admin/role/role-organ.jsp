@@ -40,9 +40,9 @@
     require(['messenger', 'ztree', 'utils', 'jquery-mCustomScrollBar'], function () {
         var webRoot = G_WEB_ROOT;
         var urls = {
-            getTreeDataJsonUrl: webRoot + "/role/getTreeDataJson",
-            addRoleOrganUrl: webRoot + "/role/addRoleOrganiation",
-            goRoleUrl: webRoot + '/role/list'
+            getTreeDataJsonUrl: webRoot + "/role/getTreeDataJson",	// 查看机构树
+            addRoleOrganUrl: webRoot + "/role/addRoleOrganiation", //添加角色数据权限信息
+            goRoleUrl: webRoot + '/role/list'	//返回角色列表
         }
         var treeData = [];
 

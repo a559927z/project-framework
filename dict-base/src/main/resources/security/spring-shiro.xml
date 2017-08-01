@@ -25,7 +25,7 @@
 		<!-- 配置我们的登录请求地址 -->
 		<property name="loginUrl" value="/loginView" />
 		<!-- 如果您请求的资源不再您的权限范围，则跳转到/403请求地址 -->
-		<property name="unauthorizedUrl" value="/error/403" />
+		<property name="unauthorizedUrl" value="/error/403.jsp" />
 		<property name="filters">
 			<map>
 				<entry key="authc" value-ref="shiroAuthenticationFilter" />
@@ -47,9 +47,15 @@
 				/license/** = anon
 				/monthReport/display = anon
 				/demo/display = anon
+				/common/**		= anon
 				<!--所有的请求(除去配置的静态资源请求或请求地址为anon的请求)都要通过登录验证,如果未登录则跳到/login-->
+				/role/**=perms["XiTongGuanLi_JueSeGuanLi:*"]
+				/function/**=perms["XiTongGuanLi_GongNengGuanLi:*"]
+				/organ/**=perms["XiTongGuanLi_ZuZhiGuanLi:*"]
+				/user/**=perms["XiTongGuanLi_YongHuGuanLi:*"]
+				/importData/**=perms["XiTongGuanLi_ShuJuDaoRu:*"]
+				/config/**=perms["XiTongGuanLi_JueSeGuanLi:*"]
 				/** = user
-				/organ/** = perms["XiTongGuanLi_YongHuGuanLi","XiTongGuanLi_ShuJuDaoRu","XiTongGuanLi_ZuZhiGuanLi","XiTongGuanLi:*","XiTongGuanLi_JueSeGuanLi","XiTongGuanLi_XiTongSheZhi","XiTongGuanLi_GongNengGuanLi"]
 			</value>
 		</property>
 	</bean>

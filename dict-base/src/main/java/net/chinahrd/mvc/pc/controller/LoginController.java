@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.chinahrd.eis.annotation.log.ControllerAop;
 
@@ -25,8 +26,18 @@ public class LoginController extends BaseController {
 		return "login";
 	}
 
+	/**
+	 * login.jsp form表单提交
+	 * 
+	 * @param userName
+	 * @param password
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@RequestParam("u") String userName, @RequestParam("p") String password, Model model) {
+	public String login(@RequestParam("u") String userName, @RequestParam("p") String password, Model model,
+			RedirectAttributes attr) {
+
 		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
 		try {
@@ -36,12 +47,19 @@ public class LoginController extends BaseController {
 			System.out.println("sessionHost:" + session.getHost());
 			System.out.println("sessionTimeout:" + session.getTimeout());
 			session.setAttribute("info", "session的数据");
+
 			return "redirect:/";
+			// 强制过密码交给 spring-mvc.xml里的Intercept
+			// String confPwd = PropertiesUtil.getProperty("user.password");
+			// if (StringUtils.equals(confPwd, password)) {
+			// return "redirect:/toUpdatePasswd";
+			// }else{
+			// return "redirect:/";
+			// }
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("user", userName);
-			request.setAttribute("errorMsg", "用户名或密码错误！");
-			return "loginView";
+			attr.addFlashAttribute("errorMsg", "用户名或密码错误！");
+			return "redirect:/loginView";
 		}
 	}
 

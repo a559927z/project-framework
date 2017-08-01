@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.chinahrd.homepage.mvc.pc.dao.ProfileDao">
+	<cache-ref namespace="net.chinahrd.ehcache.normal" />
+
+	<!-- 用户扩展信息 -->
+	<select id="findUserExpInfo" parameterType="java.util.Map"
+		resultType="net.chinahrd.entity.dto.pc.common.UserExpDto">
+		SELECT
+			t2.user_key userKey,
+			t2.user_name_ch userNameCh,
+			location AS location,
+			age AS age,
+			joined_date AS joinedDate,
+			last_time AS lastTime,
+			t4.file_path AS avatar
+		FROM
+			`dict_dim_user_exp` t1
+		INNER JOIN 
+			`dict_dim_user` t2 on t1.user_id = t2.user_id
+		LEFT JOIN `dict_relation_photo_user` t3 on t3.user_id = t2.user_id
+		LEFT JOIN `dict_dim_photo` t4 on t4.photo_id = t3.photo_id
+		WHERE t1.user_id =#{userId}
+	</select>
+	<!-- 插入图片库 -->
+	<insert id="savePhoto" parameterType="net.chinahrd.entity.dto.pc.home.PhotoDto">
+		INSERT INTO `dict_dim_photo` (photo_id,file_path,type,create_user_id) 
+		VALUES (#{photoId}, #{filePath}, #{type}, #{createUserId})
+	</insert>
+	<!-- 全删除有关userId的头像关系的图片 -->
+	<delete id="delectAvatar">
+		DELETE FROM `dict_relation_photo_user` WHERE photo_id in
+		(
+			SELECT id FROM (
+			SELECT t1.photo_id AS id FROM `dict_relation_photo_user` t1 
+			INNER JOIN `dict_dim_photo` t2 on t1.photo_id = t2.photo_id and t2.type = 1 and t1.user_id = #{userId}
+			) a
+		)
+	</delete>
+	<!-- 用户图片联系 -->
+	<insert id="savePhotoUser">
+		INSERT INTO `dict_relation_photo_user` (photo_id, user_id) 
+		VALUES (#{photoId}, #{userId})
+	</insert>
+	<!-- 查询没再有用的图片 -->
+	<select id="queryNotUsePhoto" resultType="net.chinahrd.entity.dto.KVItemDto">
+		SELECT photo_id AS k, file_path AS v 
+		FROM `dict_dim_photo` t1 
+		WHERE t1.create_user_id=#{userId} and t1.photo_id != #{photoId} and t1.type=1
+	</select>
+	<!-- 清空图片库 -->
+	<delete id="delectPhoto" parameterType="java.util.List">
+		DELETE FROM `dict_dim_photo` WHERE photo_id in
+		<foreach collection="photoIds" item="photoId" separator="," open="(" close=")">
+        	#{photoId}
+        </foreach>
+	</delete>
+</mapper>

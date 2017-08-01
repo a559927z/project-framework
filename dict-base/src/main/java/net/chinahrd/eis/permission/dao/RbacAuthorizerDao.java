@@ -15,6 +15,14 @@ import net.chinahrd.eis.permission.model.RbacUser;
 public interface RbacAuthorizerDao {
 
 	/**
+	 * 更新最后登录时间
+	 * 
+	 * @param params
+	 */
+	void updateLastTime(Map<String, Object> params);
+
+
+	/**
 	 * 
 	 * 查出用户具备角色、功能权限
 	 * 
@@ -52,5 +60,6 @@ public interface RbacAuthorizerDao {
 	 */
 	List<RbacFunction> findRbacPermissionByRole(@Param("customerId") String customerId,
 			@Param("roleIds") List<String> roleIds);
+
 
 }
