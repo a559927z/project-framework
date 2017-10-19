@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.chinahrd.mvc.pc.dao.common.CommonMessageDao">
+	<cache-ref namespace="net.chinahrd.ehcache.normal" />
+
+	<!-- 保存信息 -->
+	<insert id="saveMessage" parameterType="net.chinahrd.entity.dto.pc.common.MessageDto">
+		INSERT INTO `dict_message` (
+			send_user_id,
+			recipient_id,
+			subject,
+			content,
+			attachment_id
+		)
+		VALUES (
+			#{userId},
+			#{recipientId},
+			#{subject},
+			#{content},
+			#{attachmentId}
+			)
+	</insert>
+
+	<!-- 查询信息 -->
+	<select id="queryMessage" resultType="net.chinahrd.entity.dto.pc.common.MessageDto">
+		SELECT send_user_id AS sendUserId,
+			recipient_id AS recipientId,
+			subject,
+			content,
+			attachment_id FROM `dict_message`
+		WHERE recipient_id = #{userId}
+		<if test="isRead == true">
+			AND is_read = 1
+		</if>
+		<if test="isRead == false">
+			AND is_read = 0
+		</if>
+	</select>
+
+</mapper>

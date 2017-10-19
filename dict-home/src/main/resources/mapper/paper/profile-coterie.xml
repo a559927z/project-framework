@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.chinahrd.homepage.mvc.pc.dao.ProfileDao">
+	<cache-ref namespace="net.chinahrd.ehcache.normal" />
+	
+	<!-- 查询好友关系 -->
+	<select id="queryMyFirend" resultType="net.chinahrd.entity.dto.pc.home.CoterieDto" parameterType="java.lang.String">
+		SELECT t.my_firend_id AS myFirendId, 1 AS isAuthc, t1.user_name_ch AS userNameCh
+		FROM `dict_coterie_firend` t
+		INNER JOIN `dict_dim_user` t1 ON t.my_firend_id = t1.user_id
+		WHERE t.user_id= #{userId} AND t.is_authc=1 AND t.is_black = 0
+			<if test="seachKey != null">
+				AND
+				(t.my_firend_id LIKE CONCAT("%",'${seachKey}',"%") OR t1.user_name_ch LIKE CONCAT("%",'${seachKey}',"%"))
+			</if>
+	</select>
+	<!-- 查询待好友关系 -->
+	<select id="queryFirend"  resultType="net.chinahrd.entity.dto.pc.home.CoterieDto">
+		SELECT t.my_firend_id AS myAttentionId, 0 AS isAuthc
+		FROM dict_coterie_firend t 
+		WHERE t.user_id= #{userId} AND t.is_authc=0 AND t.is_black = 0
+	</select>
+	<!-- 添加好友 -->
+	<insert id="saveFirend">
+		INSERT INTO `dict_coterie_firend` (user_id,my_firend_id,is_authc,is_black)
+		VALUES
+        (#{dto.userId},#{dto.myFirendId},#{dto.isAuthc},#{dto.isBlack})  
+	</insert>
+	<!-- 删除好友 -->
+	<delete id="delectFirendByMyFirendId">
+		DELETE FROM `dict_coterie_firend` WHERE user_id = #{userId} AND my_firend_id=#{myFirendId}
+	</delete>
+	<!-- 查询我的关注 -->
+	<select id="queryAttention"  resultType="net.chinahrd.entity.dto.pc.home.CoterieDto">
+		SELECT t.my_attention_id AS userId, t2.user_name_ch AS userNameCh, 1 AS isSelect
+		FROM dict_coterie_attention t 
+		INNER JOIN dict_dim_user t2 ON t2.user_id = t.my_attention_id and t2.user_id != #{userId}
+		WHERE t.user_id = #{userId}
+		UNION
+		SELECT a.user_id AS userId, a.user_name_ch AS userNameCh, 0 AS isSelect
+		FROM dict_dim_user a 
+		LEFT JOIN dict_coterie_attention b ON a.user_id = b.my_attention_id and b.user_id = #{userId}
+		WHERE b.my_attention_id IS NULL and a.user_id != #{userId}
+	</select>
+	<!-- 添加我的关注 -->
+	<insert id="saveAttention">
+		INSERT INTO `dict_coterie_attention` (user_id,my_attention_id)
+		VALUES
+		 <foreach collection="list" item="item" index="index" separator=",">  
+        (#{item.userId},#{item.myAttentionId})  
+    	</foreach>
+	</insert>
+	<!-- 查询我的关注数 -->
+	<select id="findAttentionByUserId"  resultType="java.lang.Integer">
+		SELECT count(1) FROM dict_coterie_attention t WHERE t.user_id = #{userId}
+	</select>
+	<delete id="delectAttentionByUserId">
+		DELETE FROM `dict_coterie_attention` WHERE user_id = #{userId}
+	</delete>
+	<!-- 查询我的粉丝数 -->
+	<select id="findFansByUserId"  resultType="java.lang.Integer">
+		SELECT count(1) FROM dict_coterie_attention t WHERE t.my_attention_id = #{userId}
+	</select>
+	<!-- 待验证好友 ,注返转将我的好友=我，来查出别人向我发请求有那些人-->
+	<select id="queryStayAuthc" parameterType="java.util.Map"
+		resultType="net.chinahrd.entity.dto.pc.home.CoterieDto">
+		SELECT a.user_id AS myFirendId, b.user_name_ch AS userNameCh  
+		FROM `dict_coterie_firend` a
+		INNER JOIN `dict_dim_user` b ON b.user_id = a.user_id
+		WHERE a.my_firend_id = #{userId} AND is_authc = 0 AND is_black = 0
+	</select>
+	<!-- 通过验证好友,注返转将我的好友=我，来查出别人向我发请求有那些人 -->
+	<update id="updateAuthc">
+		UPDATE `dict_coterie_firend` SET is_authc = 1 WHERE my_firend_id =#{userId} AND user_id = #{myFirendId}
+	</update>
+	<!-- 通过验证后同时添加对方为好友 -->
+	<insert id="saveFirendByMyFirendId">
+		INSERT INTO `dict_coterie_firend` (user_id,my_firend_id,is_authc,is_black) VALUES 
+		(#{userId},#{myFirendId}, 1, 0)
+	</insert>
+	<!-- 不通过验证并删除待验证 -->
+	<delete id="deleteAuthc">
+		DELETE FROM `dict_coterie_firend` WHERE user_id =#{userId} AND my_firend_id = #{myFirendId}
+	</delete>
+</mapper>
