@@ -13,8 +13,6 @@ import net.chinahrd.entity.dto.KVItemDto;
  *2016年10月18日下午5:20:18
  */
 public interface TeamImgApi {
-	
-
 	/**
 	 * 分组统计能力层级人数
 	 * 
