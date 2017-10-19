@@ -52,10 +52,21 @@
 		<!-- <module>hrd-framework</module> -->
 		<module>dict-base</module>
 		<module>dict-home</module>
+		<module>dict-Test</module>
 	</modules>
 
 	<!-- 插件配置 -->
 	<build>
+		<plugins>
+			<!-- web.xml is missing and <failOnMissingWebXml> is set to true -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+		</plugins>
 		<pluginManagement>
 			<plugins>
 				<!-- compiler插件, 设定JDK版本 -->

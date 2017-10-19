@@ -6,10 +6,12 @@ net\chinahrd\entity\enums\IdCodeEnum.class
 net\chinahrd\eis\search\dto\TrainExperience.class
 net\chinahrd\utils\jqgrid\TreeGridRow.class
 net\chinahrd\utils\phantomjs\PrintArguments2$PageDirection.class
+net\chinahrd\interceptor\SpringInterceptorRegister$UrlInterceptor.class
 net\chinahrd\module\SysJob.class
 net\chinahrd\module\SysMenuDefine.class
 net\chinahrd\mvc\pc\controller\admin\RoleController.class
 net\chinahrd\eis\sms\c123\SendResultBean.class
+net\chinahrd\mvc\pc\dao\common\CommonBellDao.class
 net\chinahrd\utils\GetWeather.class
 net\chinahrd\entity\dto\pc\admin\RoleOrganizationDto.class
 net\chinahrd\mvc\pc\dao\common\ConfigDao.class
@@ -18,6 +20,7 @@ net\chinahrd\entity\dto\pc\common\ConfigDto.class
 net\chinahrd\entity\dto\pc\common\MemoCreateDto.class
 net\chinahrd\eis\sms\dao\SMSSendStatusDao.class
 net\chinahrd\entity\enums\QuarterRangeEnum.class
+net\chinahrd\eis\aop\ParamsAspect.class
 net\chinahrd\api\TrainBoardApi.class
 net\chinahrd\entity\dto\pc\common\ResultDto.class
 net\chinahrd\eis\search\dto\Attachment.class
@@ -33,6 +36,7 @@ net\chinahrd\eis\sms\AbstractSMSSendProvider.class
 net\chinahrd\eis\search\aggs\DateHistogramPack.class
 net\chinahrd\mvc\pc\controller\common\CommonController.class
 net\chinahrd\mvc\pc\controller\common\ConfigController.class
+net\chinahrd\entity\dto\pc\common\BellDto.class
 net\chinahrd\mvc\pc\service\common\ConfigService.class
 net\chinahrd\eis\sms\C123SMSSendProvider.class
 net\chinahrd\eis\permission\enums\PermissionCode.class
@@ -40,6 +44,7 @@ net\chinahrd\eis\notice\service\NoticeServiceImpl.class
 net\chinahrd\entity\dto\pc\admin\OrganTypeDto.class
 net\chinahrd\mvc\pc\dao\admin\ImportDataDao.class
 net\chinahrd\eis\sms\SMSService.class
+net\chinahrd\listener\SQLInitListener.class
 net\chinahrd\eis\annotation\log\ServiceAop.class
 net\chinahrd\eis\pagination\SqlServer2005Dialect.class
 net\chinahrd\eis\search\service\EsQueryService.class
@@ -71,6 +76,7 @@ net\chinahrd\eis\sms\c123\DataApi.class
 net\chinahrd\entity\dto\pc\admin\UserOrganizationDto.class
 net\chinahrd\eis\annotation\db\Pay.class
 net\chinahrd\eis\search\dto\PastResume.class
+net\chinahrd\entity\dto\pc\home\CoterieDto.class
 net\chinahrd\module\SysCache$3.class
 net\chinahrd\entity\dto\pc\common\MessageCreateDto.class
 net\chinahrd\mvc\pc\service\common\impl\CommonServiceImpl.class
@@ -159,15 +165,18 @@ net\chinahrd\entity\enums\TipsEnum.class
 net\chinahrd\eis\aop\LogDao.class
 net\chinahrd\eis\sms\c123\UpdateResultBean.class
 net\chinahrd\eis\permission\WebConfigListener.class
+net\chinahrd\interceptor\SpringInterceptorRegister.class
 net\chinahrd\mvc\pc\service\common\impl\ConfigServiceImpl.class
 net\chinahrd\eis\permission\enums\AuthenticationCode.class
 net\chinahrd\mvc\pc\controller\admin\OrganController.class
 net\chinahrd\module\SysProcessDao.class
 net\chinahrd\mvc\pc\service\common\CommonService.class
 net\chinahrd\eis\search\task\IndexEmpTask.class
+net\chinahrd\entity\dto\pc\common\MessageDto.class
 net\chinahrd\entity\dto\pc\admin\DaysDto.class
 net\chinahrd\mvc\pc\service\admin\impl\OrganServiceImpl.class
 net\chinahrd\eis\pagination\Dialect.class
+net\chinahrd\eis\annotation\FetchParams.class
 net\chinahrd\utils\phantomjs\PhantomJSReference2.class
 net\chinahrd\eis\sms\AbstractSMSSendProvider$MonitorNotifier.class
 net\chinahrd\eis\search\aggs\AggsType.class
@@ -182,6 +191,7 @@ net\chinahrd\eis\search\service\impl\HighlightMapper.class
 net\chinahrd\mvc\pc\service\admin\impl\FunctionServiceImpl.class
 net\chinahrd\mvc\pc\service\admin\EmpOrganService.class
 net\chinahrd\entity\dto\PaginationDto.class
+net\chinahrd\mvc\pc\dao\common\CommonMessageDao.class
 net\chinahrd\eis\search\condition\SearchKind.class
 net\chinahrd\eis\permission\model\RbacRole.class
 net\chinahrd\module\SysCacheDao.class

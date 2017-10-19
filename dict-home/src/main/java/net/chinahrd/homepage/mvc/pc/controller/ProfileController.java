@@ -28,7 +28,7 @@ public class ProfileController extends BaseController {
 
 	@Autowired
 	private ProfileService profileService;
-
+	
 	/**
 	 * 跳转到用户平台
 	 * 
