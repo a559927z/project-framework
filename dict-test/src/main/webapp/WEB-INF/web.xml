@@ -2,23 +2,23 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
-	
+
 	<!-- 加载Spring -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring-context.xml</param-value>
 	</context-param>
-	
+
 	<!-- 設定Spring Context的默认Profile -->
 	<context-param>
-    	<param-name>spring.profiles.default</param-name>
-    	<param-value>dev</param-value>
+		<param-name>spring.profiles.default</param-name>
+		<param-value>dev</param-value>
 	</context-param>
-	
+
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
+
 	<!-- Spring MVC -->
 	<servlet>
 		<servlet-name>spring-dispatcher</servlet-name>
@@ -53,7 +53,7 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
-    
+
 	<jsp-config>
 		<jsp-property-group>
 			<display-name>JSPConfiguration</display-name>
@@ -63,7 +63,7 @@
 			<trim-directive-whitespaces>true</trim-directive-whitespaces>
 		</jsp-property-group>
 	</jsp-config>
-	
+
 	<!-- Session 配置 -->
 	<session-config>
 		<session-timeout>20</session-timeout>
@@ -71,30 +71,30 @@
 
 	<!-- 浏览器就会根据配置的类型自动调用相应的程序打开 -->
 	<mime-mapping>
-	   <extension>js</extension>
-	   <mime-type>application/javascript</mime-type>
+		<extension>js</extension>
+		<mime-type>application/javascript</mime-type>
 	</mime-mapping>
 	<mime-mapping>
-	   <extension>css</extension>
-	   <mime-type>text/css</mime-type>
+		<extension>css</extension>
+		<mime-type>text/css</mime-type>
 	</mime-mapping>
 	<mime-mapping>
-	   <extension>jpg</extension>
-	   <mime-type>image/jpeg</mime-type>
+		<extension>jpg</extension>
+		<mime-type>image/jpeg</mime-type>
 	</mime-mapping>
 	<mime-mapping>
-	   <extension>png</extension>
-	   <mime-type>image/png</mime-type>
+		<extension>png</extension>
+		<mime-type>image/png</mime-type>
 	</mime-mapping>
 	<mime-mapping>
-	   <extension>gif</extension>
-	   <mime-type>image/gif</mime-type>
+		<extension>gif</extension>
+		<mime-type>image/gif</mime-type>
 	</mime-mapping>
 	<mime-mapping>
 		<extension>svg</extension>
 		<mime-type>image/svg+xml</mime-type>
 	</mime-mapping>
-	
+
 	<!-- 出错页面定义 -->
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>

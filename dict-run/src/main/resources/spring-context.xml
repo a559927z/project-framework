@@ -20,121 +20,20 @@
 	</context:component-scan>
 
 
-	<context:component-scan base-package="net.chinahrd.eis.aop" />
-	<!-- 定义aspectj -->
-	<aop:aspectj-autoproxy proxy-target-class="true" />
-
-
 	<!-- 支持上传文件 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-		<qualifier value="main" />
-	</bean>
+	<!-- 定义默认的缓存机制 -->
+	<bean id="cacheBlock" scope="prototype"
+		class="net.chinahrd.core.cache.storage.SimpleCacheStorage" />
 
-	<!-- DAO接口所在包 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="net.chinahrd" />
-		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-	</bean>
-
-
-	<!-- 使用annotation定义事务 -->
-	<!-- <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" 
-		/> -->
-	<!-- 使用tx标签配置的拦截器事务 -->
-	<tx:advice id="txAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="*" propagation="REQUIRED" />
-		</tx:attributes>
-	</tx:advice>
-	<aop:config>
-		<!-- 第一个* 表示任意返回值类型 -->
-		<!-- 第二个* 表示以任意名字开头的package. 如 com.xx. -->
-		<!-- 第三个* 表示以任意名字开头的class的类名 如TestService -->
-		<!-- 第四个* 表示 通配 *service下的任意class -->
-		<!-- 最后二个.. 表示通配 方法可以有0个或多个参数 -->
-		<aop:pointcut id="interceptorPointCuts" expression="execution(* *..*Service.*(..))" />
-<!-- 		<aop:pointcut id="interceptorPointCuts" expression="execution(* net.chinahrd.mvc.pc.service.admin.impl.*.*(..))" /> -->
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="interceptorPointCuts" />
-	</aop:config>
-
-
-	<!-- <import resource="mail/spring-mail.xml" /> -->
-	<import resource="security/spring-shiro.xml" />
+	<import resource="spring-db.xml" />
+	<import resource="spring-shiro.xml" />
+	<import resource="spring-tx.xml" />
+	<!-- <import resource="spring-mail.xml" /> -->
 	<!-- <import resource="spring-quartzJob.xml" /> -->
-	<!-- <import resource="sms/spring-sms.xml" /> -->
+	<!-- <import resource="spring-sms.xml" /> -->
 	<!-- <import resource="spring-elsearch.xml" /> -->
 
-	<!-- 开发/测试环境 -->
-	<beans profile="dev,test">
-		<context:property-placeholder
-			ignore-resource-not-found="true" ignore-unresolvable="true"
-			location="classpath:conf/*.properties" />
-		<!-- datasource -->
-		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
-			destroy-method="close">
-			<property name="driverClassName" value="${jdbc.driver}" />
-			<property name="url" value="${jdbc.url}" />
-			<property name="username" value="${jdbc.username}" />
-			<property name="password" value="${jdbc.password}" />
-			<property name="maxActive" value="${jdbc.pool.maxActive}" />
-			<property name="maxIdle" value="${jdbc.pool.maxIdle}" />
-			<property name="minIdle" value="0" />
-			<property name="defaultAutoCommit" value="false" />
-			<!-- 连接Idle10分钟后超时，每1分钟检查一次 -->
-			<property name="timeBetweenEvictionRunsMillis" value="60000" />
-			<property name="minEvictableIdleTimeMillis" value="1800000" />
-
-			<!-- SQL查询，将用于验证连接从这个池前返回给调用者。如果指定，此查询没有返回任何数据，它只是不能抛出SQLException。默认值为空。 -->
-			<!-- Oracle写法 <property name="validationQuery"><value>select 1 from dual</value></property> -->
-			<property name="validationQuery">
-				<value>SELECT 1</value>
-			</property>
-			<!-- 在从池中借用之前是否对对象进行验证的指示。如果对象无法验证，它将从池中删除，我们将尝试借用另一个。 -->
-			<property name="testOnBorrow">
-				<value>true</value>
-			</property>
-			<!-- 在返回到池之前是否要验证对象的指示。 -->
-			<property name="testOnReturn">
-				<value>true</value>
-			</property>
-			<!-- 如果一个对象无法验证，它将从池中删除。 -->
-			<property name="testWhileIdle">
-				<value>true</value>
-			</property>
-		</bean>
-
-		<!-- mybatis -->
-		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-			<property name="dataSource" ref="dataSource" />
-			<property name="plugins">
-				<array>
-					<bean class="net.chinahrd.eis.pagination.PaginationPlugin">
-						<property name="properties">
-							<value>
-								dialectClass=net.chinahrd.eis.pagination.MySQLDialect
-							</value>
-						</property>
-					</bean>
-				</array>
-			</property>
-			<!-- mybatis配置文件位置 -->
-			<property name="configLocation" value="classpath:/mybatis-config.xml" />
-			<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-			<property name="typeAliasesPackage"
-				value="net.chinahrd.mvc.pc.model,net.chinahrd.biz.test.model" />
-			<!-- 自动扫描Mapper文件位置 -->
-			<property name="mapperLocations" value="classpath*:mapper/**/*.xml" />
-		</bean>
-
-		<!-- 定义默认的缓存机制 -->
-		<bean id="cacheBlock" scope="prototype"
-			class="net.chinahrd.core.cache.storage.SimpleCacheStorage" />
-
-	</beans>
 </beans>

@@ -64,7 +64,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/static/**").addResourceLocations("classpath:/assets/");
+		registry.addResourceHandler("classpath:/static/**").addResourceLocations("classpath:/assets/");
 		// TODO 验正失败 addResourceHandler指的是对外暴露的访问路径,addResourceLocations指的是文件放置的目录
 	}
 
