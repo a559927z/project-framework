@@ -16,6 +16,9 @@
         <dependent-module archiveName="dict-home-20170728.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dict-home/dict-home">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="project-framework-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/project-framework/project-framework">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="dict-run"/>
         <property name="java-output-path" value="/dict-run/target/classes"/>
     </wb-module>
