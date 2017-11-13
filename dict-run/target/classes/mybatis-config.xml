@@ -10,9 +10,9 @@
 		<typeAlias alias="itemDto" type="net.chinahrd.entity.dto.pc.common.ItemDto" />
 		<typeAlias alias="compareDto" type="net.chinahrd.entity.dto.pc.common.CompareDto" />
 		<typeAlias alias="empDto" type="net.chinahrd.entity.dto.pc.common.EmpDto" />
-		<typeAlias alias="perBenefitDto" type="net.chinahrd.entity.dto.pc.benefit.PerBenefitDto" />
 		
 		<typeAlias alias="soureOrganDto" type="net.chinahrd.entity.dto.pc.admin.OrganDto" />
 		<typeAlias alias="riskTreeDto" type="net.chinahrd.entity.dto.pc.common.RiskTreeDto" />
 	</typeAliases>
+	
 </configuration> 

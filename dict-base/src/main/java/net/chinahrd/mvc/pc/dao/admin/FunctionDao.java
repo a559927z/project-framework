@@ -9,7 +9,6 @@ import net.chinahrd.entity.dto.pc.admin.FunctionDto;
 import net.chinahrd.entity.dto.pc.admin.FunctionItemDto;
 import net.chinahrd.entity.dto.pc.admin.FunctionTreeDto;
 import net.chinahrd.entity.dto.pc.admin.RoleFunctionDto;
-import net.chinahrd.entity.dto.pc.manage.HomeConfigDto;
 
 /**
  * Created by wqcai on 15/6/12.
@@ -122,24 +121,4 @@ public interface FunctionDao {
     //=============================================================================
     
     
-    /***
-     * 查询首页配置信息
-     * @param functionId
-     * @param empId
-     * @param customerId
-     * @return
-     */
-    List<HomeConfigDto> queryHomeConfig(@Param("functionId") String functionId,@Param("empId") String empId,@Param("customerId") String customerId);
-
-    /***
-     * 添加用户首页配置信息
-     * @param configDtos
-     */
-    void insertUserHomeConfig(@Param("dtos") List<HomeConfigDto> configDtos);
-
-    /***
-     * 修改用户首页配置信息
-     * @param configDtos
-     */
-    void updateUserHomeConfig(@Param("dtos") List<HomeConfigDto> configDtos);
 }

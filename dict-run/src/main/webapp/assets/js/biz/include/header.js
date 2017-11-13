@@ -12,7 +12,7 @@ require(['jquery', 'underscore', 'utils', 'organTreeSelector', 'message'], funct
      */
     var topOrganId = window.currOrganId = $('#topOrganId').val();
     var topOrganName = window.currOrganTxt = $('#topOrganName').val();
-
+    
     var organTreeSelector = $("#tree").organTreeSelector({
         multiple: false,
         value: {
@@ -29,7 +29,6 @@ require(['jquery', 'underscore', 'utils', 'organTreeSelector', 'message'], funct
             }
         }
     });
-
     window.setOrganTreeVal = function (organId, organTxt) {
         organTreeSelector.organTreeSelector("value", {id: organId, text: organTxt})
     }

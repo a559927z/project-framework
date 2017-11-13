@@ -6,170 +6,175 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
 import org.springframework.util.StringUtils;
 
 /**
- * 角色功能Dto
- * Created by wqcai on 15/6/17.
+ * 角色功能Dto Created by wqcai on 15/6/17.
  */
 public class RoleFunctionDto implements Serializable {
-    private static final long serialVersionUID = 914052078430171869L;
+	private static final long serialVersionUID = 914052078430171869L;
 
-    private String roleFunctionId;
-    private String customerId;
-    private String functionId;
-    private String functionName;
-    private String pathUrl;
-    private Integer isMenu;
-    private String roleId;
-    private String functionItem;
-    private String[] functionItems;
-    private String itemName;
-    private String[] itemNames;
-    private String pid;
-    private List<RoleFunctionDto> childs;
-    private String createUserId;
-    private Timestamp createTime;
+	private String roleFunctionId;
+	private String customerId;
+	private String functionId;
+	private String functionName;
+	private String pathUrl;
+	private String fullPath;
+	private Integer isMenu;
+	private String roleId;
+	private String functionItem;
+	private String[] functionItems;
+	private String itemName;
+	private String[] itemNames;
+	private String pid;
+	private List<RoleFunctionDto> childs;
+	private String createUserId;
+	private Timestamp createTime;
 
-    public String getRoleFunctionId() {
-        return roleFunctionId;
-    }
+	public String getFullPath() {
+		return fullPath;
+	}
 
-    public void setRoleFunctionId(String roleFunctionId) {
-        this.roleFunctionId = roleFunctionId;
-    }
+	public void setFullPath(String fullPath) {
+		this.fullPath = fullPath;
+	}
 
-    public String getFunctionId() {
-        return functionId;
-    }
+	public String getRoleFunctionId() {
+		return roleFunctionId;
+	}
 
-    public void setFunctionId(String functionId) {
-        this.functionId = functionId;
-    }
+	public void setRoleFunctionId(String roleFunctionId) {
+		this.roleFunctionId = roleFunctionId;
+	}
 
-    public String getFunctionName() {
-        return functionName;
-    }
+	public String getFunctionId() {
+		return functionId;
+	}
 
-    public void setFunctionName(String functionName) {
-        this.functionName = functionName;
-    }
+	public void setFunctionId(String functionId) {
+		this.functionId = functionId;
+	}
 
-    public String getRoleId() {
-        return roleId;
-    }
+	public String getFunctionName() {
+		return functionName;
+	}
 
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
-    }
+	public void setFunctionName(String functionName) {
+		this.functionName = functionName;
+	}
 
-    public String getFunctionItem() {
-        return functionItem;
-    }
+	public String getRoleId() {
+		return roleId;
+	}
 
-    public void setFunctionItem(String functionItem) {
-        this.functionItem = functionItem;
-    }
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
+	}
 
-    public String[] getFunctionItems() {
-        return null == functionItems && null != functionItem ? functionItem.split(",") : functionItems;
-    }
+	public String getFunctionItem() {
+		return functionItem;
+	}
 
-    public void setFunctionItems(String[] functionItems) {
-        this.functionItems = functionItems;
-    }
+	public void setFunctionItem(String functionItem) {
+		this.functionItem = functionItem;
+	}
 
-    public String getItemName() {
-        return itemName;
-    }
+	public String[] getFunctionItems() {
+		return null == functionItems && null != functionItem ? functionItem.split(",") : functionItems;
+	}
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
+	public void setFunctionItems(String[] functionItems) {
+		this.functionItems = functionItems;
+	}
 
-    public String[] getItemNames() {
-        return null == itemNames && null != itemName ? itemName.split(",") : itemNames;
-    }
+	public String getItemName() {
+		return itemName;
+	}
 
-    public void setItemNames(String[] itemNames) {
-        this.itemNames = itemNames;
-    }
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
 
-    public String getPid() {
-        return pid;
-    }
+	public String[] getItemNames() {
+		return null == itemNames && null != itemName ? itemName.split(",") : itemNames;
+	}
 
-    public void setPid(String pid) {
-        this.pid = pid;
-    }
+	public void setItemNames(String[] itemNames) {
+		this.itemNames = itemNames;
+	}
 
+	public String getPid() {
+		return pid;
+	}
 
-    public String getCreateUserId() {
-        return createUserId;
-    }
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
 
-    public void setCreateUserId(String createUserId) {
-        this.createUserId = createUserId;
-    }
+	public String getCreateUserId() {
+		return createUserId;
+	}
 
-    public Timestamp getCreateTime() {
-        return createTime;
-    }
+	public void setCreateUserId(String createUserId) {
+		this.createUserId = createUserId;
+	}
 
-    public void setCreateTime(Timestamp createTime) {
-        this.createTime = createTime;
-    }
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
 
-    public List<RoleFunctionDto> getChilds() {
-        return childs == null ? Collections.<RoleFunctionDto>emptyList() : childs;
-    }
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setChilds(List<RoleFunctionDto> childs) {
-        this.childs = childs;
-    }
+	public List<RoleFunctionDto> getChilds() {
+		return childs == null ? Collections.<RoleFunctionDto>emptyList() : childs;
+	}
 
-    public RoleFunctionDto findChildById(String id) {
-        if (null != childs && !childs.isEmpty()) {
-            for (RoleFunctionDto sub : childs) {
-                if (StringUtils.hasText(id) && id.equals(sub.getFunctionId())) {
-                    return sub;
-                }
-            }
-        }
-        return null;
-    }
+	public void setChilds(List<RoleFunctionDto> childs) {
+		this.childs = childs;
+	}
 
-    public void addChild(RoleFunctionDto dto) {
-        if (this.childs == null) {
-            childs = new ArrayList<>();
-        }
-        childs.add(dto);
-    }
+	public RoleFunctionDto findChildById(String id) {
+		if (null != childs && !childs.isEmpty()) {
+			for (RoleFunctionDto sub : childs) {
+				if (StringUtils.hasText(id) && id.equals(sub.getFunctionId())) {
+					return sub;
+				}
+			}
+		}
+		return null;
+	}
 
-    public String getCustomerId() {
-        return customerId;
-    }
+	public void addChild(RoleFunctionDto dto) {
+		if (this.childs == null) {
+			childs = new ArrayList<>();
+		}
+		childs.add(dto);
+	}
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
+	public String getCustomerId() {
+		return customerId;
+	}
 
-    public String getPathUrl() {
-        return pathUrl;
-    }
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
 
-    public void setPathUrl(String pathUrl) {
-        this.pathUrl = pathUrl;
-    }
+	public String getPathUrl() {
+		return pathUrl;
+	}
 
-    public Integer getIsMenu() {
-        return isMenu;
-    }
+	public void setPathUrl(String pathUrl) {
+		this.pathUrl = pathUrl;
+	}
 
-    public void setIsMenu(Integer isMenu) {
-        this.isMenu = isMenu;
-    }
+	public Integer getIsMenu() {
+		return isMenu;
+	}
 
+	public void setIsMenu(Integer isMenu) {
+		this.isMenu = isMenu;
+	}
 
 }

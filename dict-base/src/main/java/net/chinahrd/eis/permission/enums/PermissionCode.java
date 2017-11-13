@@ -12,16 +12,9 @@ public enum PermissionCode {
 	 * 角色
 	 */
 	SUPER_ADMIN("superAdmin"), // "超级管理员Key"
-	
 	ADMIN("admin"), // "管理员"
 	USER("user"), // "用户"
 	GUEST("guest"), // "来宾"
-	
-	/**
-	 * 超级管理员UUID
-	 */
-	SUPER_ADMIN_ID(""),// "超级管理员id" bc10d0cf3b1c11e5b2cb08606e0aa89a
-	SUPER_ADMIN_KEY("superAdmin"),
 	
 	/**
 	 *  功能模块

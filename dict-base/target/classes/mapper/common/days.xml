@@ -11,10 +11,10 @@
 		  t.`is_work_flag` AS 'isForkFlag',
 		  t.`is_vacation` AS 'isVacation'
 		FROM
-		  days t
+		  public_days t
 		  <where>
 		  	1=1
-			  <if test="days != null and days != '' and days != '0000-00-00'">
+			  <if test="days != null and public_days != '' and public_days != '0000-00-00'">
 			  	AND t.days = #{days}
 			  </if>
 			  <if test="beginDay != null and beginDay != '' and beginDay != '0000-00-00' and endDay != null and endDay != '' and endDay != '0000-00-00'">
@@ -36,10 +36,10 @@
 		SELECT 
 		  count(1)
 		FROM
-		  days t
+		  public_days t
 		  <where>
 		  	1=1
-			  <if test="days != null and days != '' and days != '0000-00-00'">
+			  <if test="days != null and public_days != '' and public_days != '0000-00-00'">
 			  	AND t.days = #{days}
 			  </if>
 			  <if test="beginDay != null and beginDay != '' and beginDay != '0000-00-00' and endDay != null and endDay != '' and endDay != '0000-00-00'">

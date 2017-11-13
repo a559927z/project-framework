@@ -18,9 +18,12 @@
 
 %>
 <c:set var="ctx" value="<%=basePath%>"/>
+<c:set var="ctxAssets" value="<%=basePath + \"/assets/\" %>"/>
 <c:set var="jsRoot" value="<%=basePath + \"/assets/js/\" %>"/>
 <c:set var="mjsRoot" value="<%=basePath + \"/assets/mobile/js/\" %>"/>
 <c:set var="v" value="<%=versionObj%>"/>
+
+<c:set var="sysName" value="字典后台"/>
 
 <script>
     var version =<%=versionJson%>;

@@ -6,7 +6,6 @@ import net.chinahrd.entity.dto.pc.admin.FunctionDto;
 import net.chinahrd.entity.dto.pc.admin.FunctionItemDto;
 import net.chinahrd.entity.dto.pc.admin.FunctionTreeDto;
 import net.chinahrd.entity.dto.pc.admin.RoleFunctionDto;
-import net.chinahrd.entity.dto.pc.manage.HomeConfigDto;
 
 /**
  * 功能Service接口类
@@ -99,40 +98,6 @@ public interface FunctionService {
     
     //================================================================
 
-
-    /**
-     * 查询首页相关排序信息
-     * @param empId
-     * @param customerId
-     * @return
-     */
-    List<HomeConfigDto> queryUserHomeConfig(String empId, String customerId);
-
-    /**
-     * 查询首页相关排序信息
-     * @param empId
-     * @param customerId
-     * @return
-     */
-    List<HomeConfigDto> queryUserHomeConfig(String functionCode, String empId, String customerId);
-
-    /**
-     * 添加或更新用户首页拖拽排序配置信息
-     * @param homeConfig
-     * @param empId
-     * @param customerId
-     */
-    void editUserHomeConfig(String homeConfig, String empId, String customerId);
-
-    /**
-     * 添加或更新用户首页拖拽排序配置信息
-     * @param homeConfig
-     * @param empId
-     * @param customerId
-     */
-    void editUserHomeConfig(String homeConfig,String functionCode, String empId, String customerId);
-    
-    
     
     
 

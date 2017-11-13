@@ -32,7 +32,7 @@ import net.chinahrd.eis.permission.service.RbacAuthorizerService;
 public class ShiroAuthorizingRealm extends AuthorizingRealm {
 
 	private static final Logger log = LoggerFactory.getLogger(ShiroAuthorizingRealm.class);
-	
+
 	@Autowired
 	private RbacAuthorizerService authorizerService;
 
@@ -47,9 +47,8 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken)
 			throws AuthenticationException {
-		// check invalid input
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-
+		log.debug("输入框封装入authcToken信息: userName: {}, password: {}", token.getUsername(), token.getPassword());
 		if (StringUtils.isBlank(token.getUsername())) {
 			throw new ShiroAuthenticationException(AuthenticationCode.USER_NOT_FOUND);
 		}
@@ -59,13 +58,10 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
 		// authenticate
 		String inputPwd = String.valueOf(token.getPassword());
 
-		AuthenticationResult info = 
-				authorizerService.authenticate(
-			 			EisWebContext.getCustomerId(),
-						token.getUsername(),inputPwd);
+		AuthenticationResult info = authorizerService.authenticate(EisWebContext.getCustomerId(), token.getUsername(),
+				inputPwd);
 
 		if (info.getCode() == AuthenticationCode.SUCCESS) {
-			
 			return new SimpleAuthenticationInfo(info.getUser(), inputPwd, getName());
 		}
 		throw new ShiroAuthenticationException(info.getCode());
@@ -77,8 +73,10 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		RbacUser user = (RbacUser) principals.fromRealm(getName()).iterator().next();
-		if (null == user) return null;
-		if (null == user.getShiroRolesKey() && null == user.getShiroPermissions()) return null;
+		if (null == user)
+			return null;
+		if (null == user.getShiroRolesKey() && null == user.getShiroPermissions())
+			return null;
 
 		// 权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
@@ -87,7 +85,6 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
 
 		return info;
 	}
-	
 
 	/**
 	 * 更新用户授权信息缓存.

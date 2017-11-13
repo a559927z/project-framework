@@ -20,7 +20,7 @@
     <%@include file="/WEB-INF/views/include/top.jsp" %>
     <!-- ace settings handler -->
     <script src="${ctx}/assets/js/lib/base/ace-extra.min.js"></script>
-    <title>中人网才报平台</title>
+    <title>${sysName }</title>
     <style>
         body {
             overflow-y: hidden;
@@ -39,7 +39,7 @@
         }
     </script>
 
-    <div class="skin-1 main-container-inner">
+    <div class="skin-2 main-container-inner">
         <a class="menu-toggler" id="menu-toggler" href="#">
             <span class="menu-text"></span>
         </a>
@@ -56,17 +56,17 @@
                 </script>
                 <ul class="breadcrumb">
                     <li id="breadcrumbFirst">
-                        <i class="icon-home home-icon"></i><a href="javascript:;" data-href="manageHome/index">首页</a>
+                        <i class="icon-home home-icon"></i><a href="javascript:;" data-href="home/profile">用户信息</a>
                     </li>
 
-                    <li class="active" id="breadcrumbLast">首页</li>
+                    <li class="active" id="breadcrumbLast">用户信息</li>
                 </ul><!-- .breadcrumb -->
 
             </div>
 
             <div class="page-content">
                 <iframe name="mainFrame" id="mainFrame" style="width:100%;height:100%;" scrolling="auto" frameborder="0"
-                        src="manageHome/index"></iframe>
+                        src="home/profile"></iframe>
                 <div class="col-sm-12" id="bottom_layout"></div>
             </div>
             <script>

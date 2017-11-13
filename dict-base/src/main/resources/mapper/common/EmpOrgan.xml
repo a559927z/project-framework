@@ -53,7 +53,7 @@
 			eo.half_check as halfCheck
 		FROM
 			emp_organization_relation eo
-			INNER JOIN dim_organization vo ON vo.organization_id = eo.organization_id AND vo.customer_id=eo.customer_id 
+			INNER JOIN dict_dim_organization vo ON vo.organization_id = eo.organization_id AND vo.customer_id=eo.customer_id 
 		WHERE
 			eo.emp_id =#{empId} and eo.customer_id = #{customerId} 
 		<if test="isOrganPermit == true">
@@ -140,7 +140,7 @@
 			u.is_lock as 'user.isLock'     
 		FROM v_dim_emp t
 		LEFT JOIN v_dim_emp hf ON t.`emp_hf_id`=hf.`emp_id`
-		LEFT JOIN dim_user u ON t.`emp_id` = u.`emp_id`
+		LEFT JOIN dict_dim_user u ON t.`emp_id` = u.`emp_id`
 		<where>
 			1=1
 			AND t.emp_id = #{empId}

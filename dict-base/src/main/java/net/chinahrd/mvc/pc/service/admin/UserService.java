@@ -1,6 +1,7 @@
 package net.chinahrd.mvc.pc.service.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import net.chinahrd.entity.dto.pc.admin.OrganDto;
 import net.chinahrd.entity.dto.pc.admin.TreeDto;
@@ -80,8 +81,21 @@ public interface UserService {
 
 	List<TreeDto> dbToZtree(List<OrganDto> existOrgans);
 
-	boolean updateUserPWDbyUserName(String enPwd, String userName,String customerId);
+	boolean updateUserPWDbyUserName(String enPwd, String userName, String customerId);
 
 	Integer existUser(String empId, String userName);
+
+	Map<String, Object> findAll2(String customerId, String search, int start, int length);
+
+	/**
+	 * 查出用户具备角色、功能权限
+	 * 
+	 * @param customerId
+	 * @param search
+	 * @param start
+	 * @param length
+	 * @return
+	 */
+	Map<String, Object> queryPerms(String customerId, String search, int start, int length);
 
 }

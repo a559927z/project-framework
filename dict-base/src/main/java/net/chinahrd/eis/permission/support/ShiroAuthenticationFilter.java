@@ -81,7 +81,7 @@ public class ShiroAuthenticationFilter extends FormAuthenticationFilter {
 	 * json伪装response.sendRedirect(url)重定向。 </br>
 	 * 封装json对象属性redirectUrl让jsp重新请求。 </br>
 	 * 
-	 * PS ： 这里算是onLoginSuccess了所以还对shiroSession对像清空 </br>
+	 * PS ： 这里算是onLoginSuccess了所以还 shiroSession对像清空 </br>
 	 * 
 	 * @param type
 	 * @param request

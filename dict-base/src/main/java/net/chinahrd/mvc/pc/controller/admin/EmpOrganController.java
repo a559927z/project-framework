@@ -7,6 +7,19 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.alibaba.fastjson.JSON;
+
 import net.chinahrd.entity.dto.PaginationDto;
 import net.chinahrd.entity.dto.pc.admin.EmpDto;
 import net.chinahrd.entity.dto.pc.admin.OrganDto;
@@ -20,22 +33,9 @@ import net.chinahrd.mvc.pc.service.admin.EmpOrganService;
 import net.chinahrd.mvc.pc.service.admin.OrganService;
 import net.chinahrd.mvc.pc.service.admin.UserService;
 import net.chinahrd.mvc.pc.service.common.CommonService;
-import net.chinahrd.utils.CacheHelper;
 import net.chinahrd.utils.CollectionKit;
 import net.chinahrd.utils.ExcelUtil;
 import net.chinahrd.utils.Str;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.alibaba.fastjson.JSON;
 
 /**
  * Created by jxzhang on 15/6/23.
@@ -105,8 +105,8 @@ public class EmpOrganController extends BaseController {
 			Integer page, Integer rows, String sidx, String sord) {
 		PaginationDto<net.chinahrd.entity.dto.pc.common.EmpDto> dto = new PaginationDto<net.chinahrd.entity.dto.pc.common.EmpDto>(
 				page, rows);
-		dto = commonService.findEmpAll(keyName, reqOrgId, dto, sidx, sord, getCustomerId());
-		return dto;
+//		dto = commonService.findEmpAll(keyName, reqOrgId, dto, sidx, sord, getCustomerId());
+		return null;
 	}
 
 	/**
@@ -191,41 +191,7 @@ public class EmpOrganController extends BaseController {
 		return "biz/employee/modifyEmp";
 	}
 
-	/**
-	 * 获取所有“枚举”
-	 */
-	@ResponseBody
-	@RequestMapping(value = "getDirs")
-	public Map<String, Object> getDir(Model model, @RequestParam("empId") String empId, String parentOrgId) {
-		Map<String, Object> target = CollectionKit.newMap();
-		// 职位层级
-		target.put("positionAbility", commonService.queryAbilityHashMap(getCustomerId()));
-		// 职级
-		target.put("abilityLv", commonService.queryAbilityLvHashMap(getCustomerId()));
-		// 工作单位
-		OrganDto org = new OrganDto();
-		org.setCustomerId(getCustomerId());
-		target.put("parentorgrization", organService.findCompanyList(org));
-		// 工作部门
-		if (!Str.IsEmpty(parentOrgId)) {
-			org.setDepth(-1);
-			org.setOrganizationParentId(parentOrgId);
-			org.setOrganizationTypeId(null);
-			target.put("orgrization", organService.findList(org));
-		}
-		return target;
-	}
 
-	@ResponseBody
-	@RequestMapping(value = "existEmp")
-	public String existEmp(String empId, String empKey, String userName) {
-		Integer count = commonService.existEmp(empId, empKey, userName);
-		if (count.equals(0)) {
-			return "false";
-		}
-		return "true";
-
-	}
 
 	/**
 	 * 保存员工

@@ -31,18 +31,19 @@ import net.chinahrd.utils.TableKeyUtil;
 @Controller
 public class HomeController extends BaseController {
 
-    @Autowired
-    private FunctionService functionService;
+	@Autowired
+	private FunctionService functionService;
+	
 
-    @RequestMapping(value = "/index")
-    public String index() {
-        return "biz/index";
-    }
+	@RequestMapping(value = "/index")
+	public String index() {
+		return "biz/index";
+	}
 
-    @RequestMapping(value = "/toUpdatePasswd")
-    public String toUpdatePasswd() {
-        return "biz/updatePasswd";
-    }
+	@RequestMapping(value = "/toUpdatePasswd")
+	public String toUpdatePasswd() {
+		return "biz/updatePasswd";
+	}
 
 	/**
 	 * 登录成功跳转
@@ -53,65 +54,66 @@ public class HomeController extends BaseController {
 	 * @throws IOException
 	 * @author jxzhang 重构 by 2016-12-13
 	 */
-    @ControllerAop(description = "登录成功", writeDb = true, type = 1)
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String home(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        RbacUser user = EisWebContext.getCurrentUser();
-        String customerId = user.getCustomerId();
-        List<RbacRole> rbacRoles = user.getRbacRoles();
-        List<RbacFunction> rbacFunctions = user.getRbacFunctions();
-        List<OrganDto> organPermit = user.getOrganPermit();
-        List<OrganDto> organPermitTop = user.getOrganPermitTop();
-        String userRoleNames = "";
-        List<String> roleIds = CollectionKit.newList();
-        boolean multiRoles = false;
-        if(CollectionKit.isNotEmpty(rbacRoles)){
-            userRoleNames = CollectionKit.extractToString(rbacRoles, "roleName", "、");
-            roleIds = CollectionKit.extractToList(rbacRoles, "roleId");
-            multiRoles = 
-            		rbacRoles.size() == 1 && TableKeyUtil.YG_ROLE_ID.equals(rbacRoles.get(0).getRoleId())
-            		? false : true;
-        }
+	@ControllerAop(description = "登录成功", writeDb = true, type = 1)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		this.setPermsSession();
+		
+		return "biz/home";
+	}
+
+	/**
+	 * 1：这里为了方便获取登录人身上所有权限信息。</br>
+	 * 2：其实这步可以在SubObject里获所有。</br>
+	 * 3：或者都不用，每次请求都会去doGetAuthorizationInfo方法，查取数据库。
+	 */
+	private void setPermsSession() {
+		RbacUser user = EisWebContext.getCurrentUser();
+		String customerId = user.getCustomerId();
+		List<RbacRole> rbacRoles = user.getRbacRoles();
+		List<RbacFunction> rbacFunctions = user.getRbacFunctions();
+		List<OrganDto> organPermit = user.getOrganPermit();
+		List<OrganDto> organPermitTop = user.getOrganPermitTop();
+		String userRoleNames = "";
+		List<String> roleIds = CollectionKit.newList();
+		boolean multiRoles = false;
+		if (CollectionKit.isNotEmpty(rbacRoles)) {
+			userRoleNames = CollectionKit.extractToString(rbacRoles, "roleName", "、");
+			roleIds = CollectionKit.extractToList(rbacRoles, "roleId");
+			multiRoles = rbacRoles.size() == 1 && TableKeyUtil.YG_ROLE_ID.equals(rbacRoles.get(0).getRoleId()) ? false
+					: true;
+		}
 		this.setSession("username", user.getUsername());
 		this.setSession("userRoles", userRoleNames);
 		this.setSession("multiRoles", multiRoles);
-		// this.setSession("funDtos", rbacFunctions);
-		
+//		System.out.println(rbacFunctions);
+//		 this.setSession("funDtos", rbacFunctions);
 
-        // TODO 可以通过rbacFunctions获取。这块可以去掉 ==========================================
-        boolean isSysDeploy = user.getSysDeploy() == 1;
-        List<RoleFunctionDto> functionDtos = null;
-        if (isSysDeploy) {
-            functionDtos = functionService.findFunctionAll(customerId, null);
-        } else {
-            if (rbacRoles.size() > 0) {
-                functionDtos = functionService.findFunctionAll(customerId, roleIds);
-            }
-        }
-        this.setSession("funDtos", functionDtos);
-        // TODO 这样获取存在问题，可以通过organPermitTop修正
-	    if (CollectionKit.isNotEmpty(organPermit)) {
-	    	OrganDto topOneOrgan = organPermit.get(0);
-	    	this.setSession("topOrganId", topOneOrgan.getOrganizationId());
-	    	this.setSession("topOrganName", topOneOrgan.getOrganizationName());
-	    }
-	    // ================================================================================
-	    
-        // 中人网版，支持员工首页
-	    if(CollectionKit.isNotEmpty(rbacRoles) 
-	    		&& TableKeyUtil.ZRW_CUSTOMER_ID.equals(customerId) 
-        		&& rbacRoles.size() == 1
-                && TableKeyUtil.YG_ROLE_ID.equals(rbacRoles.get(0).getRoleId()) ){
-	    	return "redirect:/empAttendance/toEmpAttendanceView";
-	    }
-        return "biz/home";
-    }
+		// TODO 可以通过rbacFunctions获取。这块可以去掉
+		// ==========================================
+		boolean isSysDeploy = user.getSysDeploy() == 1;
+		List<RoleFunctionDto> functionDtos = null;
+		if (isSysDeploy) {
+			functionDtos = functionService.findFunctionAll(customerId, null);
+		} else {
+			if (rbacRoles.size() > 0) {
+				functionDtos = functionService.findFunctionAll(customerId, roleIds);
+			}
+		}
+		this.setSession("funDtos", functionDtos);
+		// TODO 这样获取存在问题，可以通过organPermitTop修正
+		if (CollectionKit.isNotEmpty(organPermit)) {
+			OrganDto topOneOrgan = organPermit.get(0);
+			this.setSession("topOrganId", topOneOrgan.getOrganizationId());
+			this.setSession("topOrganName", topOneOrgan.getOrganizationName());
+		}
+	}
 
-    @RequestMapping(value = "/default", method = RequestMethod.GET)
-    public String defaultIndex() {
-        return "include/default";
-    }
-    
+	@RequestMapping(value = "/default", method = RequestMethod.GET)
+	public String defaultIndex() {
+		return "include/default";
+	}
+
 	/**
 	 * 将一些数据放到ShiroSession中,以便于其它地方使用
 	 * 

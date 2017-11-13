@@ -17,11 +17,6 @@ public class SysApiDefine extends ApiRegisterAbstract{
 	 */
 	@Override
 	public ApiType getApiType() {
-		// TODO Auto-generated method stub
 		return ApiType.INTERFACE;
 	}
-
-
-	
-	
 }

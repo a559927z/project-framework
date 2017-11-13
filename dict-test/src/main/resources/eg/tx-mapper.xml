@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.chinahrd.tx.annotation.TxDao">
+
+    <insert id="saveTbA">
+		INSERT INTO `_tmp_tx_a` (username,age) VALUES (#{dto.username},#{dto.age})
+	</insert>
+
+
+    <insert id="saveTbB">
+        INSERT INTO `_tmp_tx_b` (username) VALUES (#{dto.username})
+    </insert>
+
+</mapper>

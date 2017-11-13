@@ -10,7 +10,7 @@
 			t.organization_type_key   AS 'organizationTypeKey',
 			t.organization_type_level AS 'organizationTypeLevel',
 			t.organization_type_name  AS 'organizationTypeName'
-		 FROM dim_organization_type t        
+		 FROM dict_dim_organization_type t        
 		 <where>
 		 	1=1
 		 	<if test="orgType != null and orgType.organizationTypeLevel != null and orgType.organizationTypeLevel != '' and orgType.organizationTypeLevel != 'null'">

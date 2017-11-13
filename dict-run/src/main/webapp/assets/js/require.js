@@ -54,14 +54,26 @@ O),s=s.replace(Q,""),g.jsExtRegExp.test(s)&&(s=I),q.deps=q.deps?q.deps.concat(s)
     		
     		'constellationComp': 'lib/vue/bizComps/constellationComp',	// 业务组件-星座 on 2017-3-21
     		'totalInfoComp': 'lib/vue/bizComps/totalInfoComp',	// 业务组件-合计信息 on 2017-3-22
+    		
 
-
-    		//
+    		// jqury 插件
     		//=========================================
             'jquery': 'lib/jquery/jquery-1.11.1.min',
-            'docs': 'demo/docs.min',
             "jquery-ui": "lib/jquery/jquery-ui-1.11.0",
             "jquery-pin": "lib/jquery/jquery.pin.min",
+            "jgGrid": 'lib/jqGrid/jquery.jqGrid.min',//表格组件
+            "jgGrid/base": 'lib/jqGrid/grid.base',		//表格基础包
+            "jgGrid/language": 'lib/jqGrid/i18n/grid.locale-cn',//表格语言组件
+            "dataTable" : '../plugin/datatables/js/jquery.dataTables', // 表格组件
+            "jquery-drag": "lib/jquery-drag/jquery.drag",//jqueryDrag
+            "jquery-mCustomScrollBar": "lib/jquery-mCustomScrollbar/jquery.mCustomScrollbar.concat.min",//jqueryMCustomScrollbar
+            "layer" : "../plugin/layer-v3.0.3/layer/layer", //弹出层
+            'ajaxUpload': 'lib/ajaxfileupload',
+            
+            // 自定义插件
+    		//=========================================
+            'dataTablePush': 'lib/widgets/dataTablePush',//dataTable封装
+            'docs': 'demo/docs.min',
             "utils": "lib/base/base", // 工具类
             "messenger": "lib/messenger/messenger.min", // 消息控件
             'placeholder': 'lib/plugins/jquery-placeholder',
@@ -85,9 +97,7 @@ O),s=s.replace(Q,""),g.jsExtRegExp.test(s)&&(s=I),q.deps=q.deps?q.deps.concat(s)
             'timeLine2': 'lib/widgets/timeLine2',//时间轴
             'message': 'lib/widgets/message',//消息控件
             'vernierCursor': 'lib/widgets/vernierCursor',//游标尺
-            "jgGrid": 'lib/jqGrid/jquery.jqGrid.min',//表格组件
-            "jgGrid/base": 'lib/jqGrid/grid.base',		//表格基础包
-            "jgGrid/language": 'lib/jqGrid/i18n/grid.locale-cn',//表格语言组件
+            
             "zrw-elements": 'lib/base/zrw-elements',//zrw框架核心对象封装
             "tree": 'lib/widgets/jquery.tree',//树组件
             "datetimepicker": "lib/datetime/bootstrap-datetimepicker",//日期组件
@@ -126,8 +136,7 @@ O),s=s.replace(Q,""),g.jsExtRegExp.test(s)&&(s=I),q.deps=q.deps?q.deps.concat(s)
             "select2": 'lib/select2/select2.full',  //输入框
             "bottomStock": 'lib/widgets/jquery.bottomStock', //人才盘点布局-底部
             "scrollTo": 'lib/scrollto/jquery.scrollTo.min', //滚动
-            "jquery-drag": "lib/jquery-drag/jquery.drag",//jqueryDrag
-            "jquery-mCustomScrollBar": "lib/jquery-mCustomScrollbar/jquery.mCustomScrollbar.concat.min",//jqueryMCustomScrollbar
+            
             'echarts/chart/gauge': 'lib/echarts/chart/gauge',
             "zepto": '../mobile/js/lib/zepto/zepto',
             'slide': '../mobile/js/lib/slide',
@@ -151,9 +160,14 @@ O),s=s.replace(Q,""),g.jsExtRegExp.test(s)&&(s=I),q.deps=q.deps?q.deps.concat(s)
             'cardTabel': 'lib/widgets/cardTabel',
             'salesGrid': "lib/widgets/salesGrid", //销售看板列表
             'gridly': "lib/jquery-gridly/jquery.gridly", //gridly
+            'editable':'../plugin/xEditable/bootstrap-editable.min'	//用于创建可编辑弹出框的插件
         },
 
         shim = {
+    		"ajaxUpload" : {deps:["jquery"]},
+    		"editable" : {deps:["jquery"]},
+    		"layer" : {deps:["jquery"]},
+    		"dataTable": {deps: ["jquery"]},
     		"pieComp": {deps: ["vue2x"]},
     		"barComp": {deps: ["vue2x"]},
             "jquery-ui": {

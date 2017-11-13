@@ -8,13 +8,9 @@ import net.chinahrd.core.cache.CacheBlockConstructor;
 import net.chinahrd.core.cache.CustomBlock;
 import net.chinahrd.eis.permission.EisWebContext;
 import net.chinahrd.entity.dto.KVItemDto;
-import net.chinahrd.entity.dto.pc.DegreeDto;
-import net.chinahrd.entity.dto.pc.SequenceItemsDto;
-import net.chinahrd.entity.dto.pc.SubSequenceItemsDto;
 import net.chinahrd.entity.dto.pc.admin.FunctionDto;
 import net.chinahrd.entity.dto.pc.common.ConfigDto;
 import net.chinahrd.utils.CollectionKit;
-import net.chinahrd.utils.TableKeyUtil;
 
 /**
  * 系统缓存
@@ -136,4 +132,7 @@ public class SysCache {
 
     public static CacheBlock<List<KVItemDto>> queryOrgan =
             new CacheBlockConstructor<List<KVItemDto>>("queryOrgan").getDefaultBlock(customerId);
+    
+    public static CacheBlock<String> findSuperAdminId =
+            new CacheBlockConstructor<String>("findSuperAdminId").getDefaultBlock(customerId);
 }

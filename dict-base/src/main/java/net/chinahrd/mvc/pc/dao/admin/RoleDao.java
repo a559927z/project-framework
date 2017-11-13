@@ -10,9 +10,6 @@ import net.chinahrd.entity.dto.pc.admin.RoleDto;
 import net.chinahrd.entity.dto.pc.admin.UserRoleDto;
 import net.chinahrd.entity.dto.pc.common.ItemDto;
 
-/**
- * Created by wqcai on 15/6/10.
- */
 @Repository("roleDao")
 public interface RoleDao {
 
@@ -31,7 +28,8 @@ public interface RoleDao {
      * @param rb         ibatis分页查询对象
      * @return
      */
-    List<RoleDto> findAll(@Param("customerId") String customerId, RowBounds rb);
+    List<RoleDto> findAll(@Param("customerId") String customerId, @Param("search") String search, RowBounds rb);
+    
 
     /**
      * 根据角色ID查询角色信息

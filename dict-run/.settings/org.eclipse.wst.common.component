@@ -4,13 +4,19 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="jar-1.0-RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jar/jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="hrd-util-1.0-RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/hrd-util/hrd-util">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="hrd-framework-1.1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/hrd-framework/hrd-framework">
+        <dependent-module archiveName="dict-base-20170718.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dict-base/dict-base">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="dict-base-20170718.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dict-base/dict-base">
+        <dependent-module archiveName="dict-home-20170728.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dict-home/dict-home">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="project-framework-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/project-framework/project-framework">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="dict-run"/>
