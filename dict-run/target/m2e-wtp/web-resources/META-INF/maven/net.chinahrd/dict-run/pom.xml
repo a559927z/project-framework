@@ -6,7 +6,6 @@
 		<artifactId>dict</artifactId>
 		<version>20170717</version>
 	</parent>
-	<groupId>net.chinahrd</groupId>
 	<artifactId>dict-run</artifactId>
 	<version>20170718</version>
 	<packaging>war</packaging>
@@ -26,7 +25,7 @@
 
 		<dependency>
 			<groupId>net.chinahrd</groupId>
-			<artifactId>hrd-framework</artifactId>
+			<artifactId>project-framework</artifactId>
 			<version>${framework.version}</version>
 		</dependency>
 		<dependency>

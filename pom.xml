@@ -38,12 +38,29 @@
 		<dependency>
 			<groupId>net.chinahrd</groupId>
 			<artifactId>hrd-util</artifactId>
-			<version>1.0-RELEASE</version>
+			<version>${util.version}</version>
 		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>net.chinahrd</groupId> -->
+		<!-- <artifactId>hrd-framework</artifactId> -->
+		<!-- <version>1.1.1</version> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>net.chinahrd</groupId>
-			<artifactId>hrd-framework</artifactId>
-			<version>1.1.1</version>
+			<artifactId>project-framework</artifactId>
+			<version>${framework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.netflix.feign</groupId>
+			<artifactId>feign-core</artifactId>
+			<version>8.18.0</version>
+<!-- 			<scope>runtime</scope> -->
+		</dependency>
+		<dependency>
+			<groupId>com.netflix.feign</groupId>
+			<artifactId>feign-gson</artifactId>
+			<version>8.18.0</version>
 		</dependency>
 	</dependencies>
 	<!-- 编译 -->
@@ -53,6 +70,7 @@
 		<module>dict-base</module>
 		<module>dict-home</module>
 		<module>dict-Test</module>
+		<module>../project-framework</module>
 	</modules>
 
 	<!-- 插件配置 -->

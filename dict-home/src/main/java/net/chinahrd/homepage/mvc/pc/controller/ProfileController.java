@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import net.chinahrd.core.tools.Identities;
 import net.chinahrd.eis.annotation.log.ControllerAop;
 import net.chinahrd.entity.dto.pc.common.UserExpDto;
 import net.chinahrd.homepage.mvc.pc.service.ProfileService;
 import net.chinahrd.mvc.pc.controller.BaseController;
+import net.chinahrd.utils.Identities;
 
 @Controller
 @RequestMapping("/home")

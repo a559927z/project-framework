@@ -10,6 +10,9 @@
         <dependent-module archiveName="hrd-util-1.0-RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/hrd-util/hrd-util">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="project-framework-1.1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/project-framework/project-framework">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="dict-Test"/>
         <property name="java-output-path" value="/dict-Test/target/classes"/>
     </wb-module>

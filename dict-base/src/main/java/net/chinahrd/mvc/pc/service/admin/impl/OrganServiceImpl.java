@@ -8,7 +8,6 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import net.chinahrd.core.tools.Identities;
 import net.chinahrd.eis.permission.EisWebContext;
 import net.chinahrd.eis.permission.model.RbacUser;
 import net.chinahrd.entity.dto.pc.admin.OrganDto;
@@ -22,6 +21,7 @@ import net.chinahrd.mvc.pc.service.admin.OrganService;
 import net.chinahrd.utils.CacheHelper;
 import net.chinahrd.utils.CollectionKit;
 import net.chinahrd.utils.DateUtil;
+import net.chinahrd.utils.Identities;
 import net.chinahrd.utils.PropertiesUtil;
 
 /**
