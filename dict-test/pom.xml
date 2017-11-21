@@ -32,7 +32,6 @@
 	</dependencies>
 	<packaging>war</packaging>
 
-
 	<build>
 		<finalName>dict-test</finalName>
 		<plugins>
