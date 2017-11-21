@@ -48,7 +48,11 @@
 		<dependency>
 			<groupId>net.chinahrd</groupId>
 			<artifactId>project-framework</artifactId>
+<<<<<<< HEAD
 			<version>${framework.version}</version>
+=======
+			<version>1.0</version>
+>>>>>>> branch 'dev' of https://github.com/a559927z/project-dict
 		</dependency>
 
 		<dependency>
