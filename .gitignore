@@ -1,1 +1,25 @@
+#######开放模式############
+
+###############
+#    folder   #
+###############
+/.settings/
+/.settings/*
 /target/
+/target/*
+
+###############
+#  fixed file #
+###############
+*.class
+
+
+
+#########保守模式############
+!*.java
+!*.xml
+!*.js
+!*.css
+!*.properties
+!/dict-run/src/main/webapp/assets/
+!/dict-run/src/main/webapp/assets/*
