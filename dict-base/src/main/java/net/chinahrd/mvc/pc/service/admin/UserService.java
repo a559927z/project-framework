@@ -3,10 +3,10 @@ package net.chinahrd.mvc.pc.service.admin;
 import java.util.List;
 import java.util.Map;
 
+import net.chinahrd.entity.dto.PaginationDto;
 import net.chinahrd.entity.dto.pc.admin.OrganDto;
 import net.chinahrd.entity.dto.pc.admin.TreeDto;
 import net.chinahrd.entity.dto.pc.admin.UserDto;
-import net.chinahrd.entity.dto.PaginationDto;
 
 /**
  * 用户Service接口类 Created by wqcai on 15/6/8.
