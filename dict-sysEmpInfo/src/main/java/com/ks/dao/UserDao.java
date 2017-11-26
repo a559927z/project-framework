@@ -1,4 +1,4 @@
-package com.ks;
+package com.ks.dao;
 
 import org.springframework.stereotype.Repository;
 

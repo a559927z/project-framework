@@ -1,4 +1,4 @@
-package com.ks;
+package com.ks.service;
 
 public interface UserService {
 

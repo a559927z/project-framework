@@ -1,4 +1,4 @@
-package com.ks;
+package com.ks.dto;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

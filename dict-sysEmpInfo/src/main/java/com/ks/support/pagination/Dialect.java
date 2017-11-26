@@ -1,4 +1,4 @@
-package com.ks;
+package com.ks.support.pagination;
 
 public class Dialect {
 	public boolean supportLimit() {

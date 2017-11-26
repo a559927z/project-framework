@@ -1,7 +1,10 @@
-package com.ks;
+package com.ks.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.ks.dao.UserDao;
+import com.ks.service.UserService;
 
 /**
  * 用户Service实现类

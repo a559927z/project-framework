@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>[%d{HH:mm:ss.SSS}] [%logger{36}] - %msg%n</Pattern>
 		</encoder>
@@ -9,11 +9,8 @@
 
 	<!-- TRACE < DEBUG < INFO < WARN < ERROR, ALL/OFF -->
 	<logger name="com.ks" level="debug" addtivity="false" />
-	<!-- <logger name="com.ks.eis.dal.MySqlPaginationPlugin" level="debug" addtivity="false" 
-		/> -->
-	<logger name="org.springframework.web" level="INFO" />
-
-	<root level="INFO">
-		<appender-ref ref="STDOUT" />
+	<logger name="org.springframework.web" level="info" />
+	<root level="info">
+		<appender-ref ref="stdout" />
 	</root>
 </configuration>
