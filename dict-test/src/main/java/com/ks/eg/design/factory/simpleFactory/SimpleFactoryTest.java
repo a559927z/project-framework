@@ -1,6 +1,7 @@
 package com.ks.eg.design.factory.simpleFactory;
 
 import java.net.URL;
+import java.util.Arrays;
 
 import com.ks.eg.design.factory.factoryMethod.FactoryMethodTest;
 
@@ -16,7 +17,6 @@ public class SimpleFactoryTest {
 
 		AbstractChartFactory chart = AbstractChartFactory.getChart(chartType); // 通过静态工厂方法创建产品
 		chart.display();
-
+		
 	}
-
 }
