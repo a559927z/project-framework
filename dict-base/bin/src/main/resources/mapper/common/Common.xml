@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.chinahrd.mvc.pc.dao.common.CommonDao">
+	<cache-ref namespace="net.chinahrd.ehcache.normal" />
+	
+	<!-- 当前登录人数据Ids权限 -->
+	<sql id="orgIdsPermitSql">
+		SELECT DISTINCT t1.organization_id 
+		FROM dict_relation_role_user t
+		INNER JOIN dict_relation_role_organization t1 ON t.role_id = t1.role_id AND t1.half_check = 0
+		LEFT JOIN `dict_relation_user_organization` t2 ON t.user_id = t2.user_id  AND t1.half_check = 0
+		where t.user_id=#{userId}
+	</sql>
+	
+	<!-- 当前登录人数据对象（包括半勾）：并集权限（用户、角色） -->
+    <sql id="orgObjPermitSql">
+        SELECT DISTINCT
+        vo.organization_id,
+        vo.organization_name,
+        vo.organization_parent_id,
+        vo.has_children,
+        vo.full_path,
+        dot.organization_type_level as level,
+        vo.depth,
+        eo.half_check
+        FROM
+        dict_dim_organization vo
+        <!-- 		INNER JOIN emp_organization_relation eo on eo.organization_id = vo.organization_id and eo.customer_id = vo.customer_id -->
+        INNER JOIN dict_relation_user_organization eo on eo.organization_id = vo.organization_id and eo.customer_id =
+        vo.customer_id
+        <!-- 		INNER JOIN dict_dim_role r ON r.role_id = ro.role_id and ro.customer_id = r.customer_id -->
+        <!-- 		INNER JOIN dict_relation_role_user ur ON ur.role_id = r.role_id and r.customer_id = ur.customer_id -->
+        <!-- 			   AND ur.user_id = #{userId} -->
+        <!-- 		INNER JOIN dict_dim_user u ON u.emp_id = eo.emp_id and eo.customer_id = u.customer_id and u.is_lock = 0 -->
+        INNER JOIN dict_dim_user u ON u.user_id = eo.user_id and eo.customer_id = u.customer_id
+        and u.is_lock = 0
+        LEFT JOIN dict_dim_organization_type dot ON dot.organization_type_id = vo.organization_type_id
+        WHERE
+        u.user_id = #{userId}
+        <if test="customerId != null">
+            AND vo.customer_id = #{customerId}
+        </if>
+
+        UNION
+
+        SELECT DISTINCT
+        vo.organization_id,
+        vo.organization_name,
+        vo.organization_parent_id,
+        vo.has_children,
+        vo.full_path,
+        dot.organization_type_level as level,
+        vo.depth,
+        t.half_check
+        FROM
+        dict_dim_organization vo
+        INNER JOIN dict_relation_role_organization t ON t.organization_id = vo.organization_id AND vo.customer_id =
+        t.customer_id
+        INNER JOIN dict_relation_role_user t1 ON t1.role_id = t.role_id and t.customer_id = t1.customer_id
+        INNER JOIN dict_dim_user t2 ON t2.user_id = t1.user_id and t1.customer_id = t2.customer_id and t2.is_lock = 0
+        LEFT JOIN dict_dim_organization_type dot ON dot.organization_type_id = vo.organization_type_id
+        WHERE
+        t2.user_id = #{userId}
+        <if test="customerId != null">
+            AND vo.customer_id = #{customerId}
+        </if>
+    </sql>
+	
+	
+
+
+	<insert id="insertDays" parameterType="net.chinahrd.utils.holiday.DaysDto">
+		INSERT INTO public_days (
+		days,
+		is_work_flag,
+		is_holiday,
+		is_vacation
+		)
+		VALUES
+		<foreach collection="list" item="dto" separator=",">
+			(
+			#{dto.days},
+			#{dto.isWorkFlag},
+			#{dto.isHoliday},
+			#{dto.isVacation}
+			)
+		</foreach>
+	</insert>
+
+	<insert id="insertLog" parameterType="java.util.Map">
+		INSERT INTO db_log (
+		log_id, customer_id, user_id,
+		module, text,
+		use_time,
+		start_time, end_time,
+		is_error,
+		show_index,
+		`year_month`)
+		VALUES (
+		#{logId},#{customerId},#{userId},
+		#{module},#{text},#{useTime},
+		#{startTime},#{endTime},#{isError},
+		#{showIndex},#{yearMonth}
+		)
+	</insert>
+
+	<select id="checkDaysTable" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		SELECT count(1) FROM log
+		WHERE is_error = 0 AND module = 'days' AND `year_month` BETWEEN
+		#{beginTime} AND #{endTime}
+	</select>
+</mapper>

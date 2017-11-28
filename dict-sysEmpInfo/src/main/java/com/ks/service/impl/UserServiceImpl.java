@@ -2,8 +2,10 @@ package com.ks.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.ks.dao.UserDao;
+import com.ks.dto.UserDto;
 import com.ks.service.UserService;
 
 /**
@@ -19,6 +21,14 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
+
+	@Override
+	public UserDto findUserById(String customerId, String userId) {
+		if (StringUtils.isEmpty(userId)) {
+			return null;
+		}
+		return userDao.findUserById(customerId, userId);
+	}
 
 	@Override
 	public String testSql() {

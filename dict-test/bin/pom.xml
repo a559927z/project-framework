@@ -1,0 +1,81 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>net.chinahrd</groupId>
+		<artifactId>dict</artifactId>
+		<version>20170717</version>
+	</parent>
+
+	<groupId>com.ks</groupId>
+	<artifactId>dict-Test</artifactId>
+	<version>20171106</version>
+
+	<!-- 依赖项定义 -->
+	<dependencies>
+		<dependency>
+			<groupId>net.chinahrd</groupId>
+			<artifactId>jar</artifactId>
+			<version>1.0-RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>net.chinahrd</groupId>
+			<artifactId>hrd-util</artifactId>
+			<version>${util.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.chinahrd</groupId>
+			<artifactId>project-framework</artifactId>
+			<version>${framework.version}</version>
+		</dependency>
+	</dependencies>
+	<packaging>war</packaging>
+
+	<build>
+		<finalName>dict-test</finalName>
+		<plugins>
+			<!-- resource插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+			<!-- cobertura插件, 取消不需要计算覆盖率的类 -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<configuration>
+					<instrumentation>
+						<excludes>
+							<exclude>**/model/*.class</exclude>
+							<exclude>**/dto/*.class</exclude>
+							<exclude>**/*Controller.class</exclude>
+							<exclude>**/*Demo.class</exclude>
+						</excludes>
+					</instrumentation>
+				</configuration>
+			</plugin>
+			<!-- tomcat7 插件 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<systemProperties>
+						<spring.profiles.active>dev</spring.profiles.active>
+					</systemProperties>
+					<!-- <port>8080</port> -->
+					<!-- Goals里可以在parent项目指定运行 特定war项目及特定端口 -->
+					<!-- tomcat7:run -pl :mup-paper -am -Dmaven.tomcat.port=8080 -->
+					<path>/${project.artifactId}</path>
+					<contextReloadable>false</contextReloadable>
+					<useTestClasspath>true</useTestClasspath>
+				</configuration>
+			</plugin>
+			<!-- enforcer插件, 规则统一定义在parent -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -30,5 +30,40 @@
 			<artifactId>project-framework</artifactId>
 			<version>${framework.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.ks</groupId>
+			<artifactId>dict-api</artifactId>
+			<version>20171127</version>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>com.alibaba</groupId> -->
+		<!-- <artifactId>dubbo</artifactId> -->
+		<!-- <version>2.5.6</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.zookeeper</groupId> -->
+		<!-- <artifactId>zookeeper</artifactId> -->
+		<!-- <version>3.4.6</version> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>com.github.sgroschupf</groupId> -->
+		<!-- <artifactId>zkclient</artifactId> -->
+		<!-- <version>0.1</version> -->
+		<!-- </dependency> -->
+
+
+		<!-- <dependency> -->
+		<!-- <groupId>log4j</groupId> -->
+		<!-- <artifactId>log4j</artifactId> -->
+		<!-- <version>1.2.16</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.slf4j</groupId> -->
+		<!-- <artifactId>slf4j-api</artifactId> -->
+		<!-- <version>1.6.2</version> -->
+		<!-- </dependency> -->
 	</dependencies>
 </project>

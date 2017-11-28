@@ -14,7 +14,7 @@
 	<!-- 引入配置文件 -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:conf/jdbc.properties" />
+		<property name="location" value="classpath:conf/sysEmpInfo.properties" />
 	</bean>
 
 	<!-- 开发/测试环境 -->

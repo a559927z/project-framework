@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>[%d{HH:mm:ss.SSS}] [%logger{36}] - %msg%n</Pattern>
+		</encoder>
+	</appender>
+
+	<!-- TRACE < DEBUG < INFO < WARN < ERROR, ALL/OFF -->
+	<logger name="com.ks" level="debug" addtivity="false" />
+	<logger name="org.springframework.web" level="info" />
+	<root level="info">
+		<appender-ref ref="stdout" />
+	</root>
+</configuration>
