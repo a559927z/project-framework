@@ -1,4 +1,4 @@
-package com.ks.eg.httpApi;
+package com.ks.eg.httpApi.feign;
 
 import feign.Feign;
 import feign.gson.GsonDecoder;

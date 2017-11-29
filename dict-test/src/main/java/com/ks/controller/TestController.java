@@ -3,8 +3,12 @@ package com.ks.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.ks.eg.httpApi.httpClient.UserDto;
 
 @Controller
 @RequestMapping("/test")
@@ -14,6 +18,14 @@ public class TestController {
 	public String stringInterceptorRegister(HttpServletRequest request) {
 		System.out.println("stringInterceptorRegister");
 		return "springIntercept";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/postTest", method = RequestMethod.POST)
+	public String postTest(@RequestBody UserDto dto) {
+		System.out.println(dto.getUsername());
+		System.out.println(dto.getPassword());
+		return "success";
 	}
 
 }

@@ -69,8 +69,14 @@
 		<!-- <module>hrd-framework</module> -->
 		<module>dict-base</module>
 		<module>dict-home</module>
-		<module>dict-Test</module>
+		
 		<module>../project-framework</module>
+		
+		<module>dict-api</module>
+		<module>../../svn/workspace/chinahrd-hrbi/hrd-util</module>
+		<module>../../svn/workspace/chinahrd-hrbi/jar</module>
+		<module>dict-test</module>
+		<module>dict-sysEmpInfo</module>
 	</modules>
 
 	<!-- 插件配置 -->

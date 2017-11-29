@@ -1,4 +1,4 @@
-package com.ks.eg.javaBase.Collection;
+package com.ks.eg.javaBase.collection;
 
 import java.util.Arrays;
 import java.util.HashSet;
