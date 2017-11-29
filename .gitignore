@@ -1,1 +1,40 @@
-/bin/
+ # .gitignore_global
+ #######开放模式############
+
+###############
+#  fixed file #
+###############
+ *.classpath           # 所有目录下或者后缀是.classpat
+ */.classpath
+ *.project             # 所有目录下或者后缀是.project
+ *.settings/*          # 所有目录下或者后缀是.settings，以及.settings下所有文件
+ *.gitignore           # 所有目录下或者后缀是.gitignore
+ *.class
+ *.idea/*
+ *.svn/*
+*.prefs
+
+ ###############
+#    folder   #
+###############
+.settings/
+.settings/*
+target/
+target/*
+target\*
+bin\*
+*\bin\*
+dict-api/.classpath
+dict-base/.classpath
+dict-home/.classpath
+dict-run/.classpath
+dict-sysEmpInfo/.classpath
+
+
+#########保守模式############
+!*.java
+!*.xml
+!*.js
+!*.css
+!*.properties
+
