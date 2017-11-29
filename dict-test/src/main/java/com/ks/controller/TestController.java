@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ks.eg.httpApi.httpClient.UserDto;
+import com.ks.dto.BaseDto;
 
 @Controller
 @RequestMapping("/test")
@@ -22,9 +22,9 @@ public class TestController {
 
 	@ResponseBody
 	@RequestMapping(value = "/postTest", method = RequestMethod.POST)
-	public String postTest(@RequestBody UserDto dto) {
-		System.out.println(dto.getUsername());
-		System.out.println(dto.getPassword());
+	public String postTest(@RequestBody BaseDto dto) {
+		System.out.println(dto.getK());
+		System.out.println(dto.getV());
 		return "success";
 	}
 

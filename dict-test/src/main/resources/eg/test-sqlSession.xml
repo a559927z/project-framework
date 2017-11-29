@@ -12,39 +12,22 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd"
 	default-lazy-init="true">
-	
-	<context:component-scan base-package="net.chinahrd">
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
-	</context:component-scan>
 
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-		<qualifier value="main" />
-	</bean>
+	<context:component-scan base-package="com.ks" />
+
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="net.chinahrd" />
+		<property name="basePackage" value="com.ks" />
 		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>  
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
-	<!-- 使用annotation定义事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager"
-		proxy-target-class="true" />
-		
-	<!-- 定义aspectj -->
-	<aop:aspectj-autoproxy proxy-target-class="true" />
-
-<!-- 	<import resource="spring-elsearch.xml" /> -->
 
 	<!-- 开发/测试环境 -->
 	<beans profile="dev,test">
 		<context:property-placeholder
 			ignore-resource-not-found="true" ignore-unresolvable="true"
-			location="classpath:conf/*.properties,
-			          classpath:dev-conf/*.properties" />
+			location="classpath:conf/*.properties" />
 		<!-- datasource -->
 		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
 			destroy-method="close">
@@ -60,21 +43,17 @@
 			<property name="dataSource" ref="dataSource" />
 			<property name="plugins">
 				<array>
-					<bean class="net.chinahrd.eis.pagination.PaginationPlugin">
+					<bean class="com.ks.mybatis.pagination.PaginationPlugin">
 						<property name="properties">
 							<value>
-								dialectClass=net.chinahrd.eis.pagination.MySQLDialect
+								dialectClass=com.ks.mybatis.pagination.MySQLDialect
 							</value>
 						</property>
 					</bean>
 				</array>
 			</property>
-			<property name="configLocation" value="classpath:/mybatis-config.xml" />
-			<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-			<property name="typeAliasesPackage"
-				value="net.chinahrd.mvc.pcdel,net.chinahrd.biz.test.model" />
 			<!-- 显式指定Mapper文件位置 -->
-			<property name="mapperLocations" value="classpath*:mapper/search/*.xml" />
+			<property name="mapperLocations" value="classpath*:com/ks/tx/*.xml" />
 		</bean>
 	</beans>
 </beans>
