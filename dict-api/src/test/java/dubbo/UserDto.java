@@ -1,4 +1,4 @@
-package com.ks.dto;
+package dubbo;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

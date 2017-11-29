@@ -18,5 +18,10 @@
 			<artifactId>jar</artifactId>
 			<version>1.0-RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>com.ks</groupId>
+			<artifactId>dict-sysEmpInfo</artifactId>
+			<version>20171122</version>
+		</dependency>
 	</dependencies>
 </project>

@@ -24,10 +24,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDto findUserById(String customerId, String userId) {
+		System.out.println("==========" + userId);
 		if (StringUtils.isEmpty(userId)) {
 			return null;
 		}
-		return userDao.findUserById(customerId, userId);
+		UserDto dto = userDao.findUserById(customerId, userId);
+		return dto;
 	}
 
 	@Override

@@ -31,11 +31,11 @@
 			<version>${framework.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.ks</groupId>
-			<artifactId>dict-api</artifactId>
-			<version>20171127</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.ks</groupId> -->
+<!-- 			<artifactId>dict-api</artifactId> -->
+<!-- 			<version>20171127</version> -->
+<!-- 		</dependency> -->
 
 		<!-- <dependency> -->
 		<!-- <groupId>com.alibaba</groupId> -->

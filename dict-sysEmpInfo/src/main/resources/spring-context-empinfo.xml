@@ -51,4 +51,6 @@
 	</bean>
 
 
+	<import resource="dubbo-provider-sysempinfo.xml"/>
+
 </beans>
