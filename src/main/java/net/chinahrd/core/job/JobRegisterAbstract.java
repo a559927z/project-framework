@@ -20,7 +20,10 @@ import net.chinahrd.core.timer.model.TimerConfig;
  * 2016年10月8日下午1:42:50
  */
 public abstract class JobRegisterAbstract implements JobRegister {
+
+
     TimerConfig tc = new TimerConfig();
+
     private ModuleModel moduleModel;
     private List<JobRegister> list;
 
