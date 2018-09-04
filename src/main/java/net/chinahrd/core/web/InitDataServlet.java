@@ -13,46 +13,49 @@ import net.chinahrd.core.web.init.DataInitializationConfig;
 
 /**
  * 服务器启动后 自动加载 初始化数据的serlvet
- * 
+ *
  * @author htpeng 2016年2月2日下午2:36:13
  */
 public class InitDataServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public InitDataServlet() {
-		super();
-	}
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public InitDataServlet() {
+        super();
+    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     * response)
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     * response)
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+    }
 
-	public void init(ServletConfig config) throws ServletException {
-		for (Class<? extends DataInitialization> c : DataInitializationConfig.getList()) {
-			try {
-				DataInitialization d = (DataInitialization) c.newInstance();
-				d.init(config);
-			} catch (InstantiationException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        for (Class<? extends DataInitialization> c : DataInitializationConfig.getList()) {
+            try {
+                DataInitialization d = (DataInitialization) c.newInstance();
+                d.init(config);
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 }
