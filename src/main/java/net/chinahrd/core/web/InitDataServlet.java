@@ -14,7 +14,7 @@ import net.chinahrd.core.web.init.DataInitializationConfig;
 /**
  * 服务器启动后 自动加载 初始化数据的serlvet
  *
- * @author htpeng 2016年2月2日下午2:36:13
+ * @author jxzhang 2016年2月2日下午2:36:13
  */
 public class InitDataServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;

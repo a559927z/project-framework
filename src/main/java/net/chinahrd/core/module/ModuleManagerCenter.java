@@ -1,5 +1,5 @@
 /**
- *net.chinahrd.core.cache
+ * net.chinahrd.core.cache
  */
 package net.chinahrd.core.module;
 
@@ -11,14 +11,14 @@ import net.chinahrd.core.module.model.ModuleModel;
 
 /**
  * 模块管理中心
- * 
- * @author htpeng 2016年10月8日下午1:42:50
+ *
+ * @author jxzhang 2016年10月8日下午1:42:50
  */
 
 public class ModuleManagerCenter {
-	private static List<ModuleModel> list = new ArrayList<ModuleModel>();
+    private static List<ModuleModel> list = new ArrayList<ModuleModel>();
 
-	
+
 //	/**
 //	 * 获取系统加载的所有模块的code
 //	 * @return
@@ -31,27 +31,27 @@ public class ModuleManagerCenter {
 //		return moduleCodeList;
 //		
 //	}
-	/**
-	 * @param list
-	 *            the list to set
-	 */
-	static void setMenuModle(ModuleModel moduleModel) {
-		vaild(moduleModel);
-		list.add(moduleModel);
-	}
 
-	static List<ModuleModel> getModuleModel() {
-		return list;
-	}
+    /**
+     * @param list the list to set
+     */
+    static void setMenuModle(ModuleModel moduleModel) {
+        vaild(moduleModel);
+        list.add(moduleModel);
+    }
 
-	private static void vaild(ModuleModel moduleModel) {
-		if (null != moduleModel) {
-			for (ModuleModel m : list) {
-				if (m.getCode().equals(moduleModel.getCode())) {
-					throw new ModuleException("已经存在Code为 " + m.getCode() + " 的模块！");
-				}
-			}
-		}
+    static List<ModuleModel> getModuleModel() {
+        return list;
+    }
 
-	}
+    private static void vaild(ModuleModel moduleModel) {
+        if (null != moduleModel) {
+            for (ModuleModel m : list) {
+                if (m.getCode().equals(moduleModel.getCode())) {
+                    throw new ModuleException("已经存在Code为 " + m.getCode() + " 的模块！");
+                }
+            }
+        }
+
+    }
 }

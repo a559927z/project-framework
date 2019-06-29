@@ -23,8 +23,10 @@ import org.springframework.beans.factory.InitializingBean;
 /**
  * 模块注册中心
  * 子类使用
+ * <p>
+ * spring初始化bean的时候，如果bean实现了InitializingBean接口，会自动调用afterPropertiesSet方法。
  *
- * @author htpeng
+ * @author jxzhang
  * 2016年10月8日下午1:42:50
  * @Lazy(false)
  * @Component 两个注解
@@ -91,19 +93,20 @@ public abstract class ModuleRegister extends RegisterAbstract implements Initial
         return getFilePath();
     }
 
-    //
-//	/**
-//	 * 注册Menu
-//	 * @return
-//	 */
 //	protected abstract CacheRegisterInterface registerCache();
-    /* (non-Javadoc)
+
+    /**
+     * 注册Menu
+     * 当执行完默认的构造函数之后，就会调用该类实现afterPropertiesSet方法
+     *
+     * @throws Exception
      * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+     */
     @Override
     public void afterPropertiesSet() throws Exception {
         register();
     }
+
 
     private void register() {
         Read read = getRead(FileType.getFileType(getFilePath()));

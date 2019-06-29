@@ -23,7 +23,7 @@ import net.chinahrd.core.web.init.AbstractDataInitialization;
 /**
  * 初始化系统模块
  *
- * @author htpeng 2016年2月2日下午2:27:07
+ * @author jxzhang 2016年2月2日下午2:27:07
  */
 public class ModuleInitialization extends AbstractDataInitialization {
 
@@ -43,10 +43,11 @@ public class ModuleInitialization extends AbstractDataInitialization {
         // CustomizeManager.setCustomizeService(custiomizeRegister);
         for (ModuleModel m : list) {
             ModuleLocal.setModuleModel(m);
-            if (null != m.getApiInjection())
+            List<InjectionModel> jobInjectionList = m.getJobInjectionList();
+            if (null != jobInjectionList)
                 m.getApiInjection().injecton();
-            if (null != m.getJobInjection())
-                for (InjectionModel i : m.getJobInjection()) {
+            if (null != jobInjectionList)
+                for (InjectionModel i : jobInjectionList) {
                     i.injecton();
                 }
             CacheTimer.loading(m.getCacheClass());
