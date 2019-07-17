@@ -13,7 +13,7 @@ import net.chinahrd.core.web.init.DataInitialization;
 /**
  * 初始化的类的配置信息
  *
- * @author htpeng
+ * @author jxzhang
  * 2016年2月2日下午2:28:57
  */
 public class DataInitializationConfig {

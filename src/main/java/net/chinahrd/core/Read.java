@@ -5,21 +5,21 @@ import java.io.InputStream;
 
 /**
  * xml加载接口
- * 
- * @author htpeng 2016年2月2日下午2:30:26
+ *
+ * @author jxzhang 2016年2月2日下午2:30:26
  */
 public interface Read {
-	/*
-	 * 配置文件
-	 */
-	public void load(String filename);
+    /*
+     * 配置文件
+     */
+    void load(String filename);
 
-	public void load(InputStream ins);
+    void load(InputStream ins);
 
-	public void load(File file);
+    void load(File file);
 
-	/*
-	 * 获取解析完的节点
-	 */
-	public ReadModel getModel();
+    /*
+     * 获取解析完的节点
+     */
+    ReadModel getModel();
 }
