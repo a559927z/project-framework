@@ -449,38 +449,8 @@
                     </configuration>
                 </plugin>
 
-                <!-- jar打包相关插件 -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.4</version>
-                    <configuration>
-                        <archive>
-                            <manifest>
-                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                            </manifest>
-                        </archive>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>2.2.1</version>
-                </plugin>
 
-                <!-- clean插件 -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>2.5</version>
-                </plugin>
 
-                <!-- install插件 -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-install-plugin</artifactId>
-                    <version>2.5.1</version>
-                </plugin>
 
                 <!-- enforcer插件, 避免被依赖的依赖引入过期的jar�? -->
                 <plugin>
@@ -560,7 +530,8 @@
         <repository>
             <id>public-repository-group</id>
             <name>Public Repository Group</name>
-            <url>http://localhost:8081/nexus/content/groups/public</url>
+<!--            <url>http://localhost:8081/nexus/content/groups/public</url>-->
+            <url>https://maven.aliyun.com/repository/central</url>
             <layout>default</layout>
             <releases>
                 <enabled>true</enabled>
