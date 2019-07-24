@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+	<!-- localRepository | The path to the local repository maven will use to 
+		store artifacts. | | Default: ~/.m2/repository <localRepository>/path/to/local/repo</localRepository> -->
+	<!-- <localRepository>D:\maven\repository</localRepository> -->
+
+	<pluginGroups></pluginGroups>
+
+	<proxies></proxies>
+
+	<servers>
+		<server>
+			<id>releases</id>
+			<username>admin</username>
+			<password>admin123</password>
+		</server>
+		<server>
+			<id>snapshots</id>
+			<username>deployment</username>
+			<password>deployment</password>
+		</server>
+	</servers>
+
+	<mirrors>
+		<!--This sends everything else to /public -->
+		<mirror>
+			<id>nexus</id>
+			<mirrorOf>central</mirrorOf>
+			<!-- <url>http://127.0.0.1:8081/nexus/content/groups/public/</url> -->
+			<!-- <url>http://maven.aliyun.com/nexus/content/groups/public/</url> -->
+			<url>https://maven.aliyun.com/repository/central</url>
+		</mirror>
+	</mirrors>
+
+	<profiles>
+		<profile>
+			<id>nexus</id>
+			<!-- <repositories> -->
+				<!-- <repository> -->
+					<!-- <id>nexus</id> -->
+					<!-- <name>local private nexus</name> -->
+					<!-- <url>http://127.0.0.1:8081/nexus/content/groups/public/</url> -->
+				<!-- </repository> -->
+			<!-- </repositories> -->
+			
+			<repositories>
+				<repository>
+					<id>aliyun</id>
+					<name>aliyun nexus</name>
+					<!-- <url>http://maven.aliyun.com/nexus/content/groups/public/</url> -->
+					<url>https://maven.aliyun.com/repository/central</url>
+				</repository>
+			</repositories>
+				<pluginRepositories>
+					<pluginRepository>
+						<id>nexus</id>
+						<name>local private nexus</name>
+						<url>http://nexus.gs.chinahrd.net/content/groups/public/</url>
+						<releases>
+							<enabled>true</enabled>
+						</releases>
+						<snapshots>
+							<enabled>false</enabled>
+						</snapshots>
+					</pluginRepository>
+					<pluginRepository>
+						<id>aliyun</id>
+						<name>aliyun nexus</name>
+						<!-- <url>http://maven.aliyun.com/nexus/content/groups/public/</url> -->
+						<url>https://maven.aliyun.com/repository/central</url>
+						<releases>
+							<enabled>true</enabled>
+						</releases>
+						<snapshots>
+							<enabled>false</enabled>
+						</snapshots>
+					</pluginRepository>
+				</pluginRepositories>
+		</profile>
+	</profiles>
+
+	<activeProfiles>
+		<activeProfile>nexus</activeProfile>
+	</activeProfiles>
+
+</settings>
