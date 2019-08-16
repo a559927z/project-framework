@@ -6,6 +6,7 @@ package net.chinahrd.core.module.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import net.chinahrd.core.ConfigEnum;
 import net.chinahrd.core.InjectionModel;
 import net.chinahrd.core.ReadModel;
@@ -20,6 +21,7 @@ import java.util.List;
  * @author jxzhang
  * 2016年10月12日下午5:47:51
  */
+@ToString
 @Data
 @NoArgsConstructor
 public class ModuleModel {
@@ -56,13 +58,6 @@ public class ModuleModel {
 //		this.jobInjection = jobInjection;
     }
 
-    @Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        String str = "code:" + code + ";name:" + name + ";version:" + version + ";";
-//		str+="\n"+menuModel;
-        return str;
-    }
 
 
 }
